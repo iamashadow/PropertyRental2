@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:property_rental_2/All_List/all_list.dart';
+import 'package:property_rental_2/Utils/All_List/all_list.dart';
 import 'package:video_player/video_player.dart';
 import '../../../Universal_Widgets/custom_text.dart';
 
