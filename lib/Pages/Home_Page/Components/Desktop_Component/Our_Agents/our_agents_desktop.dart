@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../../All_List/all_list.dart';
+import '../../../../../Utils/All_List/all_list.dart';
 import '../../../../../Universal_Widgets/custom_text.dart';
 
 class OurAgentsDesktop extends StatelessWidget {

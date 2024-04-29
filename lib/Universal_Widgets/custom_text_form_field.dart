@@ -3,19 +3,25 @@ import 'package:flutter/material.dart';
 class CustomTextFormField extends StatelessWidget {
 
   String? labelText;
+  int? maxLines;
+  TextAlign? textAlign;
 
   CustomTextFormField({super.key,
 
     this.labelText,
+    this.maxLines,
+    this.textAlign,
 
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      maxLines: maxLines,
+      textAlign: textAlign ?? TextAlign.start,
       decoration: InputDecoration(
-        filled: true,
-          fillColor: Colors.amber,
+        // filled: true,
+        //   fillColor: Colors.amber,
           labelText: labelText,
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),

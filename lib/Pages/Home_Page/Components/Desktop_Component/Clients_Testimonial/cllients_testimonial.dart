@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../../../../All_List/all_list.dart';
+import '../../../../../Utils/All_List/all_list.dart';
 import '../../../../../Universal_Widgets/custom_text.dart';
 
 

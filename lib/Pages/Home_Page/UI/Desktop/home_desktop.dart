@@ -1,10 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
 import '../../Components/Desktop_Component/BuyOrSell_Desktop/but_or_sell_desktop.dart';
 import '../../Components/Desktop_Component/Clients_Testimonial/cllients_testimonial.dart';
-import '../../Components/Desktop_Component/Footer_Area_Desktop/footer_area_desktop.dart';
+import '../../../../Universal_Widgets/footer_area_desktop.dart';
 import '../../Components/Desktop_Component/HeadBannerSection/head_banner_section.dart';
 import '../../Components/Desktop_Component/Nav_Bar/nav_bar.dart';
 import '../../Components/Desktop_Component/Our_Agents/our_agents_desktop.dart';
@@ -40,7 +41,9 @@ class HomeDesktop extends StatelessWidget {
                 //OurProperties
                 Container(
                   width: 1.sw,
-                  height: 1.sh*0.9,
+                  height: 1.sh*1.5,
+                  // color: Colors.green,
+                  margin: EdgeInsets.only(left: 20.w, right: 20.w),
                   child: OurProperties(),
                 ),
                 SizedBox(height: 1.sh*0.1,),

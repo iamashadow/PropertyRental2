@@ -2,9 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:property_rental_2/Utils/Color_Manager/colo_manager.dart';
 import '../../../../../Universal_Widgets/ListView.dart';
 import '../../../../../Universal_Widgets/custom_text.dart';
 import '../../../../../Universal_Widgets/our_amazing_service_button_retangle.dart';
+import '../../../../Properties_All_Page/Page2/For_Rent_Page/for_rent_page.dart';
 
 class OurProperties extends StatelessWidget {
   const OurProperties({super.key});
@@ -38,26 +40,28 @@ class OurProperties extends StatelessWidget {
         SizedBox(height: 1.sh*0.055,),
 
         Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            OurAmazingServiceButtonRetangle(
-              height: 1.sh*0.050,
-              // width: 1.sw*0.1,
-              buttonColor: const Color(0xFF4B5EA3),
-              titleSize: 20,
-              titleColor: Colors.white,
+            CustomText(
+              title: "Looking for a home to Rent?",
+              fontSize: 3.sp,
+              fontColor: Colors.black,
               fontWeight: FontWeight.bold,
-              buttonTitle: "Looking for a home to Rent?",
+              letterSpacing: 1,
             ),
-            SizedBox(width: 1.sw*0.020,),
-            OurAmazingServiceButtonRetangle(
-              height: 1.sh*0.050,
-              // width: 1.sw*0.1,
-              buttonColor: Colors.green,
-              titleSize: 20,
-              titleColor: Colors.white,
-              fontWeight: FontWeight.bold,
-              buttonTitle: "Looking for a home to Buy?",
+            TextButton(
+              child: CustomText(
+                title: "See more",
+                fontSize: 3.sp,
+                fontColor: ColorManager.kasmiriBlue,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 1,
+              ),
+              onPressed: (){
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ForRentPage()),
+                );
+              },
             ),
           ],
         ),

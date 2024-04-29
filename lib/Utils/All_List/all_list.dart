@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:property_rental_2/Utils/All_Images/all_images.dart';
 
 class AllList{
   static final  OurPartnesList = [
@@ -190,48 +191,92 @@ class AllList{
       "name" : "Bridgette Ball",
       "mobileNumber" : "+31 (0)62 - 484 65 97",
       "email" : "bridgette@jbmakelaars.nl",
+      "bio" : "Mark’s journey in real estate began with a nod to family tradition, following his father’s footsteps. Starting from the bottom, "
+               "he worked his way up to a directorship before making the move to the Netherlands. With over 14 years of experience in the property service industry,"
+               "Mark’s passion for helping people find their dream homes is undeniable. Beyond his impressive resume, Mark is a devoted family man,"
+               "with his heart belonging to his wife and young daughter. When he’s not busy making dreams come true, you’ll likely find him casting "
+               "lines at his favorite fishing spot or perfecting his swing on the golf course.",
+      "position" : "Consultant in rentals, sales, and buying",
     },
     {
       "profilePicture" : "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cGVyc29ufGVufDB8MHwwfHx8MA%3D%3D",
       "name" : "Jason Ball",
       "mobileNumber" : "+31 (0)30 - 227 19 90",
       "email" : "jason@jbmakelaars.nl",
+      "bio" : "Bridgette Ball was born in South Africa and currently lives in Woerden. She opened J&B Makelaars in Utrecht a few years ago "
+              "after relocating with her family. As a real estate agent, Bridgette has worked with several companies that have achieved success. "
+              "She has an exceptional eye for detail and a keen sense of negotiation.",
+      "position" : "Owner Makelaar",
     },
     {
       "profilePicture" : "https://plus.unsplash.com/premium_photo-1671823917954-dc943c1bd9df?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cGVyc29ufGVufDB8MHwwfHx8MA%3D%3D",
       "name" : "Lysanne van Iperen",
       "mobileNumber" : "+31 (0)64 - 348 92 04",
       "email" : "lysanne@jbmakelaars.nl",
+      "bio" : "Kandidaat Makelaar & Partner",
+      "position" : "Partner",
     },
     {
       "profilePicture" : "https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cGVyc29ufGVufDB8MHwwfHx8MA%3D%3D",
       "name" : "Tom Puik",
       "mobileNumber" : "+31 (0)63 - 861 55 45",
       "email" : "tom@jbmakelaars.nl",
+      "bio" : "More then 20 years of experience in real estate at several national and international companies. "
+              "My expertise is buying, renting and valuation of properties on a rural area. By thinking along and being involved with the client "
+              "I will find their new home.",
+      "position" : "Certified Makelaar",
     },
     {
       "profilePicture" : "https://images.unsplash.com/photo-1504593811423-6dd665756598?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHBlcnNvbnxlbnwwfDB8MHx8fDA%3D",
       "name" : "Soretha Steenkamp",
       "mobileNumber" : "+31 (0)63 - 986 15 17",
       "email" : "soretha@jbmakelaars.nl",
+      "bio" : "In this challenging market, finding a home for an expat takes something special. "
+              "As someone with a deep understanding of the Dutch market and areas, I bring a strong sense of excitement and passion to the role."
+             "I will tailor our rental property strategy to meet your individual needs, budget, and style.",
+      "position" : "Kandidaat Makelaar",
     },
     {
       "profilePicture" : "https://images.unsplash.com/photo-1499952127939-9bbf5af6c51c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8cGVyc29ufGVufDB8MHwwfHx8MA%3D%3D",
       "name" : "Reinard van der Wal",
       "mobileNumber" : "‭+31 6 17 50 49 29",
       "email" : "reinard@jbmakelaars.nl",
+      "bio" : "Soretha Steenkamp has extensive experience in the real estate sector – as Broker, business owner and as Principal – "
+              "having owned a very successful real estate franchise in the Western Cape Winelands in South African for many years.  She is a"
+              "qualified Master Practitioner in Real Estate (MPRE) and obtained a National Diploma Real Estate: Property Valuation at the University"
+              "of Johannesburg in 2010. She has received several business and leadership awards as well as being awarded National & regional Brand"
+              "Ambassador for a well-known South African real estate franchise in 2017 & 2018.Soretha and her husband emigrated to the Netherlands in"
+              "September 2020, and she promptly enrolled at the Floral Academy for a formal qualification as Florist (DFA) – “Moving to the Netherlands"
+              "allowed me to pursue another passion of mine besides Real Estate – the beautiful world of flowers.”  Soretha says.She joined J&B Makelaars"
+              "(formerly Expat Property Brokers) in September 2022 as Broker and she is excited to service the expat community in their real "
+              "estate aspirations. ",
+      "position" : "Buying and Rentals Consultant",
     },
     {
       "profilePicture" : "https://images.unsplash.com/photo-1593104547489-5cfb3839a3b5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHBlcnNvbnxlbnwwfDB8MHx8fDA%3D",
       "name" : "Annemarieke Lensink",
       "mobileNumber" : "+31 (0)61 828 33 55",
       "email" : "info@jbmakelaars.nl",
+      "bio" : "Rentals Consultant Reinard has been in the Real Estate Industry for over 17 years, specializing in residential and"
+              " industrial property sales, rentals and property portfolio management. He had a very successful Real Estate Agency in"
+              "South Africa which is still serving the community with the same fundamentals that he has implemented.Reinard believes that honesty is"
+              "the core of any business, and he thrives on meeting client’s expectations, whether it may be on finding a family their dream house and"
+              "help making it their home or adding value to an investor’s portfolio and helping him grow. Reinard knows of all the stress that is"
+              "involved in relocating and would like to make the burden a little lighter.",
+      "position" : "Rentals Consultant",
     },
     {
       "profilePicture" : "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHBlcnNvbnxlbnwwfDB8MHx8fDA%3D",
       "name" : "Michelle Keggie",
       "mobileNumber" : "+31 (0)68 - 101 23 24",
       "email" : "engagements@jbmakelaars.nl",
+      "bio" : "Office Manager Annemarieke has a wealth of experience in management and entrepreneurship. She holds a diploma in franchise "
+              "management and has worked as the regional manager for a franchise chain covering the Eastern & Western Cape region in South Africa."
+              "In addition, she was also a business owner of an Event & Catering company in Cape Town, catering for corporate events, as well as being "
+              "a business owner here in the Netherlands. This has all prepared her for her current role as Office Manager at J&B Makelaars.Raised in"
+              "South Africa and the Netherlands, although originally from Zambia, she is fluent in English, Dutch and Afrikaans. She lived in various "
+              "countries before settling down in the Netherlands with her two beautiful children.",
+      "position" : "Office Manager",
     },
   ];
 
@@ -324,6 +369,75 @@ class AllList{
 
   static final propertyVideo = "www.youtube.com/watch?v=GMD8j_gqO7A";
   static final propertyVideo2 = "https://www.pexels.com/video/jellyfish-swimming-inside-the-aquarium-5158727/";
+
+
+  static final ourPartnersLogoAndWebSiteLink = [
+
+    {
+      "logo" : AllImages.AMSLanguageStudioLogoWebsite,
+      "webSiteLink" : AllImages.AMSLanguageStudioLogoWebsiteLink,
+    },
+    {
+      "logo" : AllImages.boshuiswaterontharderslogo,
+      "webSiteLink" : AllImages.boshuiswaterontharderslogoWebsiteLink,
+    },
+    {
+      "logo" : AllImages.clairfortenret,
+      "webSiteLink" : AllImages.clairfortenretWebsiteLink,
+    },
+    {
+      "logo" : AllImages.croppedcroppedLogoImageOnlySquare,
+      "webSiteLink" : AllImages.croppedcroppedLogoImageOnlySquareWebsiteLink,
+    },
+    {
+      "logo" : AllImages.EMlogoe1679488304842,
+      "webSiteLink" : AllImages.EMlogoe1679488304842WebsiteLink,
+    },
+    {
+      "logo" : AllImages.ExpatRelocation,
+      "webSiteLink" : AllImages.ExpatRelocationWebsiteLink,
+    },
+    {
+      "logo" : AllImages.irolavglobetrotterslogoBluecopy,
+      "webSiteLink" : AllImages.irolavglobetrotterslogoBluecopyWebsiteLink,
+    },
+    {
+      "logo" : AllImages.Kuierkosblacke1676372079140,
+      "webSiteLink" : AllImages.Kuierkosblacke1676372079140WebsiteLink,
+    },
+    {
+      "logo" : AllImages.LumaCONSULTINGLOGO,
+      "webSiteLink" : AllImages.LumaCONSULTINGLOGOWebsiteLink,
+    },
+    {
+      "logo" : AllImages.NLISTlogo,
+      "webSiteLink" : AllImages.NLISTlogoWebsiteLink,
+    },
+    {
+      "logo" : AllImages.Screenshot,
+      "webSiteLink" : AllImages.ScreenshotWebsiteLink,
+    },
+    {
+      "logo" : AllImages.TailorMindslogo,
+      "webSiteLink" : AllImages.TailorMindslogoWebsiteLink,
+    },
+    {
+      "logo" : AllImages.UHPlogo,
+      "webSiteLink" : AllImages.UHPlogoWebsiteLink,
+    },
+    {
+      "logo" : AllImages.vanmarlelogo,
+      "webSiteLink" : AllImages.vanmarlelogoWebsiteLink,
+    },
+    {
+      "logo" : AllImages.virtuagymlogoblackorange,
+      "webSiteLink" : AllImages.virtuagymlogoblackorangeWebsiteLink,
+    },
+
+  ];
+
+
+
 
 
 }

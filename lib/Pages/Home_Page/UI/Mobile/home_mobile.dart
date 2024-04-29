@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:property_rental_2/Pages/Our_Properties_Details_Page_Desktop/Components/property_video.dart';
+import 'package:property_rental_2/Pages/Our_Properties_Details_Page_Desktop/Desktop_Components/property_video.dart';
 
 import '../../../../Universal_Widgets/custom_text.dart';
 import '../../../../Universal_Widgets/custom_text_form_field.dart';

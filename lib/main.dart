@@ -1,7 +1,8 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:property_rental_2/Utils/Routing_Page/routing_page.dart';
 import 'Pages/Home_Page/home_page.dart';
 
 void main(){
@@ -16,7 +17,8 @@ class propertyRental extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      child: MaterialApp(
+      // designSize: Size(360, 690),
+      child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
         scrollBehavior: MaterialScrollBehavior().copyWith(
           dragDevices: {
@@ -27,6 +29,7 @@ class propertyRental extends StatelessWidget {
           },
         ),
         home: HomePage(),
+        // getPages: RoutingPage.pages,
       ),
     );
   }

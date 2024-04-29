@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../../../../../Universal_Widgets/custom_text.dart';
-import '../../../../../Universal_Widgets/icon_button.dart';
+import 'custom_text.dart';
+import 'icon_button.dart';
 
 class FooterAreaDesktop extends StatelessWidget {
   const FooterAreaDesktop({super.key});
@@ -245,7 +245,7 @@ class FooterAreaDesktop extends StatelessWidget {
                         const Icon(FontAwesomeIcons.phone, size: 15,),
                         SizedBox(width: 1.sw*0.005,),
                         CustomText(
-                          title: "+880 1626-583370",
+                          title: "+8801828583383",
                           fontWeight: FontWeight.bold,
                           fontColor: const Color(0xFF808080),
                         )
@@ -257,7 +257,7 @@ class FooterAreaDesktop extends StatelessWidget {
                         const Icon(FontAwesomeIcons.mailchimp, size: 15,),
                         SizedBox(width: 1.sw*0.005,),
                         CustomText(
-                          title: "imtiazchowdhury002@gmail.com",
+                          title: "rezajr2k18@gmail.com",
                           fontWeight: FontWeight.bold,
                           fontColor: const Color(0xFF808080),
                         )

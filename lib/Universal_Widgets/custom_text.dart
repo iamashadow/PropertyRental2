@@ -9,6 +9,7 @@ class CustomText extends StatelessWidget {
   double? letterSpacing;
   TextOverflow? txtOverflow;
   int? mxLine;
+  TextAlign? textAlign;
 
   CustomText({super.key,
     this.title,
@@ -18,6 +19,7 @@ class CustomText extends StatelessWidget {
     this.letterSpacing,
     this.txtOverflow,
     this.mxLine,
+    this.textAlign,
   });
 
   @override
@@ -26,6 +28,7 @@ class CustomText extends StatelessWidget {
       title!,
       overflow: txtOverflow,
       maxLines: mxLine,
+      textAlign: textAlign,
       style: TextStyle(
         fontSize: fontSize,
         fontWeight: fontWeight,

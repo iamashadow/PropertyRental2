@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../../All_List/all_list.dart';
+import '../../../../../Utils/All_List/all_list.dart';
 
 class OurPartnersDesktop extends StatelessWidget {
   const OurPartnersDesktop({super.key});
