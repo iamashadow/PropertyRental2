@@ -9,15 +9,13 @@ class All extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView(
-        shrinkWrap: true,
-        children: [
-          BuyingAProperty(),
-          RentalSearch(),
-          Sales(),
-        ],
-      ),
+    return ListView(
+      shrinkWrap: true,
+      children: [
+        BuyingAProperty(),
+        RentalSearch(),
+        Sales(),
+      ],
     );
   }
 }

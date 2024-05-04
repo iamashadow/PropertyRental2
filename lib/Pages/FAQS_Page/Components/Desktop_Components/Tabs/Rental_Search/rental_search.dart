@@ -15,115 +15,107 @@ class RentalSearch extends StatelessWidget {
       shrinkWrap: true,
       children: [
 
-        Expanded(
-          child: ExpansionTile(
-            expandedCrossAxisAlignment: CrossAxisAlignment.start,
-            collapsedBackgroundColor: Colors.amber[50],
-            title: CustomText(title: AllStaticText.question5,fontWeight: FontWeight.bold,),
-            children: [
-              CustomText(
-                title: AllStaticText.q5ansp1,
-                fontSize: 3.sp,
-              ),
-              CustomText(
-                title: AllStaticText.q5ansp2,
-                fontSize: 3.sp,
-              ),
-              CustomText(
-                title: AllStaticText.q5ansp3,
-                fontSize: 3.sp,
-              ),
-              CustomText(
-                title: AllStaticText.q5ansp4,
-                fontSize: 3.sp,
-                fontWeight: FontWeight.bold,
-              ),
-              CustomText(
-                title: AllStaticText.q5ansp5,
-                fontSize: 3.sp,
-              ),
-              CustomText(
-                title: AllStaticText.q5ansp6,
-                fontSize: 3.sp,
-                fontWeight: FontWeight.bold,
+        ExpansionTile(
+          expandedCrossAxisAlignment: CrossAxisAlignment.start,
+          collapsedBackgroundColor: Colors.amber[50],
+          title: CustomText(title: AllStaticText.question5,fontWeight: FontWeight.bold,),
+          children: [
+            CustomText(
+              title: AllStaticText.q5ansp1,
+              fontSize: 3.sp,
+            ),
+            CustomText(
+              title: AllStaticText.q5ansp2,
+              fontSize: 3.sp,
+            ),
+            CustomText(
+              title: AllStaticText.q5ansp3,
+              fontSize: 3.sp,
+            ),
+            CustomText(
+              title: AllStaticText.q5ansp4,
+              fontSize: 3.sp,
+              fontWeight: FontWeight.bold,
+            ),
+            CustomText(
+              title: AllStaticText.q5ansp5,
+              fontSize: 3.sp,
+            ),
+            CustomText(
+              title: AllStaticText.q5ansp6,
+              fontSize: 3.sp,
+              fontWeight: FontWeight.bold,
 
-              ),
-              CustomText(
-                title: AllStaticText.q5ansp7,
-                fontSize: 3.sp,
-              ),
-              CustomText(
-                title: AllStaticText.q5ansp8,
-                fontSize: 3.sp,
-                fontWeight: FontWeight.bold,
-              ),
-              CustomText(
-                title: AllStaticText.q5ansp9,
-                fontSize: 3.sp,
-              ),
-              CustomText(
-                title: AllStaticText.q5ansp10,
-                fontSize: 3.sp,
-                fontWeight: FontWeight.bold,
-              ),
-              CustomText(
-                title: AllStaticText.q5ansp11,
-                fontSize: 3.sp,
-              ),
-              CustomText(
-                title: AllStaticText.q5ansp12,
-                fontSize: 3.sp,
-              ),
-            ],
-          ),
+            ),
+            CustomText(
+              title: AllStaticText.q5ansp7,
+              fontSize: 3.sp,
+            ),
+            CustomText(
+              title: AllStaticText.q5ansp8,
+              fontSize: 3.sp,
+              fontWeight: FontWeight.bold,
+            ),
+            CustomText(
+              title: AllStaticText.q5ansp9,
+              fontSize: 3.sp,
+            ),
+            CustomText(
+              title: AllStaticText.q5ansp10,
+              fontSize: 3.sp,
+              fontWeight: FontWeight.bold,
+            ),
+            CustomText(
+              title: AllStaticText.q5ansp11,
+              fontSize: 3.sp,
+            ),
+            CustomText(
+              title: AllStaticText.q5ansp12,
+              fontSize: 3.sp,
+            ),
+          ],
         ),
         SizedBox(height: 10.h),
 
-        Expanded(
-          child: ExpansionTile(
-            expandedCrossAxisAlignment: CrossAxisAlignment.start,
-            collapsedBackgroundColor: Colors.amber[50],
-            title: CustomText(title: AllStaticText.question6,fontWeight: FontWeight.bold,),
-            children: [
-              CustomText(
-                title: AllStaticText.q6ansp1,
-                fontSize: 3.sp,
-              ),
+        ExpansionTile(
+          expandedCrossAxisAlignment: CrossAxisAlignment.start,
+          collapsedBackgroundColor: Colors.amber[50],
+          title: CustomText(title: AllStaticText.question6,fontWeight: FontWeight.bold,),
+          children: [
+            CustomText(
+              title: AllStaticText.q6ansp1,
+              fontSize: 3.sp,
+            ),
 
-            ],
-          ),
+          ],
         ),
         SizedBox(height: 10.h),
 
-        Expanded(
-          child: ExpansionTile(
-            expandedCrossAxisAlignment: CrossAxisAlignment.start,
-            collapsedBackgroundColor: Colors.amber[50],
-            title: CustomText(title: AllStaticText.question7,fontWeight: FontWeight.bold,),
-            children: [
-              CustomText(
-                title: AllStaticText.q7ansp1,
-                fontSize: 3.sp,
-              ),
+        ExpansionTile(
+          expandedCrossAxisAlignment: CrossAxisAlignment.start,
+          collapsedBackgroundColor: Colors.amber[50],
+          title: CustomText(title: AllStaticText.question7,fontWeight: FontWeight.bold,),
+          children: [
+            CustomText(
+              title: AllStaticText.q7ansp1,
+              fontSize: 3.sp,
+            ),
 
-            ],
-          ),
+          ],
         ),
         SizedBox(height: 10.h),
 
-        Expanded(
-          child: ExpansionTile(
-            expandedCrossAxisAlignment: CrossAxisAlignment.start,
-            collapsedBackgroundColor: Colors.amber[50],
-            title: CustomText(title: AllStaticText.question8,fontWeight: FontWeight.bold,),
-            children: [
-              CustomText(
-                title: AllStaticText.q8ansp1,
-                fontSize: 3.sp,
-              ),
+        ExpansionTile(
+          expandedCrossAxisAlignment: CrossAxisAlignment.start,
+          collapsedBackgroundColor: Colors.amber[50],
+          title: CustomText(title: AllStaticText.question8,fontWeight: FontWeight.bold,),
+          children: [
+            CustomText(
+              title: AllStaticText.q8ansp1,
+              fontSize: 3.sp,
+            ),
 
-            ],
-          ),
+          ],
         ),
         SizedBox(height: 10.h),
       ],

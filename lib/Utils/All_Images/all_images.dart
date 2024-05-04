@@ -68,6 +68,9 @@ class AllImages{
   static const String virtuagymlogoblackorangeWebsiteLink = "https://amslanguagestudio.com/nl/";
 
 
+  static const String proertyGiF = "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdHVnb25xdzl4bHE0Ymh0NXAzeWxtbmU0MGhvNGhocmJpZDJqZGd1dCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l0IylQoMkcbZUbtKw/giphy.gif";
+
+
 
 
 }

@@ -2,16 +2,21 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:property_rental_2/Pages/Contact_Us_Page/contact_us_page.dart';
+import 'package:property_rental_2/Universal_Widgets/universal_controller.dart';
 import '../../../../../Universal_Widgets/custom_text.dart';
 import '../../../../About_Us_All_Pages/Page1/About_Us_Our_Story_Page/about_us_our_story_page.dart';
 import '../../../../About_Us_All_Pages/Page3/Our_Partners/our_partners.dart';
 import '../../../../Contact_Us_Page/UI/Desktop/contact_us_desktop_page.dart';
 import '../../../../FAQS_Page/faqs_page.dart';
+import '../../../../Login_Page/login_page.dart';
 import '../../../../OurServices_All_Pages/Page1/Our_Buying_Service_Page/our_buying_service_page.dart';
 import '../../../../OurServices_All_Pages/Page2/Our_Sales_Service_Page/our_sales_service_page.dart';
 import '../../../../OurServices_All_Pages/Page3/Our_Rental_Service_Page/our_rental_service_page.dart';
 import '../../../../About_Us_All_Pages/Page2/Team_Page/Our_Team_Page/our_team_page.dart';
 import '../../../../Properties_All_Page/Page2/For_Rent_Page/for_rent_page.dart';
+import '../../../../SignUp_Page/sign_up_page.dart';
 import '../../../home_page.dart';
 
 class NavBar extends StatefulWidget {
@@ -22,6 +27,11 @@ class NavBar extends StatefulWidget {
 }
 
 class _NavBarState extends State<NavBar> {
+
+
+  // var univarsalControllar = Get.put(UniversalGetxController());
+
+
   @override
   Widget build(BuildContext context) {
 
@@ -70,6 +80,7 @@ class _NavBarState extends State<NavBar> {
 
 
 
+                //About Us Page
                 InkWell(
                   onTap: (){
                     Navigator.push(context,
@@ -91,26 +102,30 @@ class _NavBarState extends State<NavBar> {
                 ),
                 SizedBox(width: size.width*0.010,),
 
-                InkWell(
-                  onTap: (){
-                    Navigator.push(context,
-                        MaterialPageRoute(
-                            builder: (context) {
-                              return OurBuyingServicePage();
-                                // OurSalesServicePage();
-                                // OurRentalServicePage();
-                              // OurServicePage();
-                            }
-                        ),
-                    );
-                  },
-                  child: CustomText(
-                    title: "Our Services",
-                    fontWeight: FontWeight.bold,
-                    fontColor: Colors.blue,
-                  ),
-                ),
-                SizedBox(width: size.width*0.010,),
+                /*
+                Our Service Page
+                 */
+                // InkWell(
+                //   onTap: (){
+                //     Navigator.push(context,
+                //         MaterialPageRoute(
+                //             builder: (context) {
+                //               return OurSalesServicePage();
+                //                 //OurBuyingServicePage();
+                //                 // OurSalesServicePage();
+                //                 // OurRentalServicePage();
+                //               // OurServicePage();
+                //             }
+                //         ),
+                //     );
+                //   },
+                //   child: CustomText(
+                //     title: "Our Services",
+                //     fontWeight: FontWeight.bold,
+                //     fontColor: Colors.blue,
+                //   ),
+                // ),
+                // SizedBox(width: size.width*0.010,),
 
                 InkWell(
                   onTap: (){
@@ -126,17 +141,69 @@ class _NavBarState extends State<NavBar> {
                 ),
                 SizedBox(width: size.width*0.010,),
 
-                CustomText(
-                  title: "News",
-                  fontWeight: FontWeight.bold,
-                  fontColor: Colors.blue,
-                ),
-                SizedBox(width: size.width*0.010,),
+                // Obx(() => univarsalControllar.isUserLogedIn.value ?
+                // TextButton(
+                //   onPressed: (){
+                //     univarsalControllar.isUserLogedIn.value != univarsalControllar.isUserLogedIn.value;
+                //     print(univarsalControllar.isUserLogedIn.value);
+                //     Navigator.push(context,
+                //       MaterialPageRoute(builder: (context) => HomePage()),
+                //     );
+                //
+                //   },
+                //   child: CustomText(
+                //     title: "Log Out",
+                //     fontWeight: FontWeight.bold,
+                //     fontColor: Colors.black,
+                //   ),
+                // ) :
+                // Row(
+                //   children: [
+                //     ElevatedButton(
+                //       onPressed: (){
+                //         Navigator.push(context,
+                //           MaterialPageRoute(builder: (context) => LoginPage()),
+                //         );
+                //       },
+                //       style: ButtonStyle(
+                //         backgroundColor: MaterialStateProperty.all<Color>(
+                //             Colors.blue
+                //         ),
+                //         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                //           RoundedRectangleBorder(
+                //             borderRadius: BorderRadius.circular(10.0), // Adjust the radius as needed
+                //           ),
+                //         ),
+                //       ),
+                //       child: CustomText(
+                //         title: "LogIn",
+                //         fontWeight: FontWeight.bold,
+                //         fontColor: Colors.white,
+                //       ),
+                //     ),
+                //     SizedBox(width: size.width*0.010,),
+                //
+                //     TextButton(
+                //       onPressed: (){
+                //         Navigator.push(context,
+                //           MaterialPageRoute(builder: (context) => SignUpPage()),
+                //         );
+                //
+                //       },
+                //       child: CustomText(
+                //         title: "Sign Up",
+                //         fontWeight: FontWeight.bold,
+                //         fontColor: Colors.black,
+                //       ),
+                //     ),
+                //     SizedBox(width: size.width*0.010,),
+                //   ],
+                // )),
 
                 InkWell(
                   onTap: (){
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => ContactUsDesktopPage()),
+                        MaterialPageRoute(builder: (context) => ContactUsPage()),
                     );
                   },
                   child: CustomText(
