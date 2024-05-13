@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../../Universal_Widgets/custom_text.dart';
 import '../../../../../../Universal_Widgets/footer_area_desktop.dart';
 import '../../../../../../Utils/Color_Manager/colo_manager.dart';
 import '../../../../../Home_Page/Components/Desktop_Component/HeadBannerSection/head_banner_section.dart';
@@ -24,8 +25,19 @@ class OurPartnersDesktopPage extends StatelessWidget {
             ),
             SizedBox(height: 1.sh*0.1,),
 
-
-            PartnersLogoGridView(),
+            CustomText(
+              title: "Our Partners",
+              fontSize: 10.sp,
+              fontColor: Colors.black,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 1,
+            ),
+            PartnersLogoGridView(
+              leftMargin: 70.w,
+              rightMargin: 70.w,
+              // bottomMargin: 50.h,
+              scrollPhysics: NeverScrollableScrollPhysics(),
+            ),
 
 
 

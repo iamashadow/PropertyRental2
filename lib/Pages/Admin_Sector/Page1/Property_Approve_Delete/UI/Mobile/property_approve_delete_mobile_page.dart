@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class UserSectorMobileView extends StatelessWidget {
-  const UserSectorMobileView({super.key});
+class ProprtyApproveDeleteMobilePage extends StatelessWidget {
+  const ProprtyApproveDeleteMobilePage({super.key});
 
   @override
   Widget build(BuildContext context) {

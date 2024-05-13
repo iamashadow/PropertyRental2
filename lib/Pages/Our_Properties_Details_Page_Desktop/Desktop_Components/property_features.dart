@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
+import 'package:property_rental_2/Utils/universal_controller.dart';
 import '../../../Universal_Widgets/custom_text.dart';
 
 class PropertyFetures extends StatelessWidget {
@@ -16,6 +18,10 @@ class PropertyFetures extends StatelessWidget {
     this.propertyBedrooms,
 
   });
+
+
+  var universalControllerInstance = Get.put(UniversalControllerClass());
+
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +40,7 @@ class PropertyFetures extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 CustomText(
-                  title: "Property ID : None",
+                  title: "Property ID : ${universalControllerInstance.generateRandomNumber()}",
                   fontColor: const Color(0xFF4B5EA3),
                 ),
                 Row(children: [

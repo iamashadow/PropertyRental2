@@ -196,7 +196,9 @@ class PropertiesForRent extends StatelessWidget {
                           textAlign: TextAlign.start,
                           fontWeight: FontWeight.bold,
                           fontSize: 5.sp,
-                          fontColor: ColorManager.kasmiriBlue,
+                          fontColor: AllList.OurPropertiesList[index]["propertyType"] == "Sold" ? Colors.red :
+                          AllList.OurPropertiesList[index]["propertyType"] == "Available" ? Colors.green :
+                          AllList.OurPropertiesList[index]["propertyType"] == "Rented" ? Colors.deepPurple : null,
                           title: AllList.OurPropertiesList[index]["propertyType"],
 
                         ),

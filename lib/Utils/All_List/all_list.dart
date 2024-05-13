@@ -1,7 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:property_rental_2/Utils/All_Images/all_images.dart';
 
+import '../Model/property_approve_request_to_admin_model.dart';
+
 class AllList{
+
+  static final propertyDetails = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. "
+      "The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it "
+      "look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem "
+      "ipsum' will "
+      "uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour "
+      "and the like There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or"
+      " randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything "
+      "embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the "
+      "first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem "
+      "Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.";
+
+
+  static final propertyVideo = "www.youtube.com/watch?v=GMD8j_gqO7A";
+  static final propertyVideo2 = "https://www.pexels.com/video/jellyfish-swimming-inside-the-aquarium-5158727/";
+
+
   static final  OurPartnesList = [
     "data:image/png;base64,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",
     "https://media.licdn.com/dms/image/C4D1BAQHQerJacOdKCA/company-background_10000/0/1590668650912/expat_mortgages_uk_cover?e=2147483647&v=beta&t=OB-R2usDI158bTeQ88qACi1PqfqmsCsHeo_SGvS-FLc",
@@ -280,6 +299,70 @@ class AllList{
     },
   ];
 
+  static final ourPartnersLogoAndWebSiteLink = [
+
+    {
+      "logo" : AllImages.AMSLanguageStudioLogoWebsite,
+      "webSiteLink" : AllImages.AMSLanguageStudioLogoWebsiteLink,
+    },
+    {
+      "logo" : AllImages.boshuiswaterontharderslogo,
+      "webSiteLink" : AllImages.boshuiswaterontharderslogoWebsiteLink,
+    },
+    {
+      "logo" : AllImages.clairfortenret,
+      "webSiteLink" : AllImages.clairfortenretWebsiteLink,
+    },
+    {
+      "logo" : AllImages.croppedcroppedLogoImageOnlySquare,
+      "webSiteLink" : AllImages.croppedcroppedLogoImageOnlySquareWebsiteLink,
+    },
+    {
+      "logo" : AllImages.EMlogoe1679488304842,
+      "webSiteLink" : AllImages.EMlogoe1679488304842WebsiteLink,
+    },
+    // {
+    //   "logo" : AllImages.ExpatRelocation,
+    //   "webSiteLink" : AllImages.ExpatRelocationWebsiteLink,
+    // },
+    {
+      "logo" : AllImages.irolavglobetrotterslogoBluecopy,
+      "webSiteLink" : AllImages.irolavglobetrotterslogoBluecopyWebsiteLink,
+    },
+    {
+      "logo" : AllImages.Kuierkosblacke1676372079140,
+      "webSiteLink" : AllImages.Kuierkosblacke1676372079140WebsiteLink,
+    },
+    {
+      "logo" : AllImages.LumaCONSULTINGLOGO,
+      "webSiteLink" : AllImages.LumaCONSULTINGLOGOWebsiteLink,
+    },
+    {
+      "logo" : AllImages.NLISTlogo,
+      "webSiteLink" : AllImages.NLISTlogoWebsiteLink,
+    },
+    {
+      "logo" : AllImages.Screenshot,
+      "webSiteLink" : AllImages.ScreenshotWebsiteLink,
+    },
+    {
+      "logo" : AllImages.TailorMindslogo,
+      "webSiteLink" : AllImages.TailorMindslogoWebsiteLink,
+    },
+    {
+      "logo" : AllImages.UHPlogo,
+      "webSiteLink" : AllImages.UHPlogoWebsiteLink,
+    },
+    {
+      "logo" : AllImages.vanmarlelogo,
+      "webSiteLink" : AllImages.vanmarlelogoWebsiteLink,
+    },
+    {
+      "logo" : AllImages.virtuagymlogoblackorange,
+      "webSiteLink" : AllImages.virtuagymlogoblackorangeWebsiteLink,
+    },
+
+  ];
 
   static final OurPropertiesList = [
     {
@@ -354,87 +437,16 @@ class AllList{
     },
   ];
 
-
-  static final propertyDetails = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. "
-      "The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it "
-      "look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem "
-      "ipsum' will "
-      "uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour "
-      "and the like There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or"
-      " randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything "
-      "embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the "
-      "first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem "
-      "Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.";
+  static List<PropertyApproveRequestToAdminModel> propertyApproveRequestListToAdmin = [];
 
 
-  static final propertyVideo = "www.youtube.com/watch?v=GMD8j_gqO7A";
-  static final propertyVideo2 = "https://www.pexels.com/video/jellyfish-swimming-inside-the-aquarium-5158727/";
 
 
-  static final ourPartnersLogoAndWebSiteLink = [
 
-    {
-      "logo" : AllImages.AMSLanguageStudioLogoWebsite,
-      "webSiteLink" : AllImages.AMSLanguageStudioLogoWebsiteLink,
-    },
-    {
-      "logo" : AllImages.boshuiswaterontharderslogo,
-      "webSiteLink" : AllImages.boshuiswaterontharderslogoWebsiteLink,
-    },
-    {
-      "logo" : AllImages.clairfortenret,
-      "webSiteLink" : AllImages.clairfortenretWebsiteLink,
-    },
-    {
-      "logo" : AllImages.croppedcroppedLogoImageOnlySquare,
-      "webSiteLink" : AllImages.croppedcroppedLogoImageOnlySquareWebsiteLink,
-    },
-    {
-      "logo" : AllImages.EMlogoe1679488304842,
-      "webSiteLink" : AllImages.EMlogoe1679488304842WebsiteLink,
-    },
-    {
-      "logo" : AllImages.ExpatRelocation,
-      "webSiteLink" : AllImages.ExpatRelocationWebsiteLink,
-    },
-    {
-      "logo" : AllImages.irolavglobetrotterslogoBluecopy,
-      "webSiteLink" : AllImages.irolavglobetrotterslogoBluecopyWebsiteLink,
-    },
-    {
-      "logo" : AllImages.Kuierkosblacke1676372079140,
-      "webSiteLink" : AllImages.Kuierkosblacke1676372079140WebsiteLink,
-    },
-    {
-      "logo" : AllImages.LumaCONSULTINGLOGO,
-      "webSiteLink" : AllImages.LumaCONSULTINGLOGOWebsiteLink,
-    },
-    {
-      "logo" : AllImages.NLISTlogo,
-      "webSiteLink" : AllImages.NLISTlogoWebsiteLink,
-    },
-    {
-      "logo" : AllImages.Screenshot,
-      "webSiteLink" : AllImages.ScreenshotWebsiteLink,
-    },
-    {
-      "logo" : AllImages.TailorMindslogo,
-      "webSiteLink" : AllImages.TailorMindslogoWebsiteLink,
-    },
-    {
-      "logo" : AllImages.UHPlogo,
-      "webSiteLink" : AllImages.UHPlogoWebsiteLink,
-    },
-    {
-      "logo" : AllImages.vanmarlelogo,
-      "webSiteLink" : AllImages.vanmarlelogoWebsiteLink,
-    },
-    {
-      "logo" : AllImages.virtuagymlogoblackorange,
-      "webSiteLink" : AllImages.virtuagymlogoblackorangeWebsiteLink,
-    },
 
-  ];
+
+
+
 
 
 

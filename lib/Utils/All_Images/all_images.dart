@@ -29,8 +29,8 @@ class AllImages{
   static const String EMlogoe1679488304842WebsiteLink = "https://lumaconsulting.nl/";
 
 
-  static const String ExpatRelocation = "assets/images/Partners/JExpat-Relocation.png";
-  static const String ExpatRelocationWebsiteLink = "https://expatmortgages.nl/";
+  // static const String ExpatRelocation = "assets/images/Partners/JExpat-Relocation.png";
+  // static const String ExpatRelocationWebsiteLink = "https://expatmortgages.nl/";
 
   static const String irolavglobetrotterslogoBluecopy = "assets/images/Partners/irolav-globetrotters_logo-Blue-copy.png";
   static const String irolavglobetrotterslogoBluecopyWebsiteLink = "https://tailorminds.com/en/";

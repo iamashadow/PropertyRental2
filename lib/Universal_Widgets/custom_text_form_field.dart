@@ -5,20 +5,29 @@ class CustomTextFormField extends StatelessWidget {
   String? labelText;
   int? maxLines;
   TextAlign? textAlign;
+  TextEditingController? controller;
+  final String? Function(String?)? validator;
+  final AutovalidateMode autovalidateMode;
 
   CustomTextFormField({super.key,
 
     this.labelText,
     this.maxLines,
     this.textAlign,
+    this.controller,
+    this.validator,
+    this.autovalidateMode = AutovalidateMode.disabled,
 
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      autovalidateMode: autovalidateMode,
+      controller: controller,
       maxLines: maxLines,
       textAlign: textAlign ?? TextAlign.start,
+      validator: validator,
       decoration: InputDecoration(
         // filled: true,
         //   fillColor: Colors.amber,

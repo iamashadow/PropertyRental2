@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:property_rental_2/Universal_Widgets/universal_controller.dart';
-
 import '../../../../Universal_Widgets/custom_text.dart';
 import '../../../../Universal_Widgets/custom_text_form_field.dart';
 import '../../../../Universal_Widgets/footer_area_desktop.dart';
 import '../../../../Utils/Color_Manager/colo_manager.dart';
+import '../../../../Utils/universal_controller.dart';
 import '../../../Home_Page/Components/Desktop_Component/HeadBannerSection/head_banner_section.dart';
 
 class SignUpPageDesktopView extends StatelessWidget {
   SignUpPageDesktopView({super.key});
 
-  var univarsalController = Get.put(UniversalGetxController());
+  var univarsalController = Get.put(UniversalControllerClass());
 
 
   @override

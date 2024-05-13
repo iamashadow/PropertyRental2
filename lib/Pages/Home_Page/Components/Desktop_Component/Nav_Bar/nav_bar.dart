@@ -4,12 +4,12 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:property_rental_2/Pages/Contact_Us_Page/contact_us_page.dart';
-import 'package:property_rental_2/Universal_Widgets/universal_controller.dart';
 import '../../../../../Universal_Widgets/custom_text.dart';
 import '../../../../About_Us_All_Pages/Page1/About_Us_Our_Story_Page/about_us_our_story_page.dart';
 import '../../../../About_Us_All_Pages/Page3/Our_Partners/our_partners.dart';
 import '../../../../Contact_Us_Page/UI/Desktop/contact_us_desktop_page.dart';
 import '../../../../FAQS_Page/faqs_page.dart';
+import '../../../../LandLord_Sector/Page2/Land_Lord_Properties/land_lord_properties.dart';
 import '../../../../Login_Page/login_page.dart';
 import '../../../../OurServices_All_Pages/Page1/Our_Buying_Service_Page/our_buying_service_page.dart';
 import '../../../../OurServices_All_Pages/Page2/Our_Sales_Service_Page/our_sales_service_page.dart';
@@ -85,7 +85,8 @@ class _NavBarState extends State<NavBar> {
                   onTap: (){
                     Navigator.push(context,
                       MaterialPageRoute(builder: (context) {
-                        return OurPartnersPage();
+                        return AboutUsOurStoryPage();
+                          // OurPartnersPage();
                         // AboutUsOurStoryPage();
                         // OurTeamPage()
                       },
@@ -208,6 +209,20 @@ class _NavBarState extends State<NavBar> {
                   },
                   child: CustomText(
                     title: "Contact +8801626583370",
+                    fontWeight: FontWeight.bold,
+                    fontColor: Colors.blue,
+                  ),
+                ),
+                SizedBox(width: size.width*0.010,),
+
+                InkWell(
+                  onTap: (){
+                    Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => LandLordProperties()),
+                    );
+                  },
+                  child: CustomText(
+                    title: "LandLord Sector",
                     fontWeight: FontWeight.bold,
                     fontColor: Colors.blue,
                   ),

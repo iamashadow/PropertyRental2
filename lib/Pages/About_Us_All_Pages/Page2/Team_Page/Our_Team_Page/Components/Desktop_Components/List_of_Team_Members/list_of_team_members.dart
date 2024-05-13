@@ -48,7 +48,8 @@ class ListOfTeamMembersDesktop extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                           CustomText(
-                            title: "As the : ${AllList.OurAgents[index]["position"]!}",
+                            // title: "As the : ${AllList.OurAgents[index]["position"]!}",
+                            title: "As the : Property Proprietor",
                             fontColor: ColorManager.blackColor,
                             fontSize: 3.sp,
                             fontWeight: FontWeight.w500,

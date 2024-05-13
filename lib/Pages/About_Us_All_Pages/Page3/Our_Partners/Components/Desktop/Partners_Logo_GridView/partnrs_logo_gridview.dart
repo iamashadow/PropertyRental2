@@ -5,7 +5,20 @@ import 'package:property_rental_2/Utils/Color_Manager/colo_manager.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class PartnersLogoGridView extends StatelessWidget {
-  const PartnersLogoGridView({super.key});
+
+  double? leftMargin;
+  double? rightMargin;
+  // double? bottomMargin;
+  ScrollPhysics? scrollPhysics;
+
+  PartnersLogoGridView({super.key,
+
+    this.leftMargin,
+    this.rightMargin,
+    // this.bottomMargin,
+    this.scrollPhysics,
+
+  });
 
 
   launchURL({String? url}) async {
@@ -19,11 +32,13 @@ class PartnersLogoGridView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 70.w, right: 70.w, bottom: 50.h),
+      // margin: EdgeInsets.only(left: 70.w, right: 70.w, bottom: 50.h),
+      margin: EdgeInsets.only(left: leftMargin!, right: rightMargin!, ),
       padding: EdgeInsets.all(30),
       color: ColorManager.whiteColor,
       child: GridView.builder(
         shrinkWrap: true,
+        physics: scrollPhysics,
         itemCount: AllList.ourPartnersLogoAndWebSiteLink.length,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,

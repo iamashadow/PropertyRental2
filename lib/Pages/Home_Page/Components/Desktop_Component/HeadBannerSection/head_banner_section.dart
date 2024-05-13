@@ -12,7 +12,9 @@ class HeadBannerSection extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+      ),
       drawer: MyDrawer(),
       body: Column(
         children: [
@@ -23,15 +25,14 @@ class HeadBannerSection extends StatelessWidget {
                 height: 1.sh*0.7,
                 width: 1.sw,
                 decoration: BoxDecoration(
-                  color: Colors.blueGrey,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 5,
-                        blurRadius: 7,
-                        offset: Offset(0, 3), // changes position of shadow
-                      ),
-                    ],
+                    // boxShadow: [
+                    //   BoxShadow(
+                    //     color: Colors.grey.withOpacity(0.5),
+                    //     spreadRadius: 5,
+                    //     blurRadius: 7,
+                    //     offset: Offset(0, 3), // changes position of shadow
+                    //   ),
+                    // ],
                     image: DecorationImage(
                         fit: BoxFit.cover,
                         image: AssetImage("assets/images/HeadBanner/headBanner1.png")

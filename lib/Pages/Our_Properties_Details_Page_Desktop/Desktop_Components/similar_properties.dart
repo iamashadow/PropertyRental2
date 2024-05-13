@@ -248,13 +248,13 @@ class SimilarProjects extends StatelessWidget {
                               SizedBox(width: 1.sw*0.045,),
 
                               //Favourite Icon, Compare Icon
-                              Row(
-                                children: [
-                                  Icon(FontAwesomeIcons.heart),
-                                  SizedBox(width: 1.sw*0.010,),
-                                  Icon(FontAwesomeIcons.codeCompare)
-                                ],
-                              )
+                              // Row(
+                              //   children: [
+                              //     Icon(FontAwesomeIcons.heart),
+                              //     SizedBox(width: 1.sw*0.010,),
+                              //     Icon(FontAwesomeIcons.codeCompare)
+                              //   ],
+                              // )
                             ],
                           ),
                         ],

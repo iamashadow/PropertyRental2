@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:property_rental_2/Universal_Widgets/custom_text.dart';
 
 
+import '../../../About_Us_All_Pages/Page3/Our_Partners/Components/Desktop/Partners_Logo_GridView/partnrs_logo_gridview.dart';
 import '../../Components/Desktop_Component/BuyOrSell_Desktop/but_or_sell_desktop.dart';
 import '../../Components/Desktop_Component/Clients_Testimonial/cllients_testimonial.dart';
 import '../../../../Universal_Widgets/footer_area_desktop.dart';
@@ -67,12 +69,12 @@ class HomeDesktop extends StatelessWidget {
 
 
                 //Our Agents
-                Container(
-                  width: 1.sw*0.7,
-                  height: 1.sh*1.8,
-                  color: const Color(0xFFF7F7F7),
-                  child: OurAgentsDesktop(),
-                ),
+                // Container(
+                //   width: 1.sw*0.7,
+                //   height: 1.sh*1.8,
+                //   color: const Color(0xFFF7F7F7),
+                //   child: OurAgentsDesktop(),
+                // ),
 
                 //Clients Testimonials
                 Container(
@@ -87,9 +89,25 @@ class HomeDesktop extends StatelessWidget {
                 //Our Partners
                 Container(
                   width: 1.sw,
-                  height: 1.sh*0.9,
+                  // height: 700.h,
+                  // color: Colors.greenAccent,
                   margin: EdgeInsets.all(70),
-                  child: OurPartnersDesktop(),
+                  child: Column(
+                    children: [
+                      CustomText(
+                        title: "Our Partners",
+                        fontSize: 10.sp,
+                        fontColor: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 1,
+                      ),
+                      PartnersLogoGridView(
+                        leftMargin: 30.w,
+                        rightMargin: 30.w,
+                        scrollPhysics: NeverScrollableScrollPhysics(),
+                      )
+                    ],
+                  ),
                 ),
 
                 //WebFooter Area

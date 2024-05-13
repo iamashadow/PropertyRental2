@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:property_rental_2/Pages/Contact_Us_Page/contact_us_page.dart';
 import '../../../../../Universal_Widgets/custom_text.dart';
 import '../../../../../Universal_Widgets/our_amazing_service_button_circle.dart';
 import '../../../../../Universal_Widgets/our_amazing_service_button_retangle.dart';
+import '../../../../LandLord_Sector/Page2/Land_Lord_Properties/land_lord_properties.dart';
+import '../../../../Properties_All_Page/Page2/For_Rent_Page/for_rent_page.dart';
 
 class OurAmazingServicesDesktop extends StatelessWidget {
   const OurAmazingServicesDesktop({super.key});
@@ -39,41 +42,44 @@ class OurAmazingServicesDesktop extends StatelessWidget {
           children: [
             //Button : Buying
             SizedBox(width: 1.sw*0.120,),
-            OurAmazingServicesButtonCircle(
-              width: 100,
-              height: 100,
-              buttonColor: Colors.green,
-              icon: FontAwesomeIcons.house,
-              titleColor: Colors.black,
-              iconSize: 40,
-              iconColor: Colors.white,
-              title: "Buying",
+            InkWell(
+              onTap: (){
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => LandLordProperties()),
+                );
+              },
+              child: OurAmazingServicesButtonCircle(
+                width: 100,
+                height: 100,
+                buttonColor: Colors.green,
+                icon: FontAwesomeIcons.house,
+                titleColor: Colors.black,
+                iconSize: 40,
+                iconColor: Colors.white,
+                title: "Property proprietor",
+              ),
             ),
             SizedBox(width: 1.sw*0.120,),
 
-            //Button : Selling
-            OurAmazingServicesButtonCircle(
-              width: 100,
-              height: 100,
-              buttonColor: Colors.green,
-              icon: FontAwesomeIcons.key,
-              titleColor: Colors.black,
-              iconSize: 40,
-              iconColor: Colors.white,
-              title: "Selling",
-            ),
-            SizedBox(width: 1.sw*0.120,),
+
 
             //Button : Renting
-            OurAmazingServicesButtonCircle(
-              width: 100,
-              height: 100,
-              buttonColor: Colors.green,
-              icon: FontAwesomeIcons.searchengin,
-              titleColor: Colors.black,
-              iconSize: 40,
-              iconColor: Colors.white,
-              title: "Renting",
+            InkWell(
+              onTap: (){
+                Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ForRentPage()),
+                );
+              },
+              child: OurAmazingServicesButtonCircle(
+                width: 100,
+                height: 100,
+                buttonColor: Colors.green,
+                icon: FontAwesomeIcons.searchengin,
+                titleColor: Colors.black,
+                iconSize: 40,
+                iconColor: Colors.white,
+                title: "Renting",
+              ),
             ),
             SizedBox(width: 1.sw*0.120,),
 
@@ -82,14 +88,21 @@ class OurAmazingServicesDesktop extends StatelessWidget {
         SizedBox(height: 1.sh*0.050,),
 
         //Button : More About Our Services
-        OurAmazingServiceButtonRetangle(
-          height: 1.sh*0.050,
-          width: 1.sw*0.2,
-          titleColor: Colors.white,
-          buttonColor: const Color(0xFF4B5EA3),
-          buttonTitle: "More About Our Services",
-          titleSize: 20,
-          fontWeight: FontWeight.bold,
+        InkWell(
+          onTap: (){
+            Navigator.push(context,
+              MaterialPageRoute(builder: (context) => ContactUsPage()),
+            );
+          },
+          child: OurAmazingServiceButtonRetangle(
+            height: 1.sh*0.050,
+            width: 1.sw*0.2,
+            titleColor: Colors.white,
+            buttonColor: const Color(0xFF4B5EA3),
+            buttonTitle: "More About Our Services",
+            titleSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ],
     );

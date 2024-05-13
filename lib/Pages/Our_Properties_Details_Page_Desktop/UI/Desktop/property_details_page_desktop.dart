@@ -123,6 +123,8 @@ class OurPropertiesDetailsPage extends StatelessWidget {
                     children: [
                       Column(
                         children: [
+
+                          //Property ID & Features
                           PropertyFetures(
                             propertyBedrooms: propertyBedrooms,
                             propertyBathrooms: propertyBathrooms,
@@ -172,6 +174,8 @@ class OurPropertiesDetailsPage extends StatelessWidget {
                         ],
                       ),
                       SizedBox(width: 1.sw*0.01,),
+
+                      //Agent Contact Form
                       Container(
                         // color: Colors.amber,
                         width: 1.sw*0.225,

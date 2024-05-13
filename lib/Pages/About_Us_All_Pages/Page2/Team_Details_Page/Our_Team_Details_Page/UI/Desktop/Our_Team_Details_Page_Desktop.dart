@@ -3,11 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
+import 'package:property_rental_2/Pages/About_Us_All_Pages/Page2/Team_Details_Page/Our_Team_Details_Page/our_team_details_page_controller_class.dart';
 import 'package:property_rental_2/Pages/Our_Properties_Details_Page_Desktop/Desktop_Components/agent_contact_form.dart';
 import 'package:property_rental_2/Universal_Widgets/custom_button.dart';
 import 'package:property_rental_2/Universal_Widgets/custom_text.dart';
 import 'package:property_rental_2/Universal_Widgets/custom_text_form_field.dart';
 import 'package:property_rental_2/Utils/Color_Manager/colo_manager.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../../../../Universal_Widgets/footer_area_desktop.dart';
 import '../../../../../../Home_Page/Components/Desktop_Component/HeadBannerSection/head_banner_section.dart';
@@ -31,6 +34,9 @@ class OurTeamDetailsPageDesktop extends StatelessWidget {
     this.bio
 
   });
+
+
+  var ourTeamDetailsPageClassController = Get.put(OurTeamDetailsPageControllerClass());
 
   @override
   Widget build(BuildContext context) {
@@ -120,7 +126,7 @@ class OurTeamDetailsPageDesktop extends StatelessWidget {
                                       //Office
                                       Row(
                                         children: [
-                                          Icon(Icons.phone),
+                                          const Icon(Icons.phone),
                                           SizedBox(width: 1.w*2,),
                                           CustomText(
                                             fontColor: ColorManager.blackColor,
@@ -136,7 +142,7 @@ class OurTeamDetailsPageDesktop extends StatelessWidget {
                                       //Mobile
                                       Row(
                                         children: [
-                                          Icon(Icons.mobile_friendly),
+                                          const Icon(Icons.mobile_friendly),
                                           SizedBox(width: 1.w*2,),
                                           CustomText(
                                             fontColor: ColorManager.blackColor,
@@ -153,7 +159,7 @@ class OurTeamDetailsPageDesktop extends StatelessWidget {
                                       //WhatsApp
                                       Row(
                                         children: [
-                                          Icon(FontAwesomeIcons.whatsapp),
+                                          const Icon(FontAwesomeIcons.whatsapp),
                                           SizedBox(width: 1.w*2,),
                                           CustomText(
                                             fontColor: ColorManager.blackColor,
@@ -170,7 +176,7 @@ class OurTeamDetailsPageDesktop extends StatelessWidget {
                                       //Email
                                       Row(
                                         children: [
-                                          Icon(Icons.email),
+                                          const Icon(Icons.email),
                                           SizedBox(width: 1.w*2,),
                                           CustomText(
                                             fontColor: ColorManager.blackColor,
@@ -226,24 +232,28 @@ class OurTeamDetailsPageDesktop extends StatelessWidget {
                                     //Name
                                     CustomTextFormField(
                                       labelText: "Name",
+                                      controller: ourTeamDetailsPageClassController.ourTeamDetailsPageNameController,
                                     ),
                                     SizedBox(height: 1.h*10,),
 
                                     //Email
                                     CustomTextFormField(
                                       labelText: "Email",
+                                      controller: ourTeamDetailsPageClassController.ourTeamDetailsPageEmailController,
                                     ),
                                     SizedBox(height: 1.h*10,),
 
                                     //Phone Number
                                     CustomTextFormField(
                                       labelText: "Phone Number",
+                                      controller: ourTeamDetailsPageClassController.ourTeamDetailsPagePhoneNumberController,
                                     ),
                                     SizedBox(height: 1.h*10,),
 
                                     //Your Message
                                     CustomTextFormField(
                                       labelText: "Your Message",
+                                      controller: ourTeamDetailsPageClassController.ourTeamDetailsPageBioController,
                                       maxLines: 5,
                                     ),
                                     SizedBox(height: 1.h*10,),
@@ -258,7 +268,13 @@ class OurTeamDetailsPageDesktop extends StatelessWidget {
                                       buttonRadius: 10,
                                       buttonHeight: 1.h*30,
                                       buttonColor: ColorManager.kasmiriBlue,
-                                      onTap: (){},
+                                      onTap: (){
+                                        launchUrl(Uri(
+                                          scheme: "mailto",
+                                          path: "rezajr2k18@gmail.com",
+                                          query: "Send a Mail to Imtiaz Chowdhury",
+                                        ));
+                                      },
                                     ),
                                     SizedBox(height: 1.h*10,),
                                   ],
@@ -308,6 +324,7 @@ class OurTeamDetailsPageDesktop extends StatelessWidget {
                         SizedBox(height: 1.h*2,),
                       ],),
                   ),
+
                 ],
               ),
             ),
