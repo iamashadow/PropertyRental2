@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:property_rental_2/Pages/Contact_Us_Page/contact_us_page.dart';
 import 'package:property_rental_2/Pages/FAQS_Page/faqs_page.dart';
 import 'package:property_rental_2/Pages/Home_Page/home_page.dart';
 import 'package:property_rental_2/Pages/Login_Page/login_page.dart';
+import 'package:property_rental_2/Pages/Login_Page/login_page_controller.dart';
+import 'package:property_rental_2/Pages/Login_Page/model/login_rp.dart';
 import 'package:property_rental_2/Universal_Widgets/custom_button.dart';
 import 'package:property_rental_2/Universal_Widgets/custom_text.dart';
 import 'package:property_rental_2/Utils/All_Images/all_images.dart';
@@ -23,7 +26,9 @@ import '../../../../Properties_All_Page/Page2/For_Rent_Page/for_rent_page.dart';
 import '../../../../SignUp_Page/sign_up_page.dart';
 
 class MyDrawer extends StatelessWidget {
-  const MyDrawer({super.key});
+  MyDrawer({super.key});
+  final LoginPageControllerClass loginController =
+      Get.put(LoginPageControllerClass());
 
   @override
   Widget build(BuildContext context) {
@@ -32,17 +37,16 @@ class MyDrawer extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-        
             //Drawer Header
             DrawerHeader(
               padding: EdgeInsets.zero,
-                margin: EdgeInsets.zero,
-                child: Image.network(
-                    AllImages.proertyGiF,
-                  fit: BoxFit.cover,
-                ),
+              margin: EdgeInsets.zero,
+              child: Image.network(
+                AllImages.proertyGiF,
+                fit: BoxFit.cover,
+              ),
             ),
-        
+
             //Home Page
             Card(
               surfaceTintColor: ColorManager.whiteColor,
@@ -56,15 +60,18 @@ class MyDrawer extends StatelessWidget {
                   fontSize: 3.sp,
                   fontWeight: FontWeight.w500,
                 ),
-                onTap: (){
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => HomePage()),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HomePage()),
                   );
                 },
               ),
             ),
-            SizedBox(height: 2.h,),
-        
+            SizedBox(
+              height: 2.h,
+            ),
+
             //Properties Page
             Card(
               surfaceTintColor: ColorManager.whiteColor,
@@ -78,15 +85,18 @@ class MyDrawer extends StatelessWidget {
                   fontSize: 3.sp,
                   fontWeight: FontWeight.w500,
                 ),
-                onTap: (){
-                  Navigator.push(context,
+                onTap: () {
+                  Navigator.push(
+                    context,
                     MaterialPageRoute(builder: (context) => ForRentPage()),
                   );
                 },
               ),
             ),
-            SizedBox(height: 2.h,),
-        
+            SizedBox(
+              height: 2.h,
+            ),
+
             //About Us Page
             Card(
               surfaceTintColor: ColorManager.whiteColor,
@@ -102,9 +112,11 @@ class MyDrawer extends StatelessWidget {
                 ),
                 children: [
                   InkWell(
-                    onTap: (){
-                      Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => AboutUsOurStoryPage()),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => AboutUsOurStoryPage()),
                       );
                     },
                     child: CustomText(
@@ -116,10 +128,10 @@ class MyDrawer extends StatelessWidget {
                     ),
                   ),
                   Divider(),
-        
                   InkWell(
-                    onTap: (){
-                      Navigator.push(context,
+                    onTap: () {
+                      Navigator.push(
+                        context,
                         MaterialPageRoute(builder: (context) => OurTeamPage()),
                       );
                     },
@@ -132,11 +144,12 @@ class MyDrawer extends StatelessWidget {
                     ),
                   ),
                   Divider(),
-        
                   InkWell(
-                    onTap: (){
-                      Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => OurPartnersPage()),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => OurPartnersPage()),
                       );
                     },
                     child: CustomText(
@@ -150,8 +163,10 @@ class MyDrawer extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 2.h,),
-        
+            SizedBox(
+              height: 2.h,
+            ),
+
             //FAQs Page
             Card(
               surfaceTintColor: ColorManager.whiteColor,
@@ -165,15 +180,18 @@ class MyDrawer extends StatelessWidget {
                   fontSize: 3.sp,
                   fontWeight: FontWeight.w500,
                 ),
-                onTap: (){
-                  Navigator.push(context,
+                onTap: () {
+                  Navigator.push(
+                    context,
                     MaterialPageRoute(builder: (context) => FaqsPage()),
                   );
                 },
               ),
             ),
-            SizedBox(height: 2.h,),
-        
+            SizedBox(
+              height: 2.h,
+            ),
+
             //Contact Us Page
             Card(
               surfaceTintColor: ColorManager.whiteColor,
@@ -187,16 +205,18 @@ class MyDrawer extends StatelessWidget {
                   fontSize: 3.sp,
                   fontWeight: FontWeight.w500,
                 ),
-                onTap: (){
-                  Navigator.push(context,
+                onTap: () {
+                  Navigator.push(
+                    context,
                     MaterialPageRoute(builder: (context) => ContactUsPage()),
                   );
                 },
               ),
             ),
-            SizedBox(height: 20.h,),
-        
-        
+            SizedBox(
+              height: 20.h,
+            ),
+
             //Land Lord Profile Information Page
             Card(
               surfaceTintColor: ColorManager.whiteColor,
@@ -211,9 +231,12 @@ class MyDrawer extends StatelessWidget {
                 ),
                 children: [
                   InkWell(
-                    onTap: (){
-                      Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => LandLordProfileInformationPage()),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                LandLordProfileInformationPage()),
                       );
                     },
                     child: CustomText(
@@ -223,11 +246,12 @@ class MyDrawer extends StatelessWidget {
                     ),
                   ),
                   Divider(),
-        
                   InkWell(
-                    onTap: (){
-                      Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => LandLordProperties()),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => LandLordProperties()),
                       );
                     },
                     child: CustomText(
@@ -237,11 +261,12 @@ class MyDrawer extends StatelessWidget {
                     ),
                   ),
                   Divider(),
-                  
                   InkWell(
-                    onTap: (){
-                      Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => LandLordPropertyAdd()),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => LandLordPropertyAdd()),
                       );
                     },
                     child: CustomText(
@@ -253,7 +278,9 @@ class MyDrawer extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 20.h,),
+            SizedBox(
+              height: 20.h,
+            ),
 
             //Admin Profile Information & Property Approve or Delete Page
             Card(
@@ -269,9 +296,11 @@ class MyDrawer extends StatelessWidget {
                 ),
                 children: [
                   InkWell(
-                    onTap: (){
-                      Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => PropertyApproveDelete()),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PropertyApproveDelete()),
                       );
                     },
                     child: CustomText(
@@ -281,11 +310,12 @@ class MyDrawer extends StatelessWidget {
                     ),
                   ),
                   Divider(),
-
                   InkWell(
-                    onTap: (){
-                      Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => AdminProfilePage()),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => AdminProfilePage()),
                       );
                     },
                     child: CustomText(
@@ -298,49 +328,67 @@ class MyDrawer extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 20.h,),
-        
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CustomButton(
-                  onTap: (){
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => LoginPage()),
-                    );
-                  },
-                  fontWeight: FontWeight.w500,
-                  fontSize: 3.sp,
-                  fontColor: ColorManager.whiteColor,
-                  buttonRadius: 10.r,
-                  buttonTitle: "Login",
-                  buttonWidth: 20.w,
-                  buttonHeight: 30.h,
-                  buttonColor: ColorManager.kasmiriBlue,
-                ),
-        
-                SizedBox(width: 10.w,),
-        
-                CustomButton(
-                  onTap: (){
-                    Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => SignUpPage()),
-                    );
-                  },
-                  fontWeight: FontWeight.w500,
-                  fontSize: 3.sp,
-                  fontColor: ColorManager.whiteColor,
-                  buttonRadius: 10.r,
-                  buttonTitle: "Registration",
-                  buttonWidth: 20.w,
-                  buttonHeight: 30.h,
-                  buttonColor: ColorManager.blackColor,
-                ),
-              ],
-            )
-        
-        
-        
+            SizedBox(
+              height: 20.h,
+            ),
+            loginController.userData.token == null ||
+                    loginController.userData.token!.isEmpty
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CustomButton(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LoginPage()),
+                          );
+                        },
+                        fontWeight: FontWeight.w500,
+                        fontSize: 3.sp,
+                        fontColor: ColorManager.whiteColor,
+                        buttonRadius: 10.r,
+                        buttonTitle: "Login",
+                        buttonWidth: 20.w,
+                        buttonHeight: 30.h,
+                        buttonColor: ColorManager.kasmiriBlue,
+                      ),
+                      SizedBox(
+                        width: 10.w,
+                      ),
+                      CustomButton(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SignUpPage()),
+                          );
+                        },
+                        fontWeight: FontWeight.w500,
+                        fontSize: 3.sp,
+                        fontColor: ColorManager.whiteColor,
+                        buttonRadius: 10.r,
+                        buttonTitle: "Registration",
+                        buttonWidth: 20.w,
+                        buttonHeight: 30.h,
+                        buttonColor: ColorManager.blackColor,
+                      ),
+                    ],
+                  )
+                : CustomButton(
+                    onTap: () {
+                      loginController.userData = UserData();
+                      loginController.update();
+                    },
+                    fontWeight: FontWeight.w500,
+                    fontSize: 3.sp,
+                    fontColor: ColorManager.whiteColor,
+                    buttonRadius: 10.r,
+                    buttonTitle: "LogOut",
+                    buttonWidth: 20.w,
+                    buttonHeight: 30.h,
+                    buttonColor: ColorManager.kasmiriBlue,
+                  ),
           ],
         ),
       ),

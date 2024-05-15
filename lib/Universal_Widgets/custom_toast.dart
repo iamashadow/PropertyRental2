@@ -6,7 +6,7 @@ void customToast({bool? isError, required String msg}) {
       msg: msg,
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.BOTTOM,
-      timeInSecForIosWeb: 1,
+      timeInSecForIosWeb: 3,
       backgroundColor:
           isError ?? false ? ColorManager.redColor : ColorManager.greenColor,
       textColor: ColorManager.whiteColor,

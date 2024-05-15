@@ -109,7 +109,8 @@ class LoginPageDesktopView extends StatelessWidget {
                                   // );
                                   if (loginPageController.formKey.currentState!
                                       .validate()) {
-                                    loginPageController.loginRequest();
+                                    loginPageController.loginRequest(
+                                        loginOrRegistration: true);
                                   } else {
                                     customToast(
                                         msg:
