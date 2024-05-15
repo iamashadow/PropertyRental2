@@ -77,13 +77,13 @@ class LoginPageDesktopView extends StatelessWidget {
                     SizedBox(
                       height: 20.h,
                     ),
-                    SizedBox(
-                      width: 30.w,
-                      height: 30.h,
-                      child: Obx(
-                        () => loginPageController.isLoading.value
-                            ? const CircularProgressIndicator()
-                            : ElevatedButton(
+                    Obx(
+                      () => loginPageController.isLoading.value
+                          ? const CircularProgressIndicator()
+                          : SizedBox(
+                              width: 30.w,
+                              height: 30.h,
+                              child: ElevatedButton(
                                 style: ButtonStyle(
                                   backgroundColor:
                                       WidgetStateProperty.all<Color>(
@@ -118,7 +118,7 @@ class LoginPageDesktopView extends StatelessWidget {
                                   }
                                 },
                               ),
-                      ),
+                            ),
                     ),
                   ],
                 ),
