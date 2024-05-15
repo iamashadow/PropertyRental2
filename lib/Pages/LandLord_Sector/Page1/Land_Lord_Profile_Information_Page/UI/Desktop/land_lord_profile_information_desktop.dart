@@ -3,6 +3,7 @@ import 'dart:html';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -63,6 +64,20 @@ class LandLordProfileInformationDesktop extends StatelessWidget {
             //Upload Profile Image
             ProfileImageFilePicker(),
             SizedBox(height: 20.h,),
+
+
+            Align(
+              alignment: Alignment.center,
+                child: CustomText(
+                  title: "Your profile is not verified yet! Please verify your profile to add properties.",
+                  letterSpacing: 1,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 3.sp,
+                  fontColor: ColorManager.redColor,
+                ),
+            ),
+            SizedBox(height: 20.h,),
+
 
 
             Container(
