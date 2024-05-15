@@ -10,12 +10,14 @@ import '../../../../Universal_Widgets/footer_area_desktop.dart';
 import '../../../../Utils/Color_Manager/colo_manager.dart';
 import '../../../../Utils/universal_controller.dart';
 import '../../../Home_Page/Components/Desktop_Component/HeadBannerSection/head_banner_section.dart';
+import '../../login_page_controller.dart';
 
 class LoginPageDesktopView extends StatelessWidget {
   LoginPageDesktopView({super.key});
 
 
   var univarsalController = Get.put(UniversalControllerClass());
+  var loginPageController = Get.put(LoginPageControllerClass());
 
   @override
   Widget build(BuildContext context) {
@@ -49,14 +51,14 @@ class LoginPageDesktopView extends StatelessWidget {
                 ],
               ),
               child: Form(
-                key: univarsalController.formKey,
+                key: loginPageController.formKey,
                 child: Column(
                   children: [
                     CustomTextFormField(
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       labelText: "Enter Email",
                       textAlign: TextAlign.start,
-                      validator: univarsalController.validateEmail,
+                      validator: loginPageController.validateEmail,
                     ),
                     SizedBox(height: 10.h,),
 
@@ -102,7 +104,7 @@ class LoginPageDesktopView extends StatelessWidget {
                             //     MaterialPageRoute(builder: (context) => HomePage()),
                             // );
 
-                          univarsalController.submitForm();
+                          loginPageController.submitForm();
                         },
                       ),
                     ),

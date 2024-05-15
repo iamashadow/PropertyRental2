@@ -3,7 +3,11 @@ import 'dart:html';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:property_rental_2/Pages/LandLord_Sector/Page1/Land_Lord_Profile_Information_Page/land_lord_profile_information_controller.dart';
+import 'package:property_rental_2/Universal_Widgets/custom_button.dart';
 import 'package:property_rental_2/Universal_Widgets/custom_text.dart';
 import 'package:property_rental_2/Universal_Widgets/custom_text_form_field.dart';
 import 'package:property_rental_2/Utils/Color_Manager/colo_manager.dart';
@@ -37,6 +41,7 @@ class LandLordProfileInformationDesktop extends StatelessWidget {
   //    } else {// perform some action etc}
   //    }
 
+   var landLordProfileController = Get.put(LandLordProfileInformationControllerClass());
 
   @override
   Widget build(BuildContext context) {
@@ -78,12 +83,14 @@ class LandLordProfileInformationDesktop extends StatelessWidget {
                   //Name
                   CustomTextFormField(
                     labelText: "Enter Your Name",
+                    controller: landLordProfileController.landLordNameController,
                   ),
                   SizedBox(height: 10.h,),
 
                   //Profile Bio
                   CustomTextFormField(
                     labelText: "Say something about you",
+                    controller: landLordProfileController.landLordBioController,
                     maxLines: 5,
                   ),
                   SizedBox(height: 10.h,),
@@ -91,36 +98,70 @@ class LandLordProfileInformationDesktop extends StatelessWidget {
                   //Mobile Number
                   CustomTextFormField(
                     labelText: "Enter Your Mobile Number",
+                    controller: landLordProfileController.landLordMobileNumberController,
                   ),
                   SizedBox(height: 10.h,),
 
                   //WhatsApp Number
                   CustomTextFormField(
                     labelText: "Enter Your WhatsApp Number",
+                    controller: landLordProfileController.landLordWhatsAppNumberController,
                   ),
                   SizedBox(height: 10.h,),
 
                   //Office Number
                   CustomTextFormField(
                     labelText: "Enter Your Office Mobile Number",
+                    controller: landLordProfileController.landLordOfficeNumberController,
                   ),
                   SizedBox(height: 10.h,),
         
                   //Email
                   CustomTextFormField(
                     labelText: "Your Email",
+                    controller: landLordProfileController.landLordEmailController,
                   ),
                   SizedBox(height: 10.h,),
         
                   //Date of Birth
-                  CustomTextFormField(
-                    labelText: "Enter Your Date of Birth",
+                  CustomText(
+                    title: "Select your date of birth",
                   ),
+                  SizedBox(height: 10.h,),
+
+                  InkWell(
+                    onTap: () async {
+                      DateTime? datePicked = await showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(1950 , 1, 1),
+                          lastDate: DateTime(2024 , 12, 30),
+                      );
+
+                      if (datePicked != null) {
+                        landLordProfileController.selectedDate.value = datePicked;
+                      }
+
+                    },
+                    child: Obx( () => landLordProfileController.selectedDate.value != null
+                        ? CustomText(
+                      title: "Date of Birth : ${landLordProfileController.selectedDate.value!.toLocal().toString().split(' ')[0]}", // Displaying date in YYYY-MM-DD format
+                      fontColor: ColorManager.kasmiriBlue,
+                    )
+                        : CustomText(
+                      title: "Date of Birth : ",
+                      fontColor: ColorManager.kasmiriBlue,
+                    )),
+                  ),
+                  SizedBox(height: 10.h,),
+
+
                   SizedBox(height: 10.h,),
         
                   //Nationality
                   CustomTextFormField(
                     labelText: "Enter Your Nationality",
+                    controller: landLordProfileController.landLordNationalityController,
                   ),
                   SizedBox(height: 10.h,),
         
@@ -138,6 +179,24 @@ class LandLordProfileInformationDesktop extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 10.h,),
+
+                  //Save Button
+                  Align(
+                    alignment: Alignment.center,
+                    child: CustomButton(
+                      onTap: (){},
+                      fontColor: Colors.white,
+                      fontSize: 4.sp,
+                      fontWeight: FontWeight.w500,
+                      buttonColor: ColorManager.kasmiriBlue,
+                      buttonTitle: "Save",
+                      buttonRadius: 10.r,
+                      buttonHeight: 40.h,
+                      buttonWidth: 30.w,
+                    ),
+                  ),
+                  SizedBox(height: 10.h,),
+
                 ],
               ),
             ),

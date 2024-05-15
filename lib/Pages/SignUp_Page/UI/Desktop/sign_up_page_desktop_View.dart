@@ -7,11 +7,13 @@ import '../../../../Universal_Widgets/footer_area_desktop.dart';
 import '../../../../Utils/Color_Manager/colo_manager.dart';
 import '../../../../Utils/universal_controller.dart';
 import '../../../Home_Page/Components/Desktop_Component/HeadBannerSection/head_banner_section.dart';
+import '../../sign_up_page_controller.dart';
 
 class SignUpPageDesktopView extends StatelessWidget {
   SignUpPageDesktopView({super.key});
 
   var univarsalController = Get.put(UniversalControllerClass());
+  var signUpPageController = Get.put(SignUpPageControllerClass());
 
 
   @override
@@ -43,46 +45,63 @@ class SignUpPageDesktopView extends StatelessWidget {
                   ),
                 ],
               ),
-              child: Column(
-                children: [
-                  CustomTextFormField(
-                    labelText: "Enter Email",
-                    textAlign: TextAlign.start,
-                  ),
-                  SizedBox(height: 10.h,),
+              child: Form(
+                key: signUpPageController.formKey,
+                child: Column(
+                  children: [
+                    CustomTextFormField(
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      labelText: "Enter Email",
+                      textAlign: TextAlign.start,
+                      validator: signUpPageController.validateEmail,
+                      controller: signUpPageController.emailController,
 
-                  CustomTextFormField(
-                    labelText: "Enter Password",
-                    textAlign: TextAlign.start,
-                  ),
-                  SizedBox(height: 20.h,),
+                    ),
+                    SizedBox(height: 10.h,),
+
+                    CustomTextFormField(
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      labelText: "Enter Password",
+                      textAlign: TextAlign.start,
+                      validator: (value){
+                        if(value!.isEmpty){
+                          return "Please enter password";
+                        }
+                        else{
+                          return null;
+                        }
+                      },
+                      controller: signUpPageController.passwordController,
+                    ),
+                    SizedBox(height: 20.h,),
 
 
-                  SizedBox(
-                    width: 30.w,
-                    height: 30.h,
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                            Colors.blue
-                        ),
-                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0), // Adjust the radius as needed
+                    SizedBox(
+                      width: 30.w,
+                      height: 30.h,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              Colors.blue
+                          ),
+                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0), // Adjust the radius as needed
+                            ),
                           ),
                         ),
+                        child: CustomText(
+                          title: "Registration",
+                          fontWeight: FontWeight.bold,
+                          fontColor: Colors.white,
+                        ),
+                        onPressed: (){
+                          signUpPageController.submitForm();
+                        },
                       ),
-                      child: CustomText(
-                        title: "Registration",
-                        fontWeight: FontWeight.bold,
-                        fontColor: Colors.white,
-                      ),
-                      onPressed: (){
-
-                      },
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
             SizedBox(height: 1.sh*0.1,),

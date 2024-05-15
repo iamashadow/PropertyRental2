@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:property_rental_2/Utils/universal_controller.dart';
 import '../../../Universal_Widgets/custom_text.dart';
+import '../../Login_Page/login_page_controller.dart';
 
 class PropertyFetures extends StatelessWidget {
 
@@ -21,6 +22,7 @@ class PropertyFetures extends StatelessWidget {
 
 
   var universalControllerInstance = Get.put(UniversalControllerClass());
+  var loginPageController = Get.put(LoginPageControllerClass());
 
 
   @override
@@ -40,7 +42,7 @@ class PropertyFetures extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 CustomText(
-                  title: "Property ID : ${universalControllerInstance.generateRandomNumber()}",
+                  title: "Property ID : ${loginPageController.generateRandomNumber()}",
                   fontColor: const Color(0xFF4B5EA3),
                 ),
                 Row(children: [
