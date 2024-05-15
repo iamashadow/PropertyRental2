@@ -12,10 +12,7 @@ class HeadBannerSection extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-      ),
-      drawer: MyDrawer(),
+
       body: Column(
         children: [
           Stack(

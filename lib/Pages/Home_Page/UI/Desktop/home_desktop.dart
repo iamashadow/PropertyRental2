@@ -9,6 +9,7 @@ import '../../Components/Desktop_Component/BuyOrSell_Desktop/but_or_sell_desktop
 import '../../Components/Desktop_Component/Clients_Testimonial/cllients_testimonial.dart';
 import '../../../../Universal_Widgets/footer_area_desktop.dart';
 import '../../Components/Desktop_Component/HeadBannerSection/head_banner_section.dart';
+import '../../Components/Desktop_Component/My_Drawer/my_drawer.dart';
 import '../../Components/Desktop_Component/Nav_Bar/nav_bar.dart';
 import '../../Components/Desktop_Component/Our_Agents/our_agents_desktop.dart';
 import '../../Components/Desktop_Component/Our_Amazing_Services_Desktop/our_amazing_services_desktop.dart';
@@ -26,6 +27,13 @@ class HomeDesktop extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFF7F7F7),
       // backgroundColor: Colors.white,
+
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+      ),
+      drawer: MyDrawer(),
+
+
       body: SingleChildScrollView(
         child: Column(
         
