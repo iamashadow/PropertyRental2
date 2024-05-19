@@ -439,6 +439,16 @@ class AllList{
 
   static List<PropertyApproveRequestToAdminModel> propertyApproveRequestListToAdmin = [];
 
+  static final daysList = [
+    "Satur Day",
+    "Sun Day",
+    "Mon Day",
+    "Tues Day",
+    "Wednes Day",
+    "Thurs Day",
+    "Fri Day"
+  ];
+
 
 
 

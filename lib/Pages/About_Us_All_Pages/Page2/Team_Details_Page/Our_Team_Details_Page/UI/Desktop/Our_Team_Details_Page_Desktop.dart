@@ -9,11 +9,13 @@ import 'package:property_rental_2/Pages/Our_Properties_Details_Page_Desktop/Desk
 import 'package:property_rental_2/Universal_Widgets/custom_button.dart';
 import 'package:property_rental_2/Universal_Widgets/custom_text.dart';
 import 'package:property_rental_2/Universal_Widgets/custom_text_form_field.dart';
+import 'package:property_rental_2/Utils/All_List/all_list.dart';
 import 'package:property_rental_2/Utils/Color_Manager/colo_manager.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../../../../Universal_Widgets/footer_area_desktop.dart';
 import '../../../../../../Home_Page/Components/Desktop_Component/HeadBannerSection/head_banner_section.dart';
+import '../../Components/Desktop_components/Day_List_Components/day_list_components.dart';
 
 class OurTeamDetailsPageDesktop extends StatelessWidget {
 
@@ -64,228 +66,230 @@ class OurTeamDetailsPageDesktop extends StatelessWidget {
 
 
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 200),
+              padding: const EdgeInsets.symmetric(horizontal: 200),
               child: Row(
                 // mainAxisSize: MainAxisSize.min,
                 children: [
                   Expanded(
+
+
+                    /*
+                    There Was a IntrinsicHeight Widget
+                     */
+
                     child: IntrinsicHeight(
-                      child: SizedBox(
-                        // width: 1.sw*0.5,
-                        // height: 1.sh*1,
-                        // color: Colors.amber,
-                        child: Column(
-                          // mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
+                      child: Column(
+                        // mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
 
-                            //ProfileImage, Name, Position, Office, Mobile, WhatsApp, Email
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                //ProfileImage
-                                Container(
-                                  width: 1.w*70,
-                                  height: 1.h*200,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      image: DecorationImage(
-                                          fit: BoxFit.cover,
-                                          image: NetworkImage(profileImage!)
-                                      )
-                                  ),
+                          //ProfileImage, Name, Position, Office, Mobile, WhatsApp, Email
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              //ProfileImage
+                              Container(
+                                width: 1.w*70,
+                                height: 1.h*200,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: NetworkImage(profileImage!)
+                                    )
                                 ),
-                                SizedBox(width: 1.w*10,),
-
-                                //Name, Position, Office, Mobile, WhatsApp, Email
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      //Name
-                                      CustomText(
-                                        fontColor: ColorManager.blackColor,
-                                        title: name!,
-                                        fontSize: 5.sp,
-                                        fontWeight: FontWeight.bold,
-                                  
-                                      ),
-                                      SizedBox(height: 1.h*2,),
-                                  
-                                      //Position
-                                      CustomText(
-                                        fontColor: ColorManager.blackColor,
-                                        title: position!,
-                                        fontSize: 3.sp,
-                                        fontWeight: FontWeight.w500,
-                                  
-                                      ),
-                                      SizedBox(height: 1.h*2,),
-                                  
-                                  
-                                      //Office
-                                      Row(
-                                        children: [
-                                          const Icon(Icons.phone),
-                                          SizedBox(width: 1.w*2,),
-                                          CustomText(
-                                            fontColor: ColorManager.blackColor,
-                                            title: mobileNumber!,
-                                            fontSize: 3.sp,
-                                            fontWeight: FontWeight.w500,
-                                  
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(height: 1.h*2,),
-                                  
-                                      //Mobile
-                                      Row(
-                                        children: [
-                                          const Icon(Icons.mobile_friendly),
-                                          SizedBox(width: 1.w*2,),
-                                          CustomText(
-                                            fontColor: ColorManager.blackColor,
-                                            title: mobileNumber!,
-                                            fontSize: 3.sp,
-                                            fontWeight: FontWeight.w500,
-                                  
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(height: 1.h*2,),
-                                  
-                                  
-                                      //WhatsApp
-                                      Row(
-                                        children: [
-                                          const Icon(FontAwesomeIcons.whatsapp),
-                                          SizedBox(width: 1.w*2,),
-                                          CustomText(
-                                            fontColor: ColorManager.blackColor,
-                                            title: mobileNumber!,
-                                            fontSize: 3.sp,
-                                            fontWeight: FontWeight.w500,
-                                  
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(height: 1.h*2,),
-                                  
-                                  
-                                      //Email
-                                      Row(
-                                        children: [
-                                          const Icon(Icons.email),
-                                          SizedBox(width: 1.w*2,),
-                                          CustomText(
-                                            fontColor: ColorManager.blackColor,
-                                            title: email!,
-                                            fontSize: 3.sp,
-                                            fontWeight: FontWeight.w500,
-                                  
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(height: 1.h*2,),
-                                  
-                                    ],
-                                  ),
-                                ),
-
-                              ],
-                            ),
-                            SizedBox(height: 1.h*15,),
-
-                            //About Me Text
-                            CustomText(
-                              title: "About Me",
-                              fontColor: ColorManager.blackColor,
-                              fontSize: 5.sp,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            SizedBox(height: 1.h*15,),
-
-                            //About me Description
-                            Expanded(
-                              child: CustomText(
-                                fontColor: ColorManager.blackColor,
-                                title: bio!,
-                                fontSize: 3.sp,
                               ),
-                            ),
-                            SizedBox(height: 1.h*10,),
+                              SizedBox(width: 1.w*10,),
 
-                            Divider(),
-                            SizedBox(height: 1.h*10,),
-
-
-                            //Message Me Form
-                            Card(
-                              surfaceTintColor: ColorManager.whiteColor,
-                              child: Padding(
-                                padding: EdgeInsets.all(10.sp),
+                              //Name, Position, Office, Mobile, WhatsApp, Email
+                              Expanded(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-
                                     //Name
-                                    CustomTextFormField(
-                                      labelText: "Name",
-                                      controller: ourTeamDetailsPageClassController.ourTeamDetailsPageNameController,
+                                    CustomText(
+                                      fontColor: ColorManager.blackColor,
+                                      title: name!,
+                                      fontSize: 5.sp,
+                                      fontWeight: FontWeight.bold,
+
                                     ),
-                                    SizedBox(height: 1.h*10,),
+                                    SizedBox(height: 1.h*2,),
+
+                                    //Position
+                                    CustomText(
+                                      fontColor: ColorManager.blackColor,
+                                      title: position!,
+                                      fontSize: 3.sp,
+                                      fontWeight: FontWeight.w500,
+
+                                    ),
+                                    SizedBox(height: 1.h*2,),
+
+
+                                    //Office
+                                    Row(
+                                      children: [
+                                        const Icon(Icons.phone),
+                                        SizedBox(width: 1.w*2,),
+                                        CustomText(
+                                          fontColor: ColorManager.blackColor,
+                                          title: mobileNumber!,
+                                          fontSize: 3.sp,
+                                          fontWeight: FontWeight.w500,
+
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(height: 1.h*2,),
+
+                                    //Mobile
+                                    Row(
+                                      children: [
+                                        const Icon(Icons.mobile_friendly),
+                                        SizedBox(width: 1.w*2,),
+                                        CustomText(
+                                          fontColor: ColorManager.blackColor,
+                                          title: mobileNumber!,
+                                          fontSize: 3.sp,
+                                          fontWeight: FontWeight.w500,
+
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(height: 1.h*2,),
+
+
+                                    //WhatsApp
+                                    Row(
+                                      children: [
+                                        const Icon(FontAwesomeIcons.whatsapp),
+                                        SizedBox(width: 1.w*2,),
+                                        CustomText(
+                                          fontColor: ColorManager.blackColor,
+                                          title: mobileNumber!,
+                                          fontSize: 3.sp,
+                                          fontWeight: FontWeight.w500,
+
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(height: 1.h*2,),
+
 
                                     //Email
-                                    CustomTextFormField(
-                                      labelText: "Email",
-                                      controller: ourTeamDetailsPageClassController.ourTeamDetailsPageEmailController,
-                                    ),
-                                    SizedBox(height: 1.h*10,),
+                                    Row(
+                                      children: [
+                                        const Icon(Icons.email),
+                                        SizedBox(width: 1.w*2,),
+                                        CustomText(
+                                          fontColor: ColorManager.blackColor,
+                                          title: email!,
+                                          fontSize: 3.sp,
+                                          fontWeight: FontWeight.w500,
 
-                                    //Phone Number
-                                    CustomTextFormField(
-                                      labelText: "Phone Number",
-                                      controller: ourTeamDetailsPageClassController.ourTeamDetailsPagePhoneNumberController,
+                                        ),
+                                      ],
                                     ),
-                                    SizedBox(height: 1.h*10,),
+                                    SizedBox(height: 1.h*2,),
 
-                                    //Your Message
-                                    CustomTextFormField(
-                                      labelText: "Your Message",
-                                      controller: ourTeamDetailsPageClassController.ourTeamDetailsPageBioController,
-                                      maxLines: 5,
-                                    ),
-                                    SizedBox(height: 1.h*10,),
-
-                                    //Submit Button
-                                    CustomButton(
-                                      fontColor: ColorManager.whiteColor,
-                                      fontSize: 3.sp,
-                                      fontWeight: FontWeight.bold,
-                                      buttonWidth: 1.w*30,
-                                      buttonTitle: "Submit",
-                                      buttonRadius: 10,
-                                      buttonHeight: 1.h*30,
-                                      buttonColor: ColorManager.kasmiriBlue,
-                                      onTap: (){
-                                        launchUrl(Uri(
-                                          scheme: "mailto",
-                                          path: "rezajr2k18@gmail.com",
-                                          query: "Send a Mail to Imtiaz Chowdhury",
-                                        ));
-                                      },
-                                    ),
-                                    SizedBox(height: 1.h*10,),
                                   ],
                                 ),
                               ),
+
+                            ],
+                          ),
+                          SizedBox(height: 1.h*15,),
+
+                          //About Me Text
+                          CustomText(
+                            title: "About Me",
+                            fontColor: ColorManager.blackColor,
+                            fontSize: 5.sp,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          SizedBox(height: 1.h*15,),
+
+                          //About me Description
+                          Expanded(
+                            child: CustomText(
+                              fontColor: ColorManager.blackColor,
+                              title: bio!,
+                              fontSize: 3.sp,
                             ),
-                            SizedBox(height: 1.h*10,),
+                          ),
+                          SizedBox(height: 1.h*10,),
+
+                          Divider(),
+                          SizedBox(height: 1.h*10,),
 
 
-                          ],
-                        ),
+                          //Message Me Form
+                          Card(
+                            surfaceTintColor: ColorManager.whiteColor,
+                            child: Padding(
+                              padding: EdgeInsets.all(10.sp),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+
+                                  DayListComponent(),
+
+                                  CustomTextFormField(
+                                    labelText: "Name",
+                                    controller: ourTeamDetailsPageClassController.ourTeamDetailsPageNameController,
+                                  ),
+                                  SizedBox(height: 1.h*10,),
+
+                                  //Email
+                                  CustomTextFormField(
+                                    labelText: "Email",
+                                    controller: ourTeamDetailsPageClassController.ourTeamDetailsPageEmailController,
+                                  ),
+                                  SizedBox(height: 1.h*10,),
+
+                                  //Phone Number
+                                  CustomTextFormField(
+                                    labelText: "Phone Number",
+                                    controller: ourTeamDetailsPageClassController.ourTeamDetailsPagePhoneNumberController,
+                                  ),
+                                  SizedBox(height: 1.h*10,),
+
+                                  //Your Message
+                                  CustomTextFormField(
+                                    labelText: "Your Message",
+                                    controller: ourTeamDetailsPageClassController.ourTeamDetailsPageBioController,
+                                    maxLines: 5,
+                                  ),
+                                  SizedBox(height: 1.h*10,),
+
+                                  //Submit Button
+                                  CustomButton(
+                                    fontColor: ColorManager.whiteColor,
+                                    fontSize: 3.sp,
+                                    fontWeight: FontWeight.bold,
+                                    buttonWidth: 1.w*30,
+                                    buttonTitle: "Submit",
+                                    buttonRadius: 10,
+                                    buttonHeight: 1.h*30,
+                                    buttonColor: ColorManager.kasmiriBlue,
+                                    onTap: (){
+                                      launchUrl(Uri(
+                                        scheme: "mailto",
+                                        path: "rezajr2k18@gmail.com",
+                                        query: "Send a Mail to Imtiaz Chowdhury",
+                                      ));
+                                    },
+                                  ),
+                                  SizedBox(height: 1.h*10,),
+                                ],
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 1.h*10,),
+
+
+                        ],
                       ),
                     ),
                   ),

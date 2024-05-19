@@ -13,11 +13,13 @@ import '../../../../../../../Utils/universal_controller.dart';
 class AddProperty extends StatelessWidget {
   AddProperty({super.key});
 
-  var radioController = Get.put(UniversalControllerClass());
+  final radioController = Get.put(UniversalControllerClass());
 
-  var propertyAddingLandLordController = Get.put(LandLordPropertyAddController());
+  final propertyAddingLandLordController =
+      Get.put(LandLordPropertyAddController());
 
-  var propertyPic = "https://plus.unsplash.com/premium_photo-1661963209358-0f4d5f509d10?q=80&w=2014&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+  final propertyPic =
+      "https://plus.unsplash.com/premium_photo-1661963209358-0f4d5f509d10?q=80&w=2014&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
 
   @override
   Widget build(BuildContext context) {
@@ -26,13 +28,10 @@ class AddProperty extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-
           //Property Images
           InkWell(
-            onTap: (){
+            onTap: () {
               // propertyAddingLandLordController.webImagePicker();
-
-
             },
             child: Container(
               width: double.maxFinite,
@@ -55,29 +54,38 @@ class AddProperty extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 10.h,),
-
+          SizedBox(
+            height: 10.h,
+          ),
 
           //Property Name
           CustomTextFormField(
             labelText: "Property Name",
             controller: propertyAddingLandLordController.propertyNameController,
           ),
-          SizedBox(height: 10.h,),
+          SizedBox(
+            height: 10.h,
+          ),
 
           //Property Price
           CustomTextFormField(
             labelText: "Property Price",
-            controller: propertyAddingLandLordController.propertyPriceController,
+            controller:
+                propertyAddingLandLordController.propertyPriceController,
           ),
-          SizedBox(height: 10.h,),
+          SizedBox(
+            height: 10.h,
+          ),
 
           //Property Uploading Date
           CustomTextFormField(
             labelText: "Property Uploading Date",
-            controller: propertyAddingLandLordController.propertyUploadDateController,
+            controller:
+                propertyAddingLandLordController.propertyUploadDateController,
           ),
-          SizedBox(height: 10.h,),
+          SizedBox(
+            height: 10.h,
+          ),
 
           //Select Property Status
           CustomText(
@@ -85,38 +93,39 @@ class AddProperty extends StatelessWidget {
             fontWeight: FontWeight.w500,
           ),
 
+          //Property Status
+          Obx(
+            () => RadioListTile(
+                value: 1,
+                groupValue: radioController.propertyStatusRadioGroupValue.value,
+                title: CustomText(
+                  title: "Rented",
+                  fontWeight: FontWeight.w500,
+                ),
+                onChanged: (value) {
+                  radioController.propertyStatusRadioGroupValue.value = value!;
+                }),
+          ),
+          SizedBox(
+            height: 10.h,
+          ),
 
           //Property Status
           Obx(
-              () => RadioListTile(
-                  value: 1,
-                  groupValue: radioController.propertyStatusRadioGroupValue.value,
-                  title: CustomText(
-                    title: "Rented",
-                    fontWeight: FontWeight.w500,
-                  ),
-                  onChanged: (value){
-                    radioController.propertyStatusRadioGroupValue.value = value!;
-                  }
-              ),
+            () => RadioListTile(
+                value: 2,
+                groupValue: radioController.propertyStatusRadioGroupValue.value,
+                title: CustomText(
+                  title: "Available",
+                  fontWeight: FontWeight.w500,
+                ),
+                onChanged: (value) {
+                  radioController.propertyStatusRadioGroupValue.value = value!;
+                }),
           ),
-          SizedBox(height: 10.h,),
-
-          //Property Status
-          Obx(
-              () => RadioListTile(
-                  value: 2,
-                  groupValue: radioController.propertyStatusRadioGroupValue.value,
-                  title: CustomText(
-                    title: "Available",
-                    fontWeight: FontWeight.w500,
-                  ),
-                  onChanged: (value){
-                    radioController.propertyStatusRadioGroupValue.value = value!;
-                  }
-              ),
+          SizedBox(
+            height: 10.h,
           ),
-          SizedBox(height: 10.h,),
 
           //Select Property Type
           CustomText(
@@ -124,59 +133,68 @@ class AddProperty extends StatelessWidget {
             fontWeight: FontWeight.w500,
           ),
 
-
           //Property Type
           Obx(
-                () => RadioListTile(
+            () => RadioListTile(
                 value: 1,
                 groupValue: radioController.propertyTypeRadioGroupValue.value,
                 title: CustomText(
                   title: "Flat",
                   fontWeight: FontWeight.w500,
                 ),
-                onChanged: (value){
+                onChanged: (value) {
                   radioController.propertyTypeRadioGroupValue.value = value!;
-                }
-            ),
+                }),
           ),
-          SizedBox(height: 10.h,),
+          SizedBox(
+            height: 10.h,
+          ),
 
           //Property Type
           Obx(
-                () => RadioListTile(
+            () => RadioListTile(
                 value: 2,
                 groupValue: radioController.propertyTypeRadioGroupValue.value,
                 title: CustomText(
                   title: "Home",
                   fontWeight: FontWeight.w500,
                 ),
-                onChanged: (value){
+                onChanged: (value) {
                   radioController.propertyTypeRadioGroupValue.value = value!;
-                }
-            ),
+                }),
           ),
-          SizedBox(height: 10.h,),
+          SizedBox(
+            height: 10.h,
+          ),
 
           //Property Bedrooms
           CustomTextFormField(
             labelText: "Property Bedrooms",
-            controller: propertyAddingLandLordController.propertyBedRoomsController,
+            controller:
+                propertyAddingLandLordController.propertyBedRoomsController,
           ),
-          SizedBox(height: 10.h,),
+          SizedBox(
+            height: 10.h,
+          ),
 
           //Property Bathrooms
           CustomTextFormField(
             labelText: "Property Bathrooms",
-            controller: propertyAddingLandLordController.propertyBathRoomsController,
+            controller:
+                propertyAddingLandLordController.propertyBathRoomsController,
           ),
-          SizedBox(height: 10.h,),
+          SizedBox(
+            height: 10.h,
+          ),
 
           //Property Area
           CustomTextFormField(
             labelText: "Property Area",
             controller: propertyAddingLandLordController.propertyAreaController,
           ),
-          SizedBox(height: 10.h,),
+          SizedBox(
+            height: 10.h,
+          ),
 
           //Property Price
           CustomTextFormField(
@@ -184,7 +202,9 @@ class AddProperty extends StatelessWidget {
             maxLines: 5,
             controller: propertyAddingLandLordController.propertyBioController,
           ),
-          SizedBox(height: 10.h,),
+          SizedBox(
+            height: 10.h,
+          ),
 
           Center(
             child: CustomButton(
@@ -196,18 +216,29 @@ class AddProperty extends StatelessWidget {
               buttonWidth: 100.w,
               buttonTitle: "Upload Property",
               buttonRadius: 10.r,
-              onTap: (){
+              onTap: () {
                 var newProperty = PropertyApproveRequestToAdminModel(
                   propertyImage: propertyPic,
-                  propertyName: propertyAddingLandLordController.propertyNameController.text,
-                  propertyPrice: propertyAddingLandLordController.propertyPriceController.text,
-                  posetingDate: propertyAddingLandLordController.propertyUploadDateController.text,
-                  bedRooms: propertyAddingLandLordController.propertyBedRoomsController.text,
-                  bathRooms: propertyAddingLandLordController.propertyBathRoomsController.text,
-                  propertyArea: propertyAddingLandLordController.propertyAreaController.text,
-                  propertyType: radioController.propertyTypeRadioGroupValue.value.toString(),
-                  propertyStatus: radioController.propertyStatusRadioGroupValue.value.toString(),
-                  prpertyBio: propertyAddingLandLordController.propertyBioController.text,
+                  propertyName: propertyAddingLandLordController
+                      .propertyNameController.text,
+                  propertyPrice: propertyAddingLandLordController
+                      .propertyPriceController.text,
+                  posetingDate: propertyAddingLandLordController
+                      .propertyUploadDateController.text,
+                  bedRooms: propertyAddingLandLordController
+                      .propertyBedRoomsController.text,
+                  bathRooms: propertyAddingLandLordController
+                      .propertyBathRoomsController.text,
+                  propertyArea: propertyAddingLandLordController
+                      .propertyAreaController.text,
+                  propertyType: radioController
+                      .propertyTypeRadioGroupValue.value
+                      .toString(),
+                  propertyStatus: radioController
+                      .propertyStatusRadioGroupValue.value
+                      .toString(),
+                  prpertyBio: propertyAddingLandLordController
+                      .propertyBioController.text,
                 );
 
                 AllList.propertyApproveRequestListToAdmin.add(newProperty);
@@ -220,15 +251,16 @@ class AddProperty extends StatelessWidget {
                 print(newProperty.bathRooms);
                 print(newProperty.propertyArea);
                 print(newProperty.propertyType);
-                print("INdedx : ${AllList.propertyApproveRequestListToAdmin.length}");
+                print(
+                    "INdedx : ${AllList.propertyApproveRequestListToAdmin.length}");
               },
             ),
           ),
-          SizedBox(height: 10.h,),
-
+          SizedBox(
+            height: 10.h,
+          ),
         ],
       ),
     );
   }
-
 }
