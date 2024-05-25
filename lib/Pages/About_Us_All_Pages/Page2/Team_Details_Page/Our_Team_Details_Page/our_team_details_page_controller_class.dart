@@ -6,4 +6,6 @@ class OurTeamDetailsPageControllerClass extends GetxController{
   TextEditingController ourTeamDetailsPageEmailController = TextEditingController();
   TextEditingController ourTeamDetailsPagePhoneNumberController = TextEditingController();
   TextEditingController ourTeamDetailsPageBioController = TextEditingController();
+
+  Rx<DateTime?> selectedDate = Rx<DateTime?>(null);
 }

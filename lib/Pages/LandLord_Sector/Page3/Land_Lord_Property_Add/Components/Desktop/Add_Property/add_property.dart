@@ -23,6 +23,7 @@ class AddProperty extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
       margin: EdgeInsets.only(left: 100.w, right: 100.w),
       child: Column(
@@ -42,7 +43,7 @@ class AddProperty extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Icon(Icons.image),
+                    const Icon(Icons.image),
                     CustomText(
                       title: "Upload minimum 10 images",
                       fontWeight: FontWeight.w500,
@@ -59,9 +60,29 @@ class AddProperty extends StatelessWidget {
           ),
 
           //Property Name
+          CustomText(
+            title: "What is the property name?",
+            fontSize: 3.sp,
+            fontWeight: FontWeight.bold,
+          ),
+          SizedBox(
+            height: 10.h,
+          ),
+
+          //Property Name
           CustomTextFormField(
             labelText: "Property Name",
             controller: propertyAddingLandLordController.propertyNameController,
+          ),
+          SizedBox(
+            height: 10.h,
+          ),
+
+          //Property Rent Price
+          CustomText(
+            title: "How much is the rent?",
+            fontSize: 3.sp,
+            fontWeight: FontWeight.bold,
           ),
           SizedBox(
             height: 10.h,
@@ -77,20 +98,84 @@ class AddProperty extends StatelessWidget {
             height: 10.h,
           ),
 
-          //Property Uploading Date
-          CustomTextFormField(
-            labelText: "Property Uploading Date",
-            controller:
-                propertyAddingLandLordController.propertyUploadDateController,
+          // //Property Uploading Date
+          // CustomTextFormField(
+          //   labelText: "Property Uploading Date",
+          //   controller:
+          //       propertyAddingLandLordController.propertyUploadDateController,
+          // ),
+          // SizedBox(
+          //   height: 10.h,
+          // ),
+
+
+          //Date of Birth
+          CustomText(
+            title: "Property Uploading Date ${DateTime.now().toLocal().toString().split(' ')[0]}",
           ),
           SizedBox(
             height: 10.h,
           ),
 
+          // //Selecte Date of Birth
+          // Row(
+          //   children: [
+          //     CustomText(
+          //       title: "Date of Birth : ",
+          //       fontColor: ColorManager.kasmiriBlue,
+          //     ),
+          //     const Icon(Icons.calendar_month_rounded)
+          //   ],
+          // ),
+          // SizedBox(
+          //   height: 10.h,
+          // ),
+
+          //Selecte Date of Birth
+          // InkWell(
+          //   onTap: () async {
+          //     DateTime? datePicked = await showDatePicker(
+          //       context: context,
+          //       initialDate: DateTime.now(),
+          //       firstDate: DateTime(1950, 1, 1),
+          //       lastDate: DateTime.now(),
+          //     );
+          //
+          //     if (datePicked != null) {
+          //       propertyAddingLandLordController.selectedDate.value =
+          //           datePicked;
+          //     }
+          //   },
+          //   child: Obx(() =>
+          //   propertyAddingLandLordController.selectedDate.value != null
+          //       ? CustomText(
+          //     title:
+          //     "Date of Birth : ${propertyAddingLandLordController.selectedDate.value!.toLocal().toString().split(' ')[0]}", // Displaying date in YYYY-MM-DD format
+          //     fontColor: ColorManager.kasmiriBlue,
+          //   )
+          //       : Row(
+          //     children: [
+          //       CustomText(
+          //         title: "Date of Birth : ",
+          //         fontColor: ColorManager.kasmiriBlue,
+          //       ),
+          //       const Icon(Icons.calendar_month_rounded),
+          //     ],
+          //   ),
+          //   ),
+          // ),
+          // SizedBox(
+          //   height: 10.h,
+          // ),
+
+
+          ///
+
           //Select Property Status
           CustomText(
             title: "Select property status",
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.bold,
+            fontSize: 3.sp,
           ),
 
           //Property Status
@@ -130,7 +215,8 @@ class AddProperty extends StatelessWidget {
           //Select Property Type
           CustomText(
             title: "Select property type",
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.bold,
+            fontSize: 3.sp,
           ),
 
           //Property Type
@@ -168,10 +254,30 @@ class AddProperty extends StatelessWidget {
           ),
 
           //Property Bedrooms
+          CustomText(
+            title: "How many bedrooms?",
+            fontSize: 3.sp,
+            fontWeight: FontWeight.bold,
+          ),
+          SizedBox(
+            height: 10.h,
+          ),
+
+          //Property Bedrooms
           CustomTextFormField(
             labelText: "Property Bedrooms",
             controller:
                 propertyAddingLandLordController.propertyBedRoomsController,
+          ),
+          SizedBox(
+            height: 10.h,
+          ),
+
+          //Property Bathrooms
+          CustomText(
+            title: "How many bathrooms?",
+            fontSize: 3.sp,
+            fontWeight: FontWeight.bold,
           ),
           SizedBox(
             height: 10.h,
@@ -187,6 +293,17 @@ class AddProperty extends StatelessWidget {
             height: 10.h,
           ),
 
+
+          //Property Area
+          CustomText(
+            title: "Total Property Area",
+            fontSize: 3.sp,
+            fontWeight: FontWeight.bold,
+          ),
+          SizedBox(
+            height: 10.h,
+          ),
+
           //Property Area
           CustomTextFormField(
             labelText: "Property Area",
@@ -196,7 +313,17 @@ class AddProperty extends StatelessWidget {
             height: 10.h,
           ),
 
-          //Property Price
+          //Property Bio
+          CustomText(
+            title: "Say something about your property",
+            fontSize: 3.sp,
+            fontWeight: FontWeight.bold,
+          ),
+          SizedBox(
+            height: 10.h,
+          ),
+
+          //Property Bio
           CustomTextFormField(
             labelText: "Property Bio",
             maxLines: 5,
@@ -206,6 +333,24 @@ class AddProperty extends StatelessWidget {
             height: 10.h,
           ),
 
+          CustomText(
+            title: "Property Location Google Map Link",
+            fontSize: 3.sp,
+            fontWeight: FontWeight.bold,
+          ),
+          SizedBox(
+            height: 10.h,
+          ),
+
+          CustomTextFormField(
+            labelText: "Property location google map link",
+            controller: propertyAddingLandLordController.propertyPropertyLocationController,
+          ),
+          SizedBox(
+            height: 10.h,
+          ),
+
+          //Button
           Center(
             child: CustomButton(
               fontSize: 3.sp,

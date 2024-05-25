@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:property_rental_2/Pages/Contact_Us_Page/contact_us_page.dart';
 import 'package:property_rental_2/Pages/FAQS_Page/faqs_page.dart';
 import 'package:property_rental_2/Pages/Home_Page/home_page.dart';
+import 'package:property_rental_2/Pages/LandLord_Sector/Schedules/schedules.dart';
 import 'package:property_rental_2/Pages/Login_Page/login_page.dart';
 import 'package:property_rental_2/Pages/Login_Page/login_page_controller.dart';
 import 'package:property_rental_2/Pages/Login_Page/model/login_rp.dart';
@@ -221,7 +222,7 @@ class MyDrawer extends StatelessWidget {
             Card(
               surfaceTintColor: ColorManager.whiteColor,
               child: ExpansionTile(
-                leading: Icon(FontAwesomeIcons.person),
+                leading: const Icon(FontAwesomeIcons.person),
                 title: CustomText(
                   title: "Land Lord Profile & Properties",
                   textAlign: TextAlign.start,
@@ -245,7 +246,8 @@ class MyDrawer extends StatelessWidget {
                       textAlign: TextAlign.start,
                     ),
                   ),
-                  Divider(),
+                  const Divider(),
+
                   InkWell(
                     onTap: () {
                       Navigator.push(
@@ -260,7 +262,8 @@ class MyDrawer extends StatelessWidget {
                       textAlign: TextAlign.start,
                     ),
                   ),
-                  Divider(),
+                  const Divider(),
+
                   InkWell(
                     onTap: () {
                       Navigator.push(
@@ -271,6 +274,22 @@ class MyDrawer extends StatelessWidget {
                     },
                     child: CustomText(
                       title: "Add Property",
+                      fontWeight: FontWeight.w500,
+                      textAlign: TextAlign.start,
+                    ),
+                  ),
+                  const Divider(),
+
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Schedules()),
+                      );
+                    },
+                    child: CustomText(
+                      title: "Schedules",
                       fontWeight: FontWeight.w500,
                       textAlign: TextAlign.start,
                     ),

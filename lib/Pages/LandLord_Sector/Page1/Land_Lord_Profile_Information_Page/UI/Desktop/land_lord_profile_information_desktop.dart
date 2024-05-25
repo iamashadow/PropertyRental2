@@ -184,13 +184,14 @@ class _LandLordProfileInformationDesktopState
                     height: 10.h,
                   ),
 
+                  //Selecte Date of Birth
                   InkWell(
                     onTap: () async {
                       DateTime? datePicked = await showDatePicker(
                         context: context,
                         initialDate: DateTime.now(),
                         firstDate: DateTime(1950, 1, 1),
-                        lastDate: DateTime(2024, 12, 30),
+                        lastDate: DateTime.now(),
                       );
 
                       if (datePicked != null) {
@@ -205,18 +206,21 @@ class _LandLordProfileInformationDesktopState
                                     "Date of Birth : ${landLordProfileController.selectedDate.value!.toLocal().toString().split(' ')[0]}", // Displaying date in YYYY-MM-DD format
                                 fontColor: ColorManager.kasmiriBlue,
                               )
-                            : CustomText(
-                                title: "Date of Birth : ",
-                                fontColor: ColorManager.kasmiriBlue,
-                              )),
+                            : Row(
+                          children: [
+                            CustomText(
+                              title: "Date of Birth : ",
+                              fontColor: ColorManager.kasmiriBlue,
+                            ),
+                            const Icon(Icons.calendar_month_rounded),
+                          ],
+                        ),
+                    ),
                   ),
                   SizedBox(
                     height: 10.h,
                   ),
 
-                  SizedBox(
-                    height: 10.h,
-                  ),
 
                   //Nationality
                   CustomTextFormField(

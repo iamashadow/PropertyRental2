@@ -233,7 +233,7 @@ class OurTeamDetailsPageDesktop extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
 
-                                  DayListComponent(),
+                                  DatePickerComponent(),
 
                                   CustomTextFormField(
                                     labelText: "Name",

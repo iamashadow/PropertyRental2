@@ -1,46 +1,70 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/get_instance.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:property_rental_2/Pages/About_Us_All_Pages/Page2/Team_Details_Page/Our_Team_Details_Page/our_team_details_page_controller_class.dart';
 
 import '../../../../../../../../Universal_Widgets/custom_text.dart';
 import '../../../../../../../../Utils/All_List/all_list.dart';
 import '../../../../../../../../Utils/Color_Manager/colo_manager.dart';
 
-class DayListComponent extends StatelessWidget {
-  const DayListComponent({super.key});
+class DatePickerComponent extends StatelessWidget {
+  DatePickerComponent({super.key});
+
+  var ourTeamDetailsController = Get.put(OurTeamDetailsPageControllerClass());
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.maxFinite,
-      height: 30.h,
-      child: ListView.builder(
-        shrinkWrap: true,
-          itemCount: AllList.daysList.length,
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (context, index){
-            return Row(
-              children: [
-                InkWell(
-                  onTap: (){
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        //Date of Birth
+        CustomText(
+          title: "Meet with me",
+          fontSize: 4.sp,
+          fontWeight: FontWeight.bold,
+        ),
+        SizedBox(
+          height: 10.h,
+        ),
 
-                  },
-                  child: Card(
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 3.w, right: 3.w, top: 3.h, bottom: 3.h),
-                      child: CustomText(
-                        fontColor: ColorManager.blackColor,
-                        fontSize: 3.sp,
-                        fontWeight: FontWeight.w500,
-                        title: AllList.daysList[index],
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(width: 3.w,),
-              ],
+        InkWell(
+          onTap: () async {
+            DateTime? datePicked = await showDatePicker(
+              context: context,
+              initialDate: DateTime.now(),
+              firstDate: DateTime.now(),
+              lastDate: DateTime(2124, 12, 30),
+
             );
-          }
-      ),
+
+            if (datePicked != null) {
+              ourTeamDetailsController.selectedDate.value =
+                  datePicked;
+            }
+          },
+          child: Obx(() =>
+          ourTeamDetailsController.selectedDate.value != null
+              ? CustomText(
+            title:
+            "Schedule a Day : ${ourTeamDetailsController.selectedDate.value!.toLocal().toString().split(' ')[0]}", // Displaying date in YYYY-MM-DD format
+            fontColor: ColorManager.blackColor,
+            fontWeight: FontWeight.bold,
+          )
+              : Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+              CustomText(
+              title: "Schedule a Day : ",
+              fontColor: ColorManager.kasmiriBlue,
+            ),
+              const Icon(Icons.calendar_month_rounded)
+          ],
+          ),
+          ),
+        ),
+      ],
     );
   }
 }
