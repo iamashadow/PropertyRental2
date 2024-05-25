@@ -13,37 +13,42 @@ class AdminProfileInfoDesktop extends StatelessWidget {
       margin: EdgeInsets.only(left: 100.w, right: 100.w),
       child: Column(
         children: [
-
           ProfileImageFilePicker(),
-          SizedBox(height: 10.h,),
+          SizedBox(
+            height: 10.h,
+          ),
 
           Align(
             alignment: Alignment.centerRight,
-            child: ElevatedButton(
-                onPressed: (){},
-                child: Text("Edit")
-            ),
+            child: ElevatedButton(onPressed: () {}, child: Text("Edit")),
           ),
-          SizedBox(height: 10.h,),
+          SizedBox(
+            height: 10.h,
+          ),
 
           //Name
           CustomTextFormField(
             labelText: "Enter Your Name",
           ),
-          SizedBox(height: 10.h,),
+          SizedBox(
+            height: 10.h,
+          ),
 
           //Mobile Number
           CustomTextFormField(
             labelText: "Enter Your Mobile Number",
           ),
-          SizedBox(height: 10.h,),
+          SizedBox(
+            height: 10.h,
+          ),
 
           //Email
           CustomTextFormField(
             labelText: "Your Email",
           ),
-          SizedBox(height: 10.h,),
-
+          SizedBox(
+            height: 10.h,
+          ),
         ],
       ),
     );

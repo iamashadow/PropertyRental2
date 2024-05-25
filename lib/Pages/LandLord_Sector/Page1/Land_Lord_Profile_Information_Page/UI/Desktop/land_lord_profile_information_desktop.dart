@@ -7,7 +7,7 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:property_rental_2/Pages/LandLord_Sector/Page1/Land_Lord_Profile_Information_Page/land_lord_profile_information_controller.dart';
+import 'package:property_rental_2/Pages/LandLord_Sector/controller/land_lord_profile_information_controller.dart';
 import 'package:property_rental_2/Pages/Login_Page/login_page_controller.dart';
 import 'package:property_rental_2/Pages/Login_Page/model/login_rp.dart';
 import 'package:property_rental_2/Universal_Widgets/custom_button.dart';
@@ -199,28 +199,27 @@ class _LandLordProfileInformationDesktopState
                             datePicked;
                       }
                     },
-                    child: Obx(() =>
-                        landLordProfileController.selectedDate.value != null
-                            ? CustomText(
-                                title:
-                                    "Date of Birth : ${landLordProfileController.selectedDate.value!.toLocal().toString().split(' ')[0]}", // Displaying date in YYYY-MM-DD format
-                                fontColor: ColorManager.kasmiriBlue,
-                              )
-                            : Row(
-                          children: [
-                            CustomText(
-                              title: "Date of Birth : ",
+                    child: Obx(
+                      () => landLordProfileController.selectedDate.value != null
+                          ? CustomText(
+                              title:
+                                  "Date of Birth : ${landLordProfileController.selectedDate.value!.toLocal().toString().split(' ')[0]}", // Displaying date in YYYY-MM-DD format
                               fontColor: ColorManager.kasmiriBlue,
+                            )
+                          : Row(
+                              children: [
+                                CustomText(
+                                  title: "Date of Birth : ",
+                                  fontColor: ColorManager.kasmiriBlue,
+                                ),
+                                const Icon(Icons.calendar_month_rounded),
+                              ],
                             ),
-                            const Icon(Icons.calendar_month_rounded),
-                          ],
-                        ),
                     ),
                   ),
                   SizedBox(
                     height: 10.h,
                   ),
-
 
                   //Nationality
                   CustomTextFormField(

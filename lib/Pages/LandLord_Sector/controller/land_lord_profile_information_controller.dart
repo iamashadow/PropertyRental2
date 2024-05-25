@@ -1,5 +1,8 @@
 import 'dart:convert';
+import 'dart:io';
 
+import 'package:file_picker/file_picker.dart';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -24,6 +27,66 @@ class LandLordProfileInformationControllerClass extends GetxController {
 
   var isLoading = false.obs;
   Rxn<Account> account = Rxn<Account>();
+  File? imageFile;
+  String? imageUrl;
+
+  Future<void> pickImage() async {
+    try {
+      FilePickerResult? result = await FilePicker.platform.pickFiles(
+        type: FileType.image,
+      );
+
+      if (result == null) return;
+
+      if (kIsWeb) {
+        // On web, use bytes
+        Uint8List? imageData = result.files.first.bytes;
+        if (imageData != null) {
+          uploadImage(imageData);
+        }
+      } else {
+        // On mobile, use path
+        String? imagePath = result.files.single.path;
+        if (imagePath != null) {
+          uploadImage(File(imagePath));
+        }
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  Future<void> uploadImage(dynamic image) async {
+    try {
+      final url = Uri.parse("https://api.cloudinary.com/v1_1/drzze1rql/upload");
+      var request = http.MultipartRequest('POST', url)
+        ..fields['upload_preset'] = 's21fuvrf';
+      if (kIsWeb) {
+        // On web, use bytes
+        print('Image bytes length: ${image.length}');
+        request.files.add(http.MultipartFile(
+            'file', http.ByteStream(Stream.value(image)), image.length,
+            filename: 'upload.jpg'));
+      } else {
+        // On mobile, use path
+        request.files
+            .add(await http.MultipartFile.fromPath('file', image.path));
+      }
+      var response = await request.send();
+      final responseData = await response.stream.toBytes();
+      final responseString = String.fromCharCodes(responseData);
+      print('Response: $responseString');
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        final jsonMap = jsonDecode(responseString);
+        imageUrl = jsonMap['url'];
+        update();
+        printInfo(info: imageUrl!);
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
 
   Future<void> verifyLandLord({required bool isVerifyOrUpdate}) async {
     try {
