@@ -1,23 +1,21 @@
-import 'dart:html';
-
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:intl/intl.dart';
+import 'package:property_rental_2/Pages/LandLord_Sector/Page1/Land_Lord_Profile_Information_Page/Components/Desktop_Components/Nid_Front_Image_Upload/nid_image_upload.dart';
 import 'package:property_rental_2/Pages/LandLord_Sector/controller/land_lord_profile_information_controller.dart';
 import 'package:property_rental_2/Pages/Login_Page/login_page_controller.dart';
-import 'package:property_rental_2/Pages/Login_Page/model/login_rp.dart';
 import 'package:property_rental_2/Universal_Widgets/custom_button.dart';
 import 'package:property_rental_2/Universal_Widgets/custom_text.dart';
 import 'package:property_rental_2/Universal_Widgets/custom_text_form_field.dart';
 import 'package:property_rental_2/Utils/Color_Manager/colo_manager.dart';
-import 'package:property_rental_2/Utils/secure_storage.dart';
-
 import '../../../../../../Universal_Widgets/footer_area_desktop.dart';
 import '../../../../../Home_Page/Components/Desktop_Component/HeadBannerSection/head_banner_section.dart';
+import '../../Components/Desktop_Components/Nid_Back_Part_Image/nid_back_part_image.dart';
 import '../../Components/Desktop_Components/Profile_Image_File_Picker/profile_image_file_picker.dart';
 
 class LandLordProfileInformationDesktop extends StatefulWidget {
@@ -31,10 +29,8 @@ class LandLordProfileInformationDesktop extends StatefulWidget {
 class _LandLordProfileInformationDesktopState
     extends State<LandLordProfileInformationDesktop> {
   // FilePickerResult? filePickerResult;
-  final landLordProfileController =
-      Get.put(LandLordProfileInformationControllerClass());
-  final LoginPageControllerClass loginPageController =
-      Get.put(LoginPageControllerClass());
+  final landLordProfileController = Get.put(LandLordProfileInformationControllerClass());
+  final LoginPageControllerClass loginPageController = Get.put(LoginPageControllerClass());
 
   @override
   void initState() {
@@ -44,20 +40,13 @@ class _LandLordProfileInformationDesktopState
 
   void restoreData() {
     if (loginPageController.userData.account != null) {
-      landLordProfileController.landLordNameController.text =
-          loginPageController.userData.account?.name ?? '';
-      landLordProfileController.landLordEmailController.text =
-          loginPageController.userData.account?.email ?? "";
-      landLordProfileController.landLordMobileNumberController.text =
-          loginPageController.userData.account?.mobileNumber ?? '';
-      landLordProfileController.landLordWhatsAppNumberController.text =
-          loginPageController.userData.account?.whatsAppNumber ?? '';
-      landLordProfileController.landLordOfficeNumberController.text =
-          loginPageController.userData.account?.officeNumber ?? '';
-      landLordProfileController.landLordNationalityController.text =
-          loginPageController.userData.account?.nationality ?? '';
-      landLordProfileController.landLordBioController.text =
-          loginPageController.userData.account?.bio ?? '';
+      landLordProfileController.landLordNameController.text = loginPageController.userData.account?.name ?? '';
+      landLordProfileController.landLordEmailController.text = loginPageController.userData.account?.email ?? '';
+      landLordProfileController.landLordMobileNumberController.text = loginPageController.userData.account?.mobileNumber ?? '';
+      landLordProfileController.landLordWhatsAppNumberController.text = loginPageController.userData.account?.whatsAppNumber ?? '';
+      landLordProfileController.landLordOfficeNumberController.text = loginPageController.userData.account?.officeNumber ?? '';
+      landLordProfileController.landLordNationalityController.text = loginPageController.userData.account?.nationality ?? '';
+      landLordProfileController.landLordBioController.text = loginPageController.userData.account?.bio ?? '';
     }
   }
 
@@ -139,8 +128,7 @@ class _LandLordProfileInformationDesktopState
                   //Mobile Number
                   CustomTextFormField(
                     labelText: "Enter Your Mobile Number",
-                    controller: landLordProfileController
-                        .landLordMobileNumberController,
+                    controller: landLordProfileController.landLordMobileNumberController,
                   ),
                   SizedBox(
                     height: 10.h,
@@ -149,8 +137,7 @@ class _LandLordProfileInformationDesktopState
                   //WhatsApp Number
                   CustomTextFormField(
                     labelText: "Enter Your WhatsApp Number",
-                    controller: landLordProfileController
-                        .landLordWhatsAppNumberController,
+                    controller: landLordProfileController.landLordWhatsAppNumberController,
                   ),
                   SizedBox(
                     height: 10.h,
@@ -159,8 +146,7 @@ class _LandLordProfileInformationDesktopState
                   //Office Number
                   CustomTextFormField(
                     labelText: "Enter Your Office Mobile Number",
-                    controller: landLordProfileController
-                        .landLordOfficeNumberController,
+                    controller: landLordProfileController.landLordOfficeNumberController,
                   ),
                   SizedBox(
                     height: 10.h,
@@ -169,8 +155,8 @@ class _LandLordProfileInformationDesktopState
                   //Email
                   CustomTextFormField(
                     labelText: "Your Email",
-                    controller:
-                        landLordProfileController.landLordEmailController,
+                    controller: loginPageController.emailController,
+                    isEnabled: false,
                   ),
                   SizedBox(
                     height: 10.h,
@@ -184,65 +170,117 @@ class _LandLordProfileInformationDesktopState
                     height: 10.h,
                   ),
 
-                  //Selecte Date of Birth
-                  InkWell(
-                    onTap: () async {
-                      DateTime? datePicked = await showDatePicker(
-                        context: context,
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime(1950, 1, 1),
-                        lastDate: DateTime.now(),
-                      );
 
-                      if (datePicked != null) {
-                        landLordProfileController.selectedDate.value =
-                            datePicked;
-                      }
-                    },
-                    child: Obx(
-                      () => landLordProfileController.selectedDate.value != null
-                          ? CustomText(
-                              title:
-                                  "Date of Birth : ${landLordProfileController.selectedDate.value!.toLocal().toString().split(' ')[0]}", // Displaying date in YYYY-MM-DD format
-                              fontColor: ColorManager.kasmiriBlue,
-                            )
-                          : Row(
-                              children: [
-                                CustomText(
-                                  title: "Date of Birth : ",
-                                  fontColor: ColorManager.kasmiriBlue,
-                                ),
-                                const Icon(Icons.calendar_month_rounded),
-                              ],
-                            ),
-                    ),
-                  ),
-                  SizedBox(
+                  //Date of Birth
+                  // GetBuilder<LandLordProfileInformationControllerClass>(
+                  //   init: LandLordProfileInformationControllerClass(),
+                  //   builder: (landLordProfileController) {
+                  //     return InkWell(
+                  //       onTap: () async {
+                  //         DateTime? datePicked = await showDatePicker(
+                  //           context: context,
+                  //           initialDate: DateTime.now(),
+                  //           firstDate: DateTime(1950, 1, 1),
+                  //           lastDate: DateTime.now(),
+                  //         );
+                  //
+                  //         if (datePicked != null) {
+                  //           landLordProfileController.selectedDate.text = datePicked.toString();
+                  //           landLordProfileController.update();
+                  //           print(landLordProfileController.selectedDate.value);
+                  //         }
+                  //       },
+                  //       child: landLordProfileController.selectedDate.text != null && landLordProfileController.selectedDate.text != ""
+                  //             ? CustomText(
+                  //           title: "Date of Birth : ${landLordProfileController.selectedDate.text!.split(' ')[0]}",
+                  //           fontColor: ColorManager.kasmiriBlue,
+                  //         )
+                  //             : Row(
+                  //           children: [
+                  //             CustomText(
+                  //               title: "Date of Birth : ",
+                  //               fontColor: ColorManager.kasmiriBlue,
+                  //             ),
+                  //             Icon(Icons.calendar_month_rounded, color: ColorManager.kasmiriBlue,),
+                  //           ],
+                  //         ),
+                  //
+                  //     );
+                  //   },
+                  // ),
+
+            GetBuilder<LandLordProfileInformationControllerClass>(
+            init: LandLordProfileInformationControllerClass(),
+        builder: (landLordProfileController) {
+          return InkWell(
+            onTap: () async {
+              DateTime? datePicked = await showDatePicker(
+                context: context,
+                initialDate: DateTime.now(),
+                firstDate: DateTime(1950, 1, 1),
+                lastDate: DateTime.now(),
+              );
+
+              if (datePicked != null) {
+                String formattedDate = DateFormat('yyyy-MM-dd').format(datePicked);
+                landLordProfileController.selectedDate.text = formattedDate;
+                landLordProfileController.update();
+                print(landLordProfileController.selectedDate.value);
+              }
+            },
+            child: landLordProfileController.selectedDate.text.isNotEmpty
+                ? CustomText(
+              title: "Date of Birth : ${landLordProfileController.selectedDate.text}",
+              fontColor: ColorManager.kasmiriBlue,
+            )
+                : Row(
+              children: [
+                CustomText(
+                  title: "Date of Birth : ",
+                  fontColor: ColorManager.kasmiriBlue,
+                ),
+                Icon(
+                  Icons.calendar_month_rounded,
+                  color: ColorManager.kasmiriBlue,
+                ),
+              ],
+            ),
+          );
+        },
+      ),
+
+
+
+      SizedBox(
                     height: 10.h,
                   ),
 
                   //Nationality
                   CustomTextFormField(
                     labelText: "Enter Your Nationality",
-                    controller:
-                        landLordProfileController.landLordNationalityController,
+                    controller: landLordProfileController.landLordNationalityController,
+                  ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+
+
+                  //NID Upload
+                  CustomText(
+                    title: "Upload your NID",
+                    fontWeight: FontWeight.w700,
                   ),
                   SizedBox(
                     height: 10.h,
                   ),
 
                   //NID Upload
-                  Container(
-                    width: double.maxFinite,
-                    height: 50.h,
-                    color: ColorManager.kasmiriBlue.withOpacity(0.1),
-                    child: Center(
-                      child: CustomText(
-                        fontSize: 3.sp,
-                        fontWeight: FontWeight.w500,
-                        title: "Upload your NID",
-                      ),
-                    ),
+                  Row(
+                    children: [
+                      const Expanded(child: NidFrontImageUpload()),
+                      SizedBox(width: 10.w,),
+                      const Expanded(child: NidBackPartImage()),
+                    ],
                   ),
                   SizedBox(
                     height: 10.h,
@@ -254,10 +292,8 @@ class _LandLordProfileInformationDesktopState
                     child: CustomButton(
                       onTap: () {
                         loginPageController.userData.account?.verified ?? false
-                            ? landLordProfileController.verifyLandLord(
-                                isVerifyOrUpdate: false)
-                            : landLordProfileController.verifyLandLord(
-                                isVerifyOrUpdate: true);
+                            ? landLordProfileController.verifyLandLord(isVerifyOrUpdate: false)
+                            : landLordProfileController.verifyLandLord(isVerifyOrUpdate: true);
                       },
                       fontColor: Colors.white,
                       fontSize: 4.sp,
@@ -293,3 +329,4 @@ class _LandLordProfileInformationDesktopState
     );
   }
 }
+

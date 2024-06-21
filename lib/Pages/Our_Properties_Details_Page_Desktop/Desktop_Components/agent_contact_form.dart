@@ -11,8 +11,16 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../Universal_Widgets/custom_text.dart';
 import '../../../Universal_Widgets/our_amazing_service_button_retangle.dart';
 
-class AgentContactForm extends StatelessWidget {
+class AgentContactForm extends StatefulWidget {
   const AgentContactForm({super.key});
+
+  @override
+  State<AgentContactForm> createState() => _AgentContactFormState();
+}
+
+class _AgentContactFormState extends State<AgentContactForm> {
+
+  DateTime? selectedDate;
 
   @override
   Widget build(BuildContext context) {
@@ -221,7 +229,137 @@ class AgentContactForm extends StatelessWidget {
                 ),
               ),
             ),
-          )
+          ),
+
+          //Book A SLot
+          InkWell(
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: CustomText(
+                      title: "Select meeting time",
+                      fontColor: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    content: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            DateTime? datePicked = await showDatePicker(
+                              context: context,
+                              initialDate: DateTime.now(),
+                              firstDate: DateTime.now(),
+                              lastDate: DateTime(2101),
+                            );
+                            if (datePicked != null) {
+                              setState(() {
+                                selectedDate = datePicked;
+                              });
+                            }
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                            decoration: BoxDecoration(
+                              color: Colors.blue,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: CustomText(
+                              title: selectedDate != null
+                                  ? "Selected Date: ${selectedDate!.toLocal()}".split(' ')[0]
+                                  : "Select Date",
+                              fontColor: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 20,),
+                        SizedBox(
+                          height: 200, // Set fixed height for content
+                          width: double.maxFinite,
+                          child: ListView.builder(
+                            itemCount: AllList.timeSlotList.length,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) {
+                              return Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    // margin: const EdgeInsets.symmetric(vertical: 5.0), // Add margin for spacing
+                                    padding: const EdgeInsets.all(20),
+                                    height: 100,
+                                    decoration: BoxDecoration(
+                                      color: Colors.blue,
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    alignment: Alignment.center, // Center the text
+                                    child: CustomText(
+                                      title: AllList.timeSlotList[index],
+                                      fontColor: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 10,),
+                                ],
+                              );
+                            },
+                          ),
+                        ),
+
+
+                      ],
+                    ),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          // Submit action
+                        },
+                        child: CustomText(
+                          title: "Submit",
+                          fontColor: Colors.blue,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: CustomText(
+                          title: "Cancel",
+                          fontColor: Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+            child: Card(
+              color: Colors.blue,
+              elevation: 2,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0), // Use EdgeInsets instead of sp
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(
+                      Icons.bookmark,
+                      color: Colors.amber,
+                    ),
+                    const SizedBox(width: 8.0), // Use EdgeInsets instead of sp
+                    CustomText(
+                      title: "Book a meeting",
+                      fontColor: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
 
 
 
@@ -231,3 +369,157 @@ class AgentContactForm extends StatelessWidget {
     );
   }
 }
+
+
+
+//
+// class AgentContactForm extends StatefulWidget {
+//   const AgentContactForm({super.key});
+//
+//   @override
+//   _AgentContactFormState createState() => _AgentContactFormState();
+// }
+//
+// class _AgentContactFormState extends State<AgentContactForm> {
+//   DateTime? selectedDate;
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Card(
+//       child: Column(
+//         crossAxisAlignment: CrossAxisAlignment.center,
+//         children: [
+//           // ... other widgets
+//
+//           //Book A Slot
+//           InkWell(
+//             onTap: () {
+//               showDialog(
+//                 context: context,
+//                 builder: (context) {
+//                   return AlertDialog(
+//                     title: CustomText(
+//                       title: "Select meeting time",
+//                       fontColor: Colors.black,
+//                       fontWeight: FontWeight.bold,
+//                     ),
+//                     content: Column(
+//                       mainAxisSize: MainAxisSize.min,
+//                       children: [
+//                         Container(
+//                           height: 200, // Set fixed height for content
+//                           width: double.maxFinite,
+//                           child: ListView.builder(
+//                             itemCount: AllList.timeSlotList.length,
+//                             scrollDirection: Axis.horizontal,
+//                             itemBuilder: (context, index) {
+//                               return Row(
+//                                 mainAxisAlignment: MainAxisAlignment.center,
+//                                 children: [
+//                                   Container(
+//                                     padding: const EdgeInsets.all(20),
+//                                     height: 100,
+//                                     decoration: BoxDecoration(
+//                                       color: Colors.blue,
+//                                       borderRadius: BorderRadius.circular(10),
+//                                     ),
+//                                     alignment: Alignment.center, // Center the text
+//                                     child: CustomText(
+//                                       title: AllList.timeSlotList[index],
+//                                       fontColor: Colors.white,
+//                                       fontWeight: FontWeight.bold,
+//                                     ),
+//                                   ),
+//                                   const SizedBox(width: 10),
+//                                 ],
+//                               );
+//                             },
+//                           ),
+//                         ),
+//                         const SizedBox(height: 10),
+//                         InkWell(
+//                           onTap: () async {
+//                             DateTime? datePicked = await showDatePicker(
+//                               context: context,
+//                               initialDate: DateTime.now(),
+//                               firstDate: DateTime(1950, 1, 1),
+//                               lastDate: DateTime(2101),
+//                             );
+//                             if (datePicked != null) {
+//                               setState(() {
+//                                 selectedDate = datePicked;
+//                               });
+//                             }
+//                           },
+//                           child: Container(
+//                             padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+//                             decoration: BoxDecoration(
+//                               color: Colors.blue,
+//                               borderRadius: BorderRadius.circular(10),
+//                             ),
+//                             child: CustomText(
+//                               title: selectedDate != null
+//                                   ? "Selected Date: ${selectedDate!.toLocal()}".split(' ')[0]
+//                                   : "Select Date",
+//                               fontColor: Colors.white,
+//                               fontWeight: FontWeight.bold,
+//                             ),
+//                           ),
+//                         ),
+//                       ],
+//                     ),
+//                     actions: [
+//                       TextButton(
+//                         onPressed: () {
+//                           // Submit action
+//                           Navigator.pop(context);
+//                         },
+//                         child: CustomText(
+//                           title: "Submit",
+//                           fontColor: Colors.blue,
+//                           fontWeight: FontWeight.bold,
+//                         ),
+//                       ),
+//                       TextButton(
+//                         onPressed: () {
+//                           Navigator.pop(context);
+//                         },
+//                         child: CustomText(
+//                           title: "Cancel",
+//                           fontColor: Colors.black,
+//                           fontWeight: FontWeight.bold,
+//                         ),
+//                       ),
+//                     ],
+//                   );
+//                 },
+//               );
+//             },
+//             child: Card(
+//               color: Colors.blue,
+//               elevation: 2,
+//               child: Padding(
+//                 padding: const EdgeInsets.all(8.0), // Use EdgeInsets instead of sp
+//                 child: Row(
+//                   mainAxisAlignment: MainAxisAlignment.center,
+//                   children: [
+//                     const Icon(
+//                       Icons.bookmark,
+//                       color: Colors.amber,
+//                     ),
+//                     const SizedBox(width: 8.0), // Use EdgeInsets instead of sp
+//                     CustomText(
+//                       title: "Book a meeting",
+//                       fontColor: Colors.white,
+//                       fontWeight: FontWeight.bold,
+//                     ),
+//                   ],
+//                 ),
+//               ),
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }

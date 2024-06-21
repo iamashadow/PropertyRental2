@@ -15,13 +15,15 @@ class ProfileImageFilePicker extends StatelessWidget {
       builder: (controller) => Column(
         children: [
           InkWell(
-            onTap: () {
-              controller.pickImage();
+            onTap: () async {
+
+              controller.ProfileImage = await controller.pickImage();
+              controller.update();
             },
-            child: Container(
+            child: Obx(()=> Container(
               width: 150.r,
               height: 150.r,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.blue,
                 shape: BoxShape.circle,
                 // image: imageFile != null
@@ -31,34 +33,35 @@ class ProfileImageFilePicker extends StatelessWidget {
                 //       )
                 //     : null,
               ),
-              child: controller.imageUrl == null || controller.imageUrl!.isEmpty
-                  ? Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.person,
-                            size: 15.sp,
-                            color: Colors.white,
-                          ),
-                          SizedBox(height: 5.h),
-                          Text(
-                            "Upload Your Image",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ],
-                      ),
-                    )
-                  : ClipRRect(
-                      borderRadius: BorderRadius.circular(100.r),
-                      child: Image.network(
-                        controller.imageUrl!,
-                        fit: BoxFit.cover,
-                        width: 150.r,
-                        height: 150.r,
-                      ),
+              child: controller.imageIsUploadingtoServer.value ? CircularProgressIndicator() :
+              controller.ProfileImage == null || controller.ProfileImage!.isEmpty ?
+              Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.person,
+                      size: 15.sp,
+                      color: Colors.white,
                     ),
-            ),
+                    SizedBox(height: 5.h),
+                    const Text(
+                      "Upload Your Image",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ],
+                ),
+              )
+                  : ClipRRect(
+                borderRadius: BorderRadius.circular(100.r),
+                child: Image.network(
+                  controller.ProfileImage!,
+                  fit: BoxFit.cover,
+                  width: 150.r,
+                  height: 150.r,
+                ),
+              ),
+            )),
           ),
           SizedBox(
             height: 10.h,

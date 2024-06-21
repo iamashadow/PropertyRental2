@@ -8,6 +8,7 @@ class CustomTextFormField extends StatelessWidget {
   TextEditingController? controller;
   final String? Function(String?)? validator;
   final AutovalidateMode autovalidateMode;
+  bool? isEnabled;
 
   CustomTextFormField({super.key,
 
@@ -17,6 +18,7 @@ class CustomTextFormField extends StatelessWidget {
     this.controller,
     this.validator,
     this.autovalidateMode = AutovalidateMode.disabled,
+    this.isEnabled,
 
   });
 
@@ -28,6 +30,7 @@ class CustomTextFormField extends StatelessWidget {
       maxLines: maxLines,
       textAlign: textAlign ?? TextAlign.start,
       validator: validator,
+      enabled: isEnabled,
       decoration: InputDecoration(
         // filled: true,
         //   fillColor: Colors.amber,

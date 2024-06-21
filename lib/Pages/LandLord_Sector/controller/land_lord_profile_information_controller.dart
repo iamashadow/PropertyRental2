@@ -11,52 +11,90 @@ import 'package:property_rental_2/Universal_Widgets/custom_toast.dart';
 import 'package:property_rental_2/Utils/constant.dart';
 import 'package:property_rental_2/Utils/secure_storage.dart';
 
+import '../../Login_Page/login_page_controller.dart';
+
 class LandLordProfileInformationControllerClass extends GetxController {
   TextEditingController landLordNameController = TextEditingController();
   TextEditingController landLordBioController = TextEditingController();
-  TextEditingController landLordMobileNumberController =
-      TextEditingController();
-  TextEditingController landLordWhatsAppNumberController =
-      TextEditingController();
-  TextEditingController landLordOfficeNumberController =
-      TextEditingController();
+  TextEditingController landLordMobileNumberController = TextEditingController();
+  TextEditingController landLordWhatsAppNumberController = TextEditingController();
+  TextEditingController landLordOfficeNumberController = TextEditingController();
   TextEditingController landLordEmailController = TextEditingController();
   TextEditingController landLordNationalityController = TextEditingController();
+  TextEditingController selectedDate = TextEditingController();
+  // Rx<DateTime?> selectedDate = Rx<DateTime?>(null);
 
-  Rx<DateTime?> selectedDate = Rx<DateTime?>(null);
 
   var isLoading = false.obs;
   Rxn<Account> account = Rxn<Account>();
   File? imageFile;
-  String? imageUrl;
+  // String? imageUrl;
 
-  Future<void> pickImage() async {
+  String? NidFrontImageUrl;
+  String? NidBackImageUrl;
+  String? ProfileImage;
+  RxBool imageIsUploadingtoServer = false.obs;
+
+  LoginPageControllerClass loginPageControllerClass = Get.put(LoginPageControllerClass());
+
+
+
+
+  @override
+  void onInit() {
+    super.onInit();
+    landLordNameController.text = loginPageControllerClass.userData.account?.name??"";
+    landLordBioController.text = loginPageControllerClass.userData.account?.bio??"";
+    landLordMobileNumberController.text = loginPageControllerClass.userData.account?.mobileNumber??"";
+    landLordWhatsAppNumberController.text = loginPageControllerClass.userData.account?.whatsAppNumber??"";
+    landLordOfficeNumberController.text = loginPageControllerClass.userData.account?.officeNumber??"";
+    landLordEmailController.text = loginPageControllerClass.userData.account?.email??"";
+    landLordNationalityController.text = loginPageControllerClass.userData.account?.nationality??"";
+    selectedDate.text = loginPageControllerClass.userData.account?.dateOfBirth.toString()??"";
+  }
+
+  Future<String?> pickImage() async {
     try {
+      imageIsUploadingtoServer.value = true;
       FilePickerResult? result = await FilePicker.platform.pickFiles(
         type: FileType.image,
       );
 
-      if (result == null) return;
+      if (result == null){
+        imageIsUploadingtoServer.value = false;
+        return null;
+      };
 
       if (kIsWeb) {
         // On web, use bytes
         Uint8List? imageData = result.files.first.bytes;
         if (imageData != null) {
-          uploadImage(imageData);
+          String? picked_image_path = await uploadImage(imageData);
+          imageIsUploadingtoServer.value = false;
+          return picked_image_path;
         }
       } else {
         // On mobile, use path
         String? imagePath = result.files.single.path;
         if (imagePath != null) {
-          uploadImage(File(imagePath));
+          String? uploaded_image_path = await uploadImage(File(imagePath)) ;
+
+
+          imageIsUploadingtoServer.value = false;
+          return uploaded_image_path;
         }
       }
+
+      imageIsUploadingtoServer.value = false;
+      return null;
+
     } catch (e) {
+      imageIsUploadingtoServer.value = false;
       print(e.toString());
     }
   }
 
-  Future<void> uploadImage(dynamic image) async {
+  Future<String?> uploadImage(dynamic image) async {
     try {
       final url = Uri.parse("https://api.cloudinary.com/v1_1/drzze1rql/upload");
       var request = http.MultipartRequest('POST', url)
@@ -76,13 +114,18 @@ class LandLordProfileInformationControllerClass extends GetxController {
       final responseData = await response.stream.toBytes();
       final responseString = String.fromCharCodes(responseData);
       print('Response: $responseString');
+
       print(response.statusCode);
+      print(jsonDecode(responseString));
+
       if (response.statusCode == 200) {
         final jsonMap = jsonDecode(responseString);
-        imageUrl = jsonMap['url'];
-        update();
-        printInfo(info: imageUrl!);
+        // imageUrl = jsonMap['url'];
+        //
+        // printInfo(info: imageUrl!);
+        return jsonMap['url'];
       }
+      return null;
     } catch (e) {
       print(e.toString());
     }
@@ -113,12 +156,16 @@ class LandLordProfileInformationControllerClass extends GetxController {
             // "nationality": "US",
             // "nidImage": "https://example.com/nid.jpg"
 
+
+            "profileImage": ProfileImage,
             "name": landLordNameController.text,
             "bio": landLordBioController.text,
             "mobileNumber": landLordMobileNumberController.text,
             "whatsAppNumber": landLordWhatsAppNumberController.text,
             "officeNumber": landLordOfficeNumberController.text,
-            "dateOfBirth": selectedDate.value.toString(),
+            "dateOfBirth": selectedDate.text,
+            "nationality": landLordNationalityController.text,
+            "nidImage": '${NidFrontImageUrl},${NidFrontImageUrl}',
           }));
       var data = jsonDecode(response.body);
       if (response.statusCode == 200 || response.statusCode == 201) {
@@ -134,3 +181,5 @@ class LandLordProfileInformationControllerClass extends GetxController {
     }
   }
 }
+
+

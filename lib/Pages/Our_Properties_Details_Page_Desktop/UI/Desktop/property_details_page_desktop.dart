@@ -145,13 +145,13 @@ class OurPropertiesDetailsPage extends StatelessWidget {
                           ),
                           SizedBox(height: 1.sh*0.05,),
 
-                          //Property Video
-                          Container(
-                            width: 1.sw*0.36,
-                            color: Colors.amber,
-                            child: PropertyVideo(),
-                          ),
-                          SizedBox(height: 1.sh*0.05,),
+                          // //Property Video
+                          // Container(
+                          //   width: 1.sw*0.36,
+                          //   color: Colors.amber,
+                          //   child: PropertyVideo(),
+                          // ),
+                          // SizedBox(height: 1.sh*0.05,),
 
 
                           //Property Map Location
