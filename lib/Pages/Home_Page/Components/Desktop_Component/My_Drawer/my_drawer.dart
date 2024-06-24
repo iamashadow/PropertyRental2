@@ -15,6 +15,8 @@ import 'package:property_rental_2/Universal_Widgets/custom_button.dart';
 import 'package:property_rental_2/Universal_Widgets/custom_text.dart';
 import 'package:property_rental_2/Utils/All_Images/all_images.dart';
 import 'package:property_rental_2/Utils/Color_Manager/colo_manager.dart';
+import 'package:property_rental_2/Utils/constant.dart';
+import 'package:property_rental_2/Utils/secure_storage.dart';
 import '../../../../About_Us_All_Pages/Page1/About_Us_Our_Story_Page/about_us_our_story_page.dart';
 import '../../../../About_Us_All_Pages/Page2/Team_Page/Our_Team_Page/our_team_page.dart';
 import '../../../../About_Us_All_Pages/Page3/Our_Partners/our_partners.dart';
@@ -247,7 +249,6 @@ class MyDrawer extends StatelessWidget {
                     ),
                   ),
                   const Divider(),
-
                   InkWell(
                     onTap: () {
                       Navigator.push(
@@ -263,7 +264,6 @@ class MyDrawer extends StatelessWidget {
                     ),
                   ),
                   const Divider(),
-
                   InkWell(
                     onTap: () {
                       Navigator.push(
@@ -279,13 +279,11 @@ class MyDrawer extends StatelessWidget {
                     ),
                   ),
                   const Divider(),
-
                   InkWell(
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) => Schedules()),
+                        MaterialPageRoute(builder: (context) => Schedules()),
                       );
                     },
                     child: CustomText(
@@ -396,6 +394,8 @@ class MyDrawer extends StatelessWidget {
                   )
                 : CustomButton(
                     onTap: () {
+                      tokenValue = null;
+                      SecureData.deleteAllSecureData();
                       loginController.userData = UserData();
                       loginController.update();
                     },

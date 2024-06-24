@@ -7,6 +7,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:property_rental_2/Pages/Login_Page/model/login_rp.dart';
 import 'package:property_rental_2/Universal_Widgets/custom_toast.dart';
 import 'package:property_rental_2/Utils/constant.dart';
@@ -17,16 +18,18 @@ import '../../Login_Page/login_page_controller.dart';
 class LandLordProfileInformationControllerClass extends GetxController {
   TextEditingController landLordNameController = TextEditingController();
   TextEditingController landLordBioController = TextEditingController();
-  TextEditingController landLordMobileNumberController = TextEditingController();
-  TextEditingController landLordWhatsAppNumberController = TextEditingController();
-  TextEditingController landLordOfficeNumberController = TextEditingController();
+  TextEditingController landLordMobileNumberController =
+      TextEditingController();
+  TextEditingController landLordWhatsAppNumberController =
+      TextEditingController();
+  TextEditingController landLordOfficeNumberController =
+      TextEditingController();
   TextEditingController landLordEmailController = TextEditingController();
   TextEditingController landLordNationalityController = TextEditingController();
   TextEditingController selectedDate = TextEditingController();
   // Rx<DateTime?> selectedDate = Rx<DateTime?>(null);
 
   final FlutterSecureStorage secureStorage = FlutterSecureStorage();
-
 
   var isLoading = false.obs;
   Rxn<Account> account = Rxn<Account>();
@@ -40,33 +43,45 @@ class LandLordProfileInformationControllerClass extends GetxController {
 
   var verifyIsLoading = false.obs;
 
-  LoginPageControllerClass loginPageControllerClass = Get.put(LoginPageControllerClass());
+  LoginPageControllerClass loginPageControllerClass = Get.find();
 
+  // @override
+  // void onInit() {
+  //   super.onInit();
+  //   landLordNameController.text =
+  //       loginPageControllerClass.userData.account?.name ?? "";
 
+  //   ProfileImage =
+  //       loginPageControllerClass.userData.account?.profileImage ?? "";
 
+  //   NidFrontImageUrl =
+  //       loginPageControllerClass.userData.account?.nidImage?.split(",").first ??
+  //           "";
 
-  @override
-  void onInit() {
-    super.onInit();
-    landLordNameController.text = loginPageControllerClass.userData.account?.name??"";
+  //   NidBackImageUrl =
+  //       loginPageControllerClass.userData.account?.nidImage?.split(",").last ??
+  //           "";
 
-    ProfileImage = loginPageControllerClass.userData.account?.profileImage??"";
+  //   landLordBioController.text =
+  //       loginPageControllerClass.userData.account?.bio ?? "";
+  //   landLordMobileNumberController.text =
+  //       loginPageControllerClass.userData.account?.mobileNumber ?? "";
+  //   landLordWhatsAppNumberController.text =
+  //       loginPageControllerClass.userData.account?.whatsAppNumber ?? "";
+  //   landLordOfficeNumberController.text =
+  //       loginPageControllerClass.userData.account?.officeNumber ?? "";
+  //   landLordEmailController.text =
+  //       loginPageControllerClass.userData.account?.email ?? "";
+  //   landLordNationalityController.text =
+  //       loginPageControllerClass.userData.account?.nationality ?? "";
+  //   selectedDate.text = loginPageControllerClass.userData.account?.dateOfBirth
+  //           .toString()
+  //           .split("T")
+  //           .first ??
+  //       "";
 
-    NidFrontImageUrl = loginPageControllerClass.userData.account?.nidImage?.split(",").first??"";
-
-    NidBackImageUrl = loginPageControllerClass.userData.account?.nidImage?.split(",").last??"";
-
-    landLordBioController.text = loginPageControllerClass.userData.account?.bio??"";
-    landLordMobileNumberController.text = loginPageControllerClass.userData.account?.mobileNumber??"";
-    landLordWhatsAppNumberController.text = loginPageControllerClass.userData.account?.whatsAppNumber??"";
-    landLordOfficeNumberController.text = loginPageControllerClass.userData.account?.officeNumber??"";
-    landLordEmailController.text = loginPageControllerClass.userData.account?.email??"";
-    landLordNationalityController.text = loginPageControllerClass.userData.account?.nationality??"";
-    selectedDate.text = loginPageControllerClass.userData.account?.dateOfBirth.toString()??"";
-
-    loadSavedDate();
-
-  }
+  //   loadSavedDate();
+  // }
 
   Future<void> loadSavedDate() async {
     String? savedDate = await secureStorage.read(key: 'selectedDate');
@@ -76,7 +91,6 @@ class LandLordProfileInformationControllerClass extends GetxController {
     }
   }
 
-
   Future<String?> pickImage() async {
     try {
       imageIsUploadingtoServer.value = true;
@@ -84,10 +98,11 @@ class LandLordProfileInformationControllerClass extends GetxController {
         type: FileType.image,
       );
 
-      if (result == null){
+      if (result == null) {
         imageIsUploadingtoServer.value = false;
         return null;
-      };
+      }
+      ;
 
       if (kIsWeb) {
         // On web, use bytes
@@ -101,8 +116,7 @@ class LandLordProfileInformationControllerClass extends GetxController {
         // On mobile, use path
         String? imagePath = result.files.single.path;
         if (imagePath != null) {
-          String? uploaded_image_path = await uploadImage(File(imagePath)) ;
-
+          String? uploaded_image_path = await uploadImage(File(imagePath));
 
           imageIsUploadingtoServer.value = false;
           return uploaded_image_path;
@@ -111,7 +125,6 @@ class LandLordProfileInformationControllerClass extends GetxController {
 
       imageIsUploadingtoServer.value = false;
       return null;
-
     } catch (e) {
       imageIsUploadingtoServer.value = false;
       print(e.toString());
@@ -178,12 +191,12 @@ class LandLordProfileInformationControllerClass extends GetxController {
             "officeNumber": landLordOfficeNumberController.text,
             "dateOfBirth": selectedDate.text,
             "nationality": landLordNationalityController.text,
-            "nidImage": '${NidFrontImageUrl},${NidFrontImageUrl}',
+            "nidImage": '$NidFrontImageUrl,$NidFrontImageUrl',
           }));
       var data = jsonDecode(response.body);
-      print("Data : ${data}");
+      print("Data : $data");
       if (response.statusCode == 200 || response.statusCode == 201) {
-        account.value = Account.fromJson(data);
+        account.value = Account.fromJson(data["data"]);
         // loginPageControllerClass.userData = Account.fromJson(data);
         customToast(msg: data['message']);
       } else {
@@ -191,7 +204,7 @@ class LandLordProfileInformationControllerClass extends GetxController {
       }
       verifyIsLoading.value = false;
       // getLandLordProfile();
-      printInfo(info: "Accaunt Data : ${account}");
+      printInfo(info: "Accaunt Data : $account");
       update();
     } catch (e) {
       printError(info: e.toString());
@@ -201,34 +214,55 @@ class LandLordProfileInformationControllerClass extends GetxController {
 
   Future<void> getLandLordProfile() async {
     try {
-      verifyIsLoading.value = true;
-      var token = await SecureData.readSecureData(key: "token");
+      isLoading.value = true;
+      // var token = await SecureData.readSecureData(key: "token");
+      printInfo(info: "Token.................. $tokenValue");
       var response = await http.get(
-          Uri.parse(
-              '$baseurl/landlord/account/'
-          ),
-          headers: <String, String>{
-            'Authorization': 'Bearer $token',
-            'Content-Type': 'application/json',
-          },
+        Uri.parse('$baseurl/landlord/account/'),
+        headers: <String, String>{
+          'Authorization': 'Bearer $tokenValue',
+          'Content-Type': 'application/json',
+        },
       );
       var data = jsonDecode(response.body);
-      print("Data : ${data}");
+      // printInfo(info: "ddddddddddddddddddddddddData : $data");
       if (response.statusCode == 200 || response.statusCode == 201) {
-        account.value = Account.fromJson(data);
-        // loginPageControllerClass.userData = Account.fromJson(data);
+        print("imtiaz");
+        account.value = Account.fromJson(data['data']);
+
+        loginPageControllerClass.userData =
+            UserData(token: tokenValue, account: account.value!);
+        update();
+        printInfo(info: "daaaaaaaaaaaaaaaaaaaaaaaaaaData : ${data}");
+        if (account.value != null) {
+          landLordNameController.text = account.value?.name ?? "";
+          landLordBioController.text = account.value?.bio ?? "";
+          landLordEmailController.text = account.value?.email ?? "";
+          landLordMobileNumberController.text =
+              account.value?.mobileNumber ?? "";
+          landLordNationalityController.text = account.value?.nationality ?? "";
+          landLordOfficeNumberController.text =
+              account.value?.officeNumber ?? "";
+          landLordWhatsAppNumberController.text =
+              account.value?.whatsAppNumber ?? "";
+          selectedDate.text = DateFormat("yyyy-MM-dd")
+              .format(account.value?.dateOfBirth ?? DateTime.now());
+          NidBackImageUrl =
+              account.value?.nidImage?.split(",").lastOrNull ?? "";
+          NidFrontImageUrl =
+              account.value?.nidImage?.split(",").firstOrNull ?? "";
+          ProfileImage = account.value?.profileImage ?? "";
+        }
         customToast(msg: data['message']);
       } else {
         customToast(msg: data['message'], isError: true);
       }
-      verifyIsLoading.value = false;
-      printInfo(info: "Accaunt Data : ${account}");
+      isLoading.value = false;
+      printInfo(info: "get land user Data : ${account.value!.toJson()}");
       update();
     } catch (e) {
-      printError(info: e.toString());
-      verifyIsLoading.value = false;
+      printError(info: "getLandLordProfile error: $e");
+      isLoading.value = false;
     }
   }
 }
-
-

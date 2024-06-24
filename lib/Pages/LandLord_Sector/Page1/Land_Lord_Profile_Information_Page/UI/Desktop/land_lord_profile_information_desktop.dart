@@ -29,30 +29,53 @@ class LandLordProfileInformationDesktop extends StatefulWidget {
 class _LandLordProfileInformationDesktopState
     extends State<LandLordProfileInformationDesktop> {
   // FilePickerResult? filePickerResult;
-  final landLordProfileController = Get.put(LandLordProfileInformationControllerClass());
-  final LoginPageControllerClass loginPageController = Get.put(LoginPageControllerClass());
+  final LandLordProfileInformationControllerClass landLordProfileController =
+      Get.find();
+  final LoginPageControllerClass loginPageController = Get.find();
 
-  @override
-  void initState() {
-    restoreData();
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   restoreData();
+  //   super.initState();
+  // }
 
-  void restoreData() {
-    if (loginPageController.userData.account != null) {
-      landLordProfileController.landLordNameController.text = loginPageController.userData.account?.name ?? '';
-      landLordProfileController.landLordEmailController.text = loginPageController.userData.account?.email ?? '';
-      landLordProfileController.landLordMobileNumberController.text = loginPageController.userData.account?.mobileNumber ?? '';
-      landLordProfileController.landLordWhatsAppNumberController.text = loginPageController.userData.account?.whatsAppNumber ?? '';
-      landLordProfileController.landLordOfficeNumberController.text = loginPageController.userData.account?.officeNumber ?? '';
-      landLordProfileController.landLordNationalityController.text = loginPageController.userData.account?.nationality ?? '';
-      landLordProfileController.landLordBioController.text = loginPageController.userData.account?.bio ?? '';
-      landLordProfileController.ProfileImage = loginPageController.userData.account?.profileImage?? '';
-    }
-  }
+  // void restoreData() {
+  //   if (loginPageController.userData.account != null) {
+  //     landLordProfileController.landLordNameController.text = loginPageController.userData.account?.name ?? '';
+  //     landLordProfileController.landLordEmailController.text = loginPageController.userData.account?.email ?? '';
+  //     landLordProfileController.landLordMobileNumberController.text = loginPageController.userData.account?.mobileNumber ?? '';
+  //     landLordProfileController.landLordWhatsAppNumberController.text = loginPageController.userData.account?.whatsAppNumber ?? '';
+  //     landLordProfileController.landLordOfficeNumberController.text = loginPageController.userData.account?.officeNumber ?? '';
+  //     landLordProfileController.landLordNationalityController.text = loginPageController.userData.account?.nationality ?? '';
+  //     landLordProfileController.landLordBioController.text = loginPageController.userData.account?.bio ?? '';
+  //     landLordProfileController.ProfileImage = loginPageController.userData.account?.profileImage?? '';
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
+    print("profileImage Values : ${landLordProfileController.ProfileImage}");
+    print(
+        "name Values : ${landLordProfileController.landLordNameController.text}");
+    print(
+        "bio Values : ${landLordProfileController.landLordBioController.text}");
+    print(
+        "mobileNumber Values : ${landLordProfileController.landLordMobileNumberController.text}");
+    print(
+        "officeNumber Values : ${landLordProfileController.landLordOfficeNumberController.text}");
+    print(
+        "whatsAppNumber Values : ${landLordProfileController.landLordWhatsAppNumberController.text}");
+    print(
+        "email Values : ${landLordProfileController.landLordEmailController.text}");
+    print(
+        "dateOfBirth Values : ${landLordProfileController.selectedDate.text}");
+    print(
+        "nationality Values : ${landLordProfileController.landLordNationalityController.text}");
+    print(
+        "nidImageFront Values : ${landLordProfileController.NidFrontImageUrl}");
+    print("nidImageBack Values : ${landLordProfileController.NidBackImageUrl}");
+    print(
+        "verified Values : ${landLordProfileController.account.value?.verified}");
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -76,43 +99,30 @@ class _LandLordProfileInformationDesktopState
 
             Align(
               alignment: Alignment.center,
-              child: Obx( ()=> CustomText(
-                // title: loginPageController.userData.account?.verified ?? false
-                title: ((){
-                  print("profileImage Values : ${landLordProfileController.account?.value?.profileImage!}");
-                  print("name Values : ${landLordProfileController.account?.value?.name}");
-                  print("bio Values : ${landLordProfileController.account?.value?.bio}");
-                  print("mobileNumber Values : ${landLordProfileController.account?.value?.mobileNumber}");
-                  print("officeNumber Values : ${landLordProfileController.account?.value?.officeNumber}");
-                  print("whatsAppNumber Values : ${landLordProfileController.account?.value?.whatsAppNumber}");
-                  print("email Values : ${landLordProfileController.account?.value?.email}");
-                  print("dateOfBirth Values : ${landLordProfileController.account?.value?.dateOfBirth}");
-                  print("nationality Values : ${landLordProfileController.account?.value?.nationality}");
-                  print("nidImageFront Values : ${landLordProfileController.account?.value?.nidImage!.split(",").first}");
-                  print("nidImageBack Values : ${landLordProfileController.account?.value?.nidImage!.split(",").last}");
-                  print("verified Values : ${landLordProfileController.account?.value?.verified}");
+              child: Obx(
+                () => CustomText(
+                  // title: loginPageController.userData.account?.verified ?? false
+                  title: (() {
+                    if (landLordProfileController.account.value?.verified ==
+                        true) {
+                      return "Your profile is verified! You can add properties now.";
+                    } else {
+                      return "Your profile is not verified yet! Please verify your profile to add properties.";
+                    }
+                  }()),
 
-                  if(landLordProfileController.account.value?.verified == true){
-                    return "Your profile is verified! You can add properties now.";
-                  }
-                  else{
-                    return "Your profile is not verified yet! Please verify your profile to add properties.";
-
-                  }
-                }()),
-
-                letterSpacing: 1,
-                fontWeight: FontWeight.w400,
-                fontSize: 3.sp,
-                fontColor: ((){
-                  if(landLordProfileController.account.value?.verified == true){
-                    return ColorManager.greenColor;
-                  }
-                  else{
-                    return ColorManager.redColor;
-                  }
-                }()),
-              ),
+                  letterSpacing: 1,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 3.sp,
+                  fontColor: (() {
+                    if (landLordProfileController.account.value?.verified ==
+                        true) {
+                      return ColorManager.greenColor;
+                    } else {
+                      return ColorManager.redColor;
+                    }
+                  }()),
+                ),
               ),
             ),
             SizedBox(
@@ -156,7 +166,8 @@ class _LandLordProfileInformationDesktopState
                   //Mobile Number
                   CustomTextFormField(
                     labelText: "Enter Your Mobile Number",
-                    controller: landLordProfileController.landLordMobileNumberController,
+                    controller: landLordProfileController
+                        .landLordMobileNumberController,
                   ),
                   SizedBox(
                     height: 10.h,
@@ -165,7 +176,8 @@ class _LandLordProfileInformationDesktopState
                   //WhatsApp Number
                   CustomTextFormField(
                     labelText: "Enter Your WhatsApp Number",
-                    controller: landLordProfileController.landLordWhatsAppNumberController,
+                    controller: landLordProfileController
+                        .landLordWhatsAppNumberController,
                   ),
                   SizedBox(
                     height: 10.h,
@@ -174,7 +186,8 @@ class _LandLordProfileInformationDesktopState
                   //Office Number
                   CustomTextFormField(
                     labelText: "Enter Your Office Mobile Number",
-                    controller: landLordProfileController.landLordOfficeNumberController,
+                    controller: landLordProfileController
+                        .landLordOfficeNumberController,
                   ),
                   SizedBox(
                     height: 10.h,
@@ -197,7 +210,6 @@ class _LandLordProfileInformationDesktopState
                   SizedBox(
                     height: 10.h,
                   ),
-
 
                   //Date of Birth
                   // GetBuilder<LandLordProfileInformationControllerClass>(
@@ -237,61 +249,63 @@ class _LandLordProfileInformationDesktopState
                   //   },
                   // ),
 
-            GetBuilder<LandLordProfileInformationControllerClass>(
-            init: LandLordProfileInformationControllerClass(),
-        builder: (landLordProfileController) {
-          return InkWell(
-            onTap: () async {
-              DateTime? datePicked = await showDatePicker(
-                context: context,
-                initialDate: DateTime.now(),
-                firstDate: DateTime(1950, 1, 1),
-                lastDate: DateTime.now(),
-              );
+                  GetBuilder<LandLordProfileInformationControllerClass>(
+                    init: LandLordProfileInformationControllerClass(),
+                    builder: (landLordProfileController) {
+                      return InkWell(
+                        onTap: () async {
+                          DateTime? datePicked = await showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(1950, 1, 1),
+                            lastDate: DateTime.now(),
+                          );
 
-              if (datePicked != null) {
-                String formattedDate = DateFormat('yyyy-MM-dd').format(datePicked);
-                landLordProfileController.selectedDate.text = formattedDate;
-                landLordProfileController.update();
-                print(landLordProfileController.selectedDate.value);
-              }
-            },
-            child: landLordProfileController.selectedDate.text.isNotEmpty
-                ? CustomText(
-              title: "Date of Birth : ${landLordProfileController.selectedDate.text}",
-              fontColor: ColorManager.kasmiriBlue,
-            )
-                : Row(
-              children: [
-                CustomText(
-                  title: "Date of Birth : ",
-                  fontColor: ColorManager.kasmiriBlue,
-                ),
-                Icon(
-                  Icons.calendar_month_rounded,
-                  color: ColorManager.kasmiriBlue,
-                ),
-              ],
-            ),
-          );
-        },
-      ),
+                          if (datePicked != null) {
+                            String formattedDate =
+                                DateFormat('yyyy-MM-dd').format(datePicked);
+                            landLordProfileController.selectedDate.text =
+                                formattedDate;
+                            landLordProfileController.update();
+                            print(landLordProfileController.selectedDate.value);
+                          }
+                        },
+                        child: landLordProfileController
+                                .selectedDate.text.isNotEmpty
+                            ? CustomText(
+                                title:
+                                    "Date of Birth : ${landLordProfileController.selectedDate.text}",
+                                fontColor: ColorManager.kasmiriBlue,
+                              )
+                            : Row(
+                                children: [
+                                  CustomText(
+                                    title: "Date of Birth : ",
+                                    fontColor: ColorManager.kasmiriBlue,
+                                  ),
+                                  Icon(
+                                    Icons.calendar_month_rounded,
+                                    color: ColorManager.kasmiriBlue,
+                                  ),
+                                ],
+                              ),
+                      );
+                    },
+                  ),
 
-
-
-      SizedBox(
+                  SizedBox(
                     height: 10.h,
                   ),
 
                   //Nationality
                   CustomTextFormField(
                     labelText: "Enter Your Nationality",
-                    controller: landLordProfileController.landLordNationalityController,
+                    controller:
+                        landLordProfileController.landLordNationalityController,
                   ),
                   SizedBox(
                     height: 10.h,
                   ),
-
 
                   //NID Upload
                   CustomText(
@@ -306,7 +320,9 @@ class _LandLordProfileInformationDesktopState
                   Row(
                     children: [
                       const Expanded(child: NidFrontImageUpload()),
-                      SizedBox(width: 10.w,),
+                      SizedBox(
+                        width: 10.w,
+                      ),
                       const Expanded(child: NidBackPartImage()),
                     ],
                   ),
@@ -317,36 +333,46 @@ class _LandLordProfileInformationDesktopState
                   //Save Button
                   Align(
                     alignment: Alignment.center,
-                    child: Obx( (){
+                    child: Obx(
+                      () {
+                        print(
+                            'verifyIsLoading: ${landLordProfileController.verifyIsLoading.value}');
+                        print(
+                            'account verified: ${landLordProfileController.account.value?.verified}');
 
-                      print('verifyIsLoading: ${landLordProfileController.verifyIsLoading.value}');
-                      print('account verified: ${landLordProfileController.account.value?.verified}');
-
-                      return landLordProfileController.verifyIsLoading.value ? CircularProgressIndicator() : CustomButton(
-                        onTap: () {
-                          // loginPageController.userData.account?.verified ?? false
-                          landLordProfileController.account.value?.verified ?? false
-                              ? landLordProfileController.verifyLandLord(isVerifyOrUpdate: false)
-                              : landLordProfileController.verifyLandLord(isVerifyOrUpdate: true);
-                        },
-                        fontColor: Colors.white,
-                        fontSize: 4.sp,
-                        fontWeight: FontWeight.w500,
-                        buttonColor: ColorManager.kasmiriBlue,
-                        buttonTitle:
-                        // loginPageController.userData.account?.verified ?? false
-                        landLordProfileController.account.value?.verified ?? false
-                            ? "Save & Update"
-                            : "Verify Profile",
-                        buttonRadius: 10.r,
-                        buttonHeight: 40.h,
-                        buttonWidth: 30.w,
-                      );
-                    } ,
-
+                        return landLordProfileController.verifyIsLoading.value
+                            ? CircularProgressIndicator()
+                            : CustomButton(
+                                onTap: () {
+                                  // loginPageController.userData.account?.verified ?? false
+                                  landLordProfileController
+                                              .account.value?.verified ??
+                                          false
+                                      ? landLordProfileController
+                                          .verifyLandLord(
+                                              isVerifyOrUpdate: false)
+                                      : landLordProfileController
+                                          .verifyLandLord(
+                                              isVerifyOrUpdate: true);
+                                },
+                                fontColor: Colors.white,
+                                fontSize: 4.sp,
+                                fontWeight: FontWeight.w500,
+                                buttonColor: ColorManager.kasmiriBlue,
+                                buttonTitle:
+                                    // loginPageController.userData.account?.verified ?? false
+                                    landLordProfileController
+                                                .account.value?.verified ??
+                                            false
+                                        ? "Save & Update"
+                                        : "Verify Profile",
+                                buttonRadius: 10.r,
+                                buttonHeight: 40.h,
+                                buttonWidth: 30.w,
+                              );
+                      },
                     ),
                   ),
-
 
                   SizedBox(
                     height: 10.h,
@@ -368,4 +394,3 @@ class _LandLordProfileInformationDesktopState
     );
   }
 }
-

@@ -1,7 +1,11 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_core/get_core.dart';
+import 'package:get/get_instance/get_instance.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:property_rental_2/Pages/LandLord_Sector/controller/land_lord_profile_information_controller.dart';
+import 'package:property_rental_2/Pages/Login_Page/login_page_controller.dart';
 import 'Pages/Home_Page/home_page.dart';
 
 void main() {
@@ -26,6 +30,10 @@ class PropertyRental extends StatelessWidget {
             PointerDeviceKind.unknown,
           },
         ),
+        initialBinding: BindingsBuilder(() {
+          Get.put(LoginPageControllerClass());
+          Get.put(LandLordProfileInformationControllerClass());
+        }),
         home: const HomePage(),
         // getPages: RoutingPage.pages,
       ),

@@ -15,7 +15,8 @@ class LoginPageControllerClass extends GetxController {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  // LandLordProfileInformationControllerClass landLordProfileInformationControllerClass = Get.put(LandLordProfileInformationControllerClass());
+  // LandLordProfileInformationControllerClass
+  //     landLordProfileInformationControllerClass = Get.find();
 
   var isLoading = false.obs;
   UserData userData = UserData();
@@ -69,13 +70,19 @@ class LoginPageControllerClass extends GetxController {
       final LoginResponse loginResponse = loginResponseFromJson(response.body);
       if (response.statusCode == 200 || response.statusCode == 201) {
         userData = loginResponse.data!;
-        await SecureData.writeSecureData(key: 'token', value: userData.token);
-        isLoading.value = false;
+        tokenValue = loginResponse.data!.token;
+        await SecureData.writeSecureData(
+            key: 'token', value: loginResponse.data!.token);
         // landLordProfileInformationControllerClass.getLandLordProfile();
+
+        isLoading.value = false;
+
         loginOrRegistration
             ? Get.to(() => const HomePage())
             : Get.to(() => const LandLordProfileInformationPage());
         customToast(msg: loginResponse.message!);
+        Get.find<LandLordProfileInformationControllerClass>()
+            .getLandLordProfile();
         printInfo(info: userData.toJson().toString());
       } else {
         isLoading.value = false;
@@ -83,7 +90,7 @@ class LoginPageControllerClass extends GetxController {
         customToast(isError: true, msg: loginResponse.message!);
       }
     } catch (e) {
-      printError(info: e.toString());
+      printError(info: "login/registration error: $e");
       isLoading.value = false;
     }
   }
