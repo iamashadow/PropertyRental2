@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:property_rental_2/Pages/Home_Page/home_page.dart';
+import 'package:property_rental_2/Pages/LandLord_Sector/controller/land_lord_profile_information_controller.dart';
 import 'package:property_rental_2/Pages/Login_Page/model/login_rp.dart';
 import 'package:property_rental_2/Universal_Widgets/custom_toast.dart';
 import 'package:property_rental_2/Utils/constant.dart';
@@ -13,6 +14,9 @@ import 'package:http/http.dart' as http;
 class LoginPageControllerClass extends GetxController {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
+  // LandLordProfileInformationControllerClass landLordProfileInformationControllerClass = Get.put(LandLordProfileInformationControllerClass());
+
   var isLoading = false.obs;
   UserData userData = UserData();
 
@@ -52,8 +56,8 @@ class LoginPageControllerClass extends GetxController {
       isLoading.value = true;
       final response = await http.post(
         Uri.parse(loginOrRegistration
-            ? '$baseurl/landlord/login'
-            : '$baseurl/landlord/create'),
+            ? '$baseurl/landlord/account/login'
+            : '$baseurl/landlord/account/create'),
         headers: <String, String>{
           'Content-Type': 'application/json',
         },
@@ -67,6 +71,7 @@ class LoginPageControllerClass extends GetxController {
         userData = loginResponse.data!;
         await SecureData.writeSecureData(key: 'token', value: userData.token);
         isLoading.value = false;
+        // landLordProfileInformationControllerClass.getLandLordProfile();
         loginOrRegistration
             ? Get.to(() => const HomePage())
             : Get.to(() => const LandLordProfileInformationPage());

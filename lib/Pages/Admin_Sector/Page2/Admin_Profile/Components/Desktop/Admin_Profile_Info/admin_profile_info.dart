@@ -13,7 +13,7 @@ class AdminProfileInfoDesktop extends StatelessWidget {
       margin: EdgeInsets.only(left: 100.w, right: 100.w),
       child: Column(
         children: [
-          ProfileImageFilePicker(),
+          // ProfileImageFilePicker(loginPageControllerClassInistance: ,),
           SizedBox(
             height: 10.h,
           ),

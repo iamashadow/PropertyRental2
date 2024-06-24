@@ -5,8 +5,15 @@ import 'package:property_rental_2/Pages/LandLord_Sector/controller/land_lord_pro
 import 'package:property_rental_2/Universal_Widgets/custom_button.dart';
 import 'package:property_rental_2/Utils/Color_Manager/colo_manager.dart';
 
+import '../../../../../../Login_Page/login_page_controller.dart';
+
 class ProfileImageFilePicker extends StatelessWidget {
-  ProfileImageFilePicker({super.key});
+
+  // final LoginPageControllerClass loginPageControllerClassInistance;
+
+  ProfileImageFilePicker({super.key,
+    // required this.loginPageControllerClassInistance,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,34 +40,54 @@ class ProfileImageFilePicker extends StatelessWidget {
                 //       )
                 //     : null,
               ),
-              child: controller.imageIsUploadingtoServer.value ? CircularProgressIndicator() :
-              controller.ProfileImage == null || controller.ProfileImage!.isEmpty ?
-              Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.person,
-                      size: 15.sp,
-                      color: Colors.white,
+              child: ((){
+                if(controller.imageIsUploadingtoServer.value){
+                  return CircularProgressIndicator();
+                }
+                else if(controller.ProfileImage == null || controller.ProfileImage!.isEmpty){
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.person,
+                          size: 15.sp,
+                          color: Colors.white,
+                        ),
+                        SizedBox(height: 5.h),
+                        const Text(
+                          "Upload Your Image",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ],
                     ),
-                    SizedBox(height: 5.h),
-                    const Text(
-                      "Upload Your Image",
-                      style: TextStyle(color: Colors.white),
+                  );
+                }
+                else{
+                  return ClipRRect(
+                    borderRadius: BorderRadius.circular(100.r),
+                    child: Image.network(
+                      controller.ProfileImage!,
+                      fit: BoxFit.cover,
+                      width: 150.r,
+                      height: 150.r,
                     ),
-                  ],
-                ),
-              )
-                  : ClipRRect(
-                borderRadius: BorderRadius.circular(100.r),
-                child: Image.network(
-                  controller.ProfileImage!,
-                  fit: BoxFit.cover,
-                  width: 150.r,
-                  height: 150.r,
-                ),
-              ),
+                  );
+                }
+              }())
+
+              // loginPageControllerClassInistance.userData.account?.profileImage != null || loginPageControllerClassInistance.userData.account!.profileImage!.isNotEmpty?
+              // ClipRRect(
+              //   borderRadius: BorderRadius.circular(100.r),
+              //   child: Image.network(
+              //     loginPageControllerClassInistance.userData.account!.profileImage!,
+              //     fit: BoxFit.cover,
+              //     width: 150.r,
+              //     height: 150.r,
+              //   ),
+              // ) :
+
+
             )),
           ),
           SizedBox(

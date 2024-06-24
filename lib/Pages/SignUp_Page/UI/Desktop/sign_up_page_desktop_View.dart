@@ -8,6 +8,7 @@ import '../../../../Universal_Widgets/footer_area_desktop.dart';
 import '../../../../Utils/Color_Manager/colo_manager.dart';
 import '../../../../Utils/universal_controller.dart';
 import '../../../Home_Page/Components/Desktop_Component/HeadBannerSection/head_banner_section.dart';
+import '../../../LandLord_Sector/controller/land_lord_profile_information_controller.dart';
 import '../../sign_up_page_controller.dart';
 
 class SignUpPageDesktopView extends StatelessWidget {

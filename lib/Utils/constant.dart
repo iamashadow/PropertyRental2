@@ -1,1 +1,1 @@
-String baseurl = "https://property-rental-backend-red.vercel.app/api/v1";
+String baseurl = "https://property-rental-backend-ashen.vercel.app/api/v1";

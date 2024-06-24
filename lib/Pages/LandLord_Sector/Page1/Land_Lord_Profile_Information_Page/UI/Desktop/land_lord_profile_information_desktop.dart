@@ -47,6 +47,7 @@ class _LandLordProfileInformationDesktopState
       landLordProfileController.landLordOfficeNumberController.text = loginPageController.userData.account?.officeNumber ?? '';
       landLordProfileController.landLordNationalityController.text = loginPageController.userData.account?.nationality ?? '';
       landLordProfileController.landLordBioController.text = loginPageController.userData.account?.bio ?? '';
+      landLordProfileController.ProfileImage = loginPageController.userData.account?.profileImage?? '';
     }
   }
 
@@ -67,6 +68,7 @@ class _LandLordProfileInformationDesktopState
             ),
 
             //Upload Profile Image
+            // ProfileImageFilePicker(loginPageControllerClassInistance: loginPageController,),
             ProfileImageFilePicker(),
             SizedBox(
               height: 20.h,
@@ -74,17 +76,43 @@ class _LandLordProfileInformationDesktopState
 
             Align(
               alignment: Alignment.center,
-              child: CustomText(
-                title: loginPageController.userData.account?.verified ?? false
-                    ? "Your profile is verified! You can add properties now."
-                    : "Your profile is not verified yet! Please verify your profile to add properties.",
+              child: Obx( ()=> CustomText(
+                // title: loginPageController.userData.account?.verified ?? false
+                title: ((){
+                  print("profileImage Values : ${landLordProfileController.account?.value?.profileImage!}");
+                  print("name Values : ${landLordProfileController.account?.value?.name}");
+                  print("bio Values : ${landLordProfileController.account?.value?.bio}");
+                  print("mobileNumber Values : ${landLordProfileController.account?.value?.mobileNumber}");
+                  print("officeNumber Values : ${landLordProfileController.account?.value?.officeNumber}");
+                  print("whatsAppNumber Values : ${landLordProfileController.account?.value?.whatsAppNumber}");
+                  print("email Values : ${landLordProfileController.account?.value?.email}");
+                  print("dateOfBirth Values : ${landLordProfileController.account?.value?.dateOfBirth}");
+                  print("nationality Values : ${landLordProfileController.account?.value?.nationality}");
+                  print("nidImageFront Values : ${landLordProfileController.account?.value?.nidImage!.split(",").first}");
+                  print("nidImageBack Values : ${landLordProfileController.account?.value?.nidImage!.split(",").last}");
+                  print("verified Values : ${landLordProfileController.account?.value?.verified}");
+
+                  if(landLordProfileController.account.value?.verified == true){
+                    return "Your profile is verified! You can add properties now.";
+                  }
+                  else{
+                    return "Your profile is not verified yet! Please verify your profile to add properties.";
+
+                  }
+                }()),
+
                 letterSpacing: 1,
                 fontWeight: FontWeight.w400,
                 fontSize: 3.sp,
-                fontColor:
-                    loginPageController.userData.account?.verified ?? false
-                        ? ColorManager.greenColor
-                        : ColorManager.redColor,
+                fontColor: ((){
+                  if(landLordProfileController.account.value?.verified == true){
+                    return ColorManager.greenColor;
+                  }
+                  else{
+                    return ColorManager.redColor;
+                  }
+                }()),
+              ),
               ),
             ),
             SizedBox(
@@ -289,26 +317,37 @@ class _LandLordProfileInformationDesktopState
                   //Save Button
                   Align(
                     alignment: Alignment.center,
-                    child: CustomButton(
-                      onTap: () {
-                        loginPageController.userData.account?.verified ?? false
-                            ? landLordProfileController.verifyLandLord(isVerifyOrUpdate: false)
-                            : landLordProfileController.verifyLandLord(isVerifyOrUpdate: true);
-                      },
-                      fontColor: Colors.white,
-                      fontSize: 4.sp,
-                      fontWeight: FontWeight.w500,
-                      buttonColor: ColorManager.kasmiriBlue,
-                      buttonTitle:
-                          loginPageController.userData.account?.verified ??
-                                  false
-                              ? "Save & Update"
-                              : "Verify Profile",
-                      buttonRadius: 10.r,
-                      buttonHeight: 40.h,
-                      buttonWidth: 30.w,
+                    child: Obx( (){
+
+                      print('verifyIsLoading: ${landLordProfileController.verifyIsLoading.value}');
+                      print('account verified: ${landLordProfileController.account.value?.verified}');
+
+                      return landLordProfileController.verifyIsLoading.value ? CircularProgressIndicator() : CustomButton(
+                        onTap: () {
+                          // loginPageController.userData.account?.verified ?? false
+                          landLordProfileController.account.value?.verified ?? false
+                              ? landLordProfileController.verifyLandLord(isVerifyOrUpdate: false)
+                              : landLordProfileController.verifyLandLord(isVerifyOrUpdate: true);
+                        },
+                        fontColor: Colors.white,
+                        fontSize: 4.sp,
+                        fontWeight: FontWeight.w500,
+                        buttonColor: ColorManager.kasmiriBlue,
+                        buttonTitle:
+                        // loginPageController.userData.account?.verified ?? false
+                        landLordProfileController.account.value?.verified ?? false
+                            ? "Save & Update"
+                            : "Verify Profile",
+                        buttonRadius: 10.r,
+                        buttonHeight: 40.h,
+                        buttonWidth: 30.w,
+                      );
+                    } ,
+
                     ),
                   ),
+
+
                   SizedBox(
                     height: 10.h,
                   ),
