@@ -397,11 +397,11 @@ class AddProperty extends StatelessWidget {
             height: 10.h,
           ),
 
-
           //Property Documents
           InkWell(
-            onTap: (){
-              propertyAddingLandLordController.uploadFile();
+            onTap: () async {
+              propertyAddingLandLordController.documentUrl.text =
+                  await propertyAddingLandLordController.uploadFile() ?? "";
             },
             child: AbsorbPointer(
               child: CustomTextFormField(
@@ -414,56 +414,76 @@ class AddProperty extends StatelessWidget {
             height: 10.h,
           ),
 
+          InkWell(
+            onTap: () async {
+              propertyAddingLandLordController.propertyVideoUrl.text =
+                  await propertyAddingLandLordController.uploadFile() ?? "";
+            },
+            child: AbsorbPointer(
+              child: CustomTextFormField(
+                labelText: "Property Video Link",
+                controller: propertyAddingLandLordController.propertyVideoUrl,
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 10.h,
+          ),
 
           //Button
           Center(
-            child: CustomButton(
-              fontSize: 3.sp,
-              fontWeight: FontWeight.w500,
-              fontColor: ColorManager.whiteColor,
-              buttonColor: ColorManager.kasmiriBlue,
-              buttonHeight: 30.h,
-              buttonWidth: 100.w,
-              buttonTitle: "Upload Property",
-              buttonRadius: 10.r,
-              onTap: () {
-                var newProperty = PropertyApproveRequestToAdminModel(
-                  propertyImage: propertyPic,
-                  propertyName: propertyAddingLandLordController
-                      .propertyNameController.text,
-                  propertyPrice: propertyAddingLandLordController
-                      .propertyPriceController.text,
-                  posetingDate: propertyAddingLandLordController
-                      .propertyUploadDateController.text,
-                  bedRooms: propertyAddingLandLordController
-                      .propertyBedRoomsController.text,
-                  bathRooms: propertyAddingLandLordController
-                      .propertyBathRoomsController.text,
-                  propertyArea: propertyAddingLandLordController
-                      .propertyAreaController.text,
-                  propertyType: radioController
-                      .propertyTypeRadioGroupValue.value
-                      .toString(),
-                  propertyStatus: radioController
-                      .propertyStatusRadioGroupValue.value
-                      .toString(),
-                  prpertyBio: propertyAddingLandLordController
-                      .propertyBioController.text,
-                );
+            child: Obx(
+              () => propertyAddingLandLordController.isLoading.value
+                  ? CircularProgressIndicator()
+                  : CustomButton(
+                      fontSize: 3.sp,
+                      fontWeight: FontWeight.w500,
+                      fontColor: ColorManager.whiteColor,
+                      buttonColor: ColorManager.kasmiriBlue,
+                      buttonHeight: 30.h,
+                      buttonWidth: 100.w,
+                      buttonTitle: "Upload Property",
+                      buttonRadius: 10.r,
+                      onTap: () {
+                        var newProperty = PropertyApproveRequestToAdminModel(
+                          propertyImage: propertyPic,
+                          propertyName: propertyAddingLandLordController
+                              .propertyNameController.text,
+                          propertyPrice: propertyAddingLandLordController
+                              .propertyPriceController.text,
+                          posetingDate: propertyAddingLandLordController
+                              .propertyUploadDateController.text,
+                          bedRooms: propertyAddingLandLordController
+                              .propertyBedRoomsController.text,
+                          bathRooms: propertyAddingLandLordController
+                              .propertyBathRoomsController.text,
+                          propertyArea: propertyAddingLandLordController
+                              .propertyAreaController.text,
+                          propertyType: radioController
+                              .propertyTypeRadioGroupValue.value
+                              .toString(),
+                          propertyStatus: radioController
+                              .propertyStatusRadioGroupValue.value
+                              .toString(),
+                          prpertyBio: propertyAddingLandLordController
+                              .propertyBioController.text,
+                        );
 
-                AllList.propertyApproveRequestListToAdmin.add(newProperty);
+                        AllList.propertyApproveRequestListToAdmin
+                            .add(newProperty);
 
-                print(newProperty.propertyImage);
-                print(newProperty.propertyName);
-                print(newProperty.propertyPrice);
-                print(newProperty.posetingDate);
-                print(newProperty.bedRooms);
-                print(newProperty.bathRooms);
-                print(newProperty.propertyArea);
-                print(newProperty.propertyType);
-                print(
-                    "INdedx : ${AllList.propertyApproveRequestListToAdmin.length}");
-              },
+                        print(newProperty.propertyImage);
+                        print(newProperty.propertyName);
+                        print(newProperty.propertyPrice);
+                        print(newProperty.posetingDate);
+                        print(newProperty.bedRooms);
+                        print(newProperty.bathRooms);
+                        print(newProperty.propertyArea);
+                        print(newProperty.propertyType);
+                        print(
+                            "INdedx : ${AllList.propertyApproveRequestListToAdmin.length}");
+                      },
+                    ),
             ),
           ),
           SizedBox(

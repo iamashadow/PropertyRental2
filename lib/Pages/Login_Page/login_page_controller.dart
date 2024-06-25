@@ -2,8 +2,10 @@ import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:property_rental_2/Pages/Admin_Sector/Page2/Admin_Profile/admin_profile_page.dart';
 import 'package:property_rental_2/Pages/Home_Page/home_page.dart';
 import 'package:property_rental_2/Pages/LandLord_Sector/controller/land_lord_profile_information_controller.dart';
+import 'package:property_rental_2/Pages/Login_Page/model/admin_login_model.dart';
 import 'package:property_rental_2/Pages/Login_Page/model/login_rp.dart';
 import 'package:property_rental_2/Universal_Widgets/custom_toast.dart';
 import 'package:property_rental_2/Utils/constant.dart';
@@ -17,9 +19,11 @@ class LoginPageControllerClass extends GetxController {
 
   // LandLordProfileInformationControllerClass
   //     landLordProfileInformationControllerClass = Get.find();
+  var whichRole = ''.obs;
 
   var isLoading = false.obs;
   UserData userData = UserData();
+  Rxn<AdminData> adminData = Rxn<AdminData>();
 
   String generateRandomNumber() {
     final Random random = Random();
@@ -56,9 +60,15 @@ class LoginPageControllerClass extends GetxController {
     try {
       isLoading.value = true;
       final response = await http.post(
-        Uri.parse(loginOrRegistration
-            ? '$baseurl/landlord/account/login'
-            : '$baseurl/landlord/account/create'),
+        Uri.parse(whichRole.value == 'Admin'
+            ? loginOrRegistration
+                ? '$baseurl/admin/account/login'
+                : '$baseurl/admin/account/create'
+            : whichRole.value == 'LandLord'
+                ? loginOrRegistration
+                    ? '$baseurl/landlord/account/login'
+                    : '$baseurl/landlord/account/create'
+                : ""),
         headers: <String, String>{
           'Content-Type': 'application/json',
         },
@@ -67,31 +77,49 @@ class LoginPageControllerClass extends GetxController {
           'password': passwordController.text,
         }),
       );
-      final LoginResponse loginResponse = loginResponseFromJson(response.body);
+
+      // Declare variables outside of the conditionals
+      LoginResponse? loginResponse;
+      AdminLoginRpModel? adminLoginRpModel;
+
       if (response.statusCode == 200 || response.statusCode == 201) {
-        userData = loginResponse.data!;
-        tokenValue = loginResponse.data!.token;
-        await SecureData.writeSecureData(
-            key: 'token', value: loginResponse.data!.token);
-        // landLordProfileInformationControllerClass.getLandLordProfile();
+        if (whichRole.value == "LandLord") {
+          loginResponse = loginResponseFromJson(response.body);
+        } else if (whichRole.value == "Admin") {
+          adminLoginRpModel = adminLoginRpModelFromJson(response.body);
+        }
 
+        // Handle token storage and navigation based on role
+        if (whichRole.value == 'Admin' && adminLoginRpModel != null) {
+          adminData.value = adminLoginRpModel.data;
+          await SecureData.writeSecureData(
+              key: 'token', value: adminLoginRpModel.data!.token);
+          tokenValue = adminLoginRpModel.data!.token;
+          loginOrRegistration
+              ? Get.to(() => const HomePage())
+              : Get.to(() => const AdminProfilePage());
+          customToast(msg: adminLoginRpModel.message!);
+        } else if (whichRole.value == 'LandLord' && loginResponse != null) {
+          userData = loginResponse.data!;
+          await SecureData.writeSecureData(
+              key: 'token', value: loginResponse.data!.token);
+          tokenValue = loginResponse.data!.token;
+          loginOrRegistration
+              ? Get.to(() => const HomePage())
+              : Get.to(() => const LandLordProfileInformationPage());
+          customToast(msg: loginResponse.message!);
+        }
+// landLordProfileInformationControllerClass.getLandLordProfile();
         isLoading.value = false;
-
-        loginOrRegistration
-            ? Get.to(() => const HomePage())
-            : Get.to(() => const LandLordProfileInformationPage());
-        customToast(msg: loginResponse.message!);
-        Get.find<LandLordProfileInformationControllerClass>()
-            .getLandLordProfile();
-        printInfo(info: userData.toJson().toString());
       } else {
         isLoading.value = false;
         printError(info: response.body);
-        customToast(isError: true, msg: loginResponse.message!);
+        customToast(isError: true, msg: "Login failed");
       }
     } catch (e) {
       printError(info: "login/registration error: $e");
       isLoading.value = false;
+      customToast(isError: true, msg: "An error occurred");
     }
   }
 }

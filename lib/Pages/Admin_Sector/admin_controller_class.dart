@@ -1,58 +1,58 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:property_rental_2/Pages/Login_Page/model/admin_login_model.dart';
+import 'package:property_rental_2/Pages/Login_Page/model/login_rp.dart';
+import 'package:property_rental_2/Universal_Widgets/custom_toast.dart';
 
 import '../../Utils/constant.dart';
 
-class AdminControllerClass extends GetxController{
+class AdminControllerClass extends GetxController {
+  TextEditingController adminNameController = TextEditingController();
+  TextEditingController adminMobileController = TextEditingController();
   TextEditingController adminEmailController = TextEditingController();
   TextEditingController adminPasswordController = TextEditingController();
+  Rxn<AdminAccount> adminUserData = Rxn<AdminAccount>();
 
   var isLoading = false.obs;
 
-
-  Future<void> loginRequest({required bool loginOrRegistration}) async {
+  Future<void> getAdminProfile() async {
     try {
       isLoading.value = true;
-      final response = await http.post(
-        Uri.parse('$baseurl/admin/account/login'),
+      // var token = await SecureData.readSecureData(key: "token");
+      printInfo(info: "Token.................. $tokenValue");
+      var response = await http.get(
+        Uri.parse('$baseurl/admin/account/'),
         headers: <String, String>{
+          'Authorization': 'Bearer $tokenValue',
           'Content-Type': 'application/json',
         },
-        body: jsonEncode({
-          'email': adminEmailController.text,
-          'password': adminPasswordController.text,
-        }),
       );
-      final LoginResponse loginResponse = loginResponseFromJson(response.body);
+      var data = jsonDecode(response.body);
+      // printInfo(info: "ddddddddddddddddddddddddData : $data");
       if (response.statusCode == 200 || response.statusCode == 201) {
-        userData = loginResponse.data!;
-        tokenValue = loginResponse.data!.token;
-        await SecureData.writeSecureData(
-            key: 'token', value: loginResponse.data!.token);
-        // landLordProfileInformationControllerClass.getLandLordProfile();
+        print("imtiaz");
+        adminUserData.value = AdminAccount.fromJson(data["data"]);
+        update();
+        if (adminUserData.value != null) {
+          adminEmailController.text = adminUserData.value!.email!;
+          adminNameController.text = adminUserData.value!.name!;
+          adminMobileController.text = adminUserData.value!.mobile!;
+        }
 
-        isLoading.value = false;
-
-        loginOrRegistration
-            ? Get.to(() => const HomePage())
-            : Get.to(() => const LandLordProfileInformationPage());
-        customToast(msg: loginResponse.message!);
-        Get.find<LandLordProfileInformationControllerClass>()
-            .getLandLordProfile();
-        printInfo(info: userData.toJson().toString());
+        customToast(msg: data['message']);
       } else {
-        isLoading.value = false;
-        printError(info: response.body);
-        customToast(isError: true, msg: loginResponse.message!);
+        customToast(msg: data['message'], isError: true);
       }
+      isLoading.value = false;
+      // printInfo(info: "get land user Data : ${account.value!.toJson()}");
+      update();
     } catch (e) {
-      printError(info: "login/registration error: $e");
+      printError(info: "getLandLordProfile error: $e");
       isLoading.value = false;
     }
   }
-
-
 }
