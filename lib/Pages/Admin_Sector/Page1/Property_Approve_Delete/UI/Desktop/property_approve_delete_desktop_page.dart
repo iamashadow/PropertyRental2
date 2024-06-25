@@ -25,7 +25,12 @@ class ProeprtyApproveDeleteDesktopPage extends StatelessWidget {
             SizedBox(height: 1.sh*0.1,),
 
 
-            ProeprtyRequestsAndApprovedProperties(),
+            Container(
+              height: 1.sh*1,
+              width: 1.sw,
+              color: Colors.amber,
+              child: ProeprtyRequestsAndApprovedProperties(),
+            ),
             SizedBox(height: 10.h,),
 
 

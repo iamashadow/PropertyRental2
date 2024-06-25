@@ -136,59 +136,94 @@ class _LandLordProfileInformationDesktopState
                 children: [
                   Align(
                     alignment: Alignment.centerRight,
-                    child: ElevatedButton(
-                        onPressed: () {}, child: const Text("Edit")),
+                    child: Obx(()=> ElevatedButton(
+
+
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(
+                          landLordProfileController.isTextEditingFieldEditable.value
+                              ? Colors.white : Colors.blue,
+                        ),
+                      ),
+                        onPressed: () {
+
+                          // landLordProfileController.isEditButtonPressed != landLordProfileController.isEditButtonPressed;
+                          //
+                          // if(landLordProfileController.account.value!.verified == false){
+                          //   landLordProfileController.isTextEditingFieldEditable = true;
+                          // }
+                          // else if(landLordProfileController.isEditButtonPressed == true){
+                          //   landLordProfileController.isTextEditingFieldEditable =
+                          // }
+                          // else{
+                          //   landLordProfileController.isTextEditingFieldEditable = false;
+                          // }
+
+                          landLordProfileController.isTextEditingFieldEditable.value = !landLordProfileController.isTextEditingFieldEditable.value;
+                        },
+                      child: Text(
+                      landLordProfileController.isTextEditingFieldEditable.value
+                        ? "Editable Mode"
+                        : "Change Profile Info",
+                        style: TextStyle(
+                          color: landLordProfileController.isTextEditingFieldEditable.value ? Colors.black : Colors.white,
+                          fontWeight: FontWeight.bold
+                        ),
+                    ),
+                    ),
+                    ),
                   ),
                   SizedBox(
                     height: 10.h,
                   ),
 
                   //Name
-                  CustomTextFormField(
+                  Obx(() => CustomTextFormField(
                     labelText: "Enter Your Name",
-                    controller:
-                        landLordProfileController.landLordNameController,
-                  ),
+                    controller: landLordProfileController.landLordNameController,
+                    isEnabled: landLordProfileController.isTextEditingFieldEditable.value,
+                  ),),
                   SizedBox(
                     height: 10.h,
                   ),
 
                   //Profile Bio
-                  CustomTextFormField(
+                  Obx(() => CustomTextFormField(
                     labelText: "Say something about you",
                     controller: landLordProfileController.landLordBioController,
+                    isEnabled: landLordProfileController.isTextEditingFieldEditable.value,
                     maxLines: 5,
-                  ),
+                  ),),
                   SizedBox(
                     height: 10.h,
                   ),
 
                   //Mobile Number
-                  CustomTextFormField(
+                  Obx(() => CustomTextFormField(
                     labelText: "Enter Your Mobile Number",
-                    controller: landLordProfileController
-                        .landLordMobileNumberController,
-                  ),
+                    controller: landLordProfileController.landLordMobileNumberController,
+                    isEnabled: landLordProfileController.isTextEditingFieldEditable.value,
+                  ),),
                   SizedBox(
                     height: 10.h,
                   ),
 
                   //WhatsApp Number
-                  CustomTextFormField(
+                  Obx(() => CustomTextFormField(
                     labelText: "Enter Your WhatsApp Number",
-                    controller: landLordProfileController
-                        .landLordWhatsAppNumberController,
-                  ),
+                    controller: landLordProfileController.landLordWhatsAppNumberController,
+                    isEnabled: landLordProfileController.isTextEditingFieldEditable.value,
+                  ),),
                   SizedBox(
                     height: 10.h,
                   ),
 
                   //Office Number
-                  CustomTextFormField(
+                  Obx(() => CustomTextFormField(
                     labelText: "Enter Your Office Mobile Number",
-                    controller: landLordProfileController
-                        .landLordOfficeNumberController,
-                  ),
+                    controller: landLordProfileController.landLordOfficeNumberController,
+                    isEnabled: landLordProfileController.isTextEditingFieldEditable.value,
+                  ),),
                   SizedBox(
                     height: 10.h,
                   ),
@@ -249,9 +284,11 @@ class _LandLordProfileInformationDesktopState
                   //   },
                   // ),
 
-                  GetBuilder<LandLordProfileInformationControllerClass>(
-                    init: LandLordProfileInformationControllerClass(),
-                    builder: (landLordProfileController) {
+              GetBuilder<LandLordProfileInformationControllerClass>(
+                init: LandLordProfileInformationControllerClass(),
+                builder: (landLordProfileController) {
+                  return Obx(() {
+                    if (landLordProfileController.isTextEditingFieldEditable.value) {
                       return InkWell(
                         onTap: () async {
                           DateTime? datePicked = await showDatePicker(
@@ -263,46 +300,62 @@ class _LandLordProfileInformationDesktopState
 
                           if (datePicked != null) {
                             String formattedDate =
-                                DateFormat('yyyy-MM-dd').format(datePicked);
-                            landLordProfileController.selectedDate.text =
-                                formattedDate;
+                            DateFormat('yyyy-MM-dd').format(datePicked);
+                            landLordProfileController.selectedDate.text = formattedDate;
                             landLordProfileController.update();
                             print(landLordProfileController.selectedDate.value);
                           }
                         },
-                        child: landLordProfileController
-                                .selectedDate.text.isNotEmpty
+                        child: landLordProfileController.selectedDate.text.isNotEmpty
                             ? CustomText(
-                                title:
-                                    "Date of Birth : ${landLordProfileController.selectedDate.text}",
-                                fontColor: ColorManager.kasmiriBlue,
-                              )
+                          title: "Date of Birth : ${landLordProfileController.selectedDate.text}",
+                          fontColor: ColorManager.kasmiriBlue,
+                        )
                             : Row(
-                                children: [
-                                  CustomText(
-                                    title: "Date of Birth : ",
-                                    fontColor: ColorManager.kasmiriBlue,
-                                  ),
-                                  Icon(
-                                    Icons.calendar_month_rounded,
-                                    color: ColorManager.kasmiriBlue,
-                                  ),
-                                ],
-                              ),
+                          children: [
+                            CustomText(
+                              title: "Date of Birth : ",
+                              fontColor: ColorManager.kasmiriBlue,
+                            ),
+                            Icon(
+                              Icons.calendar_month_rounded,
+                              color: ColorManager.kasmiriBlue,
+                            ),
+                          ],
+                        ),
                       );
-                    },
-                  ),
-
+                    } else {
+                      return landLordProfileController.selectedDate.text.isNotEmpty
+                          ? CustomText(
+                        title: "Date of Birth : ${landLordProfileController.selectedDate.text}",
+                        fontColor: ColorManager.kasmiriBlue,
+                      )
+                          : Row(
+                        children: [
+                          CustomText(
+                            title: "Date of Birth : ",
+                            fontColor: ColorManager.kasmiriBlue,
+                          ),
+                          Icon(
+                            Icons.calendar_month_rounded,
+                            color: ColorManager.kasmiriBlue,
+                          ),
+                        ],
+                      );
+                    }
+                  });
+                },
+              ),
                   SizedBox(
                     height: 10.h,
                   ),
 
                   //Nationality
-                  CustomTextFormField(
+                  Obx(() => CustomTextFormField(
                     labelText: "Enter Your Nationality",
-                    controller:
-                        landLordProfileController.landLordNationalityController,
-                  ),
+                    controller: landLordProfileController.landLordNationalityController,
+                    isEnabled: landLordProfileController.isTextEditingFieldEditable.value,
+                  ),),
                   SizedBox(
                     height: 10.h,
                   ),
@@ -317,7 +370,10 @@ class _LandLordProfileInformationDesktopState
                   ),
 
                   //NID Upload
-                  Row(
+                  Obx(
+                        () =>
+                        landLordProfileController.isTextEditingFieldEditable.value == true ?
+                        Row(
                     children: [
                       const Expanded(child: NidFrontImageUpload()),
                       SizedBox(
@@ -325,60 +381,108 @@ class _LandLordProfileInformationDesktopState
                       ),
                       const Expanded(child: NidBackPartImage()),
                     ],
+                  ) :
+                        Row(
+                          children: [
+                            const Expanded(child: NidFrontImageUpload()),
+                            SizedBox(
+                              width: 10.w,
+                            ),
+                            const Expanded(child: NidBackPartImage()),
+                          ],
+                        ),
                   ),
                   SizedBox(
                     height: 10.h,
                   ),
 
                   //Save Button
-                  Align(
-                    alignment: Alignment.center,
-                    child: Obx(
+                  // Align(
+                  //   alignment: Alignment.center,
+                  //   child: Obx(
+                  //     () {
+                  //       print(
+                  //           'verifyIsLoading: ${landLordProfileController.verifyIsLoading.value}');
+                  //       print(
+                  //           'account verified: ${landLordProfileController.account.value?.verified}');
+                  //
+                  //       return
+                  //         landLordProfileController.verifyIsLoading.value
+                  //           ? CircularProgressIndicator()
+                  //           : CustomButton(
+                  //               onTap: () {
+                  //                 // loginPageController.userData.account?.verified ?? false
+                  //                 landLordProfileController
+                  //                             .account.value?.verified ??
+                  //                         false
+                  //                     ? landLordProfileController
+                  //                         .verifyLandLord(
+                  //                             isVerifyOrUpdate: false)
+                  //                     : landLordProfileController
+                  //                         .verifyLandLord(
+                  //                             isVerifyOrUpdate: true);
+                  //               },
+                  //               fontColor: Colors.white,
+                  //               fontSize: 4.sp,
+                  //               fontWeight: FontWeight.w500,
+                  //               buttonColor: ColorManager.kasmiriBlue,
+                  //               buttonTitle:
+                  //                   // loginPageController.userData.account?.verified ?? false
+                  //                   landLordProfileController
+                  //                               .account.value?.verified ??
+                  //                           false
+                  //                       ? "Save & Update"
+                  //                       : "Verify Profile",
+                  //               buttonRadius: 10.r,
+                  //               buttonHeight: 40.h,
+                  //               buttonWidth: 30.w,
+                  //             );
+                  //     },
+                  //   ),
+                  // ),
+
+              Align(
+                alignment: Alignment.center,
+                child: Obx(
                       () {
-                        print(
-                            'verifyIsLoading: ${landLordProfileController.verifyIsLoading.value}');
-                        print(
-                            'account verified: ${landLordProfileController.account.value?.verified}');
+                    print('verifyIsLoading: ${landLordProfileController.verifyIsLoading.value}');
+                    print('account verified: ${landLordProfileController.account.value?.verified}');
 
-                        return landLordProfileController.verifyIsLoading.value
-                            ? CircularProgressIndicator()
-                            : CustomButton(
-                                onTap: () {
-                                  // loginPageController.userData.account?.verified ?? false
-                                  landLordProfileController
-                                              .account.value?.verified ??
-                                          false
-                                      ? landLordProfileController
-                                          .verifyLandLord(
-                                              isVerifyOrUpdate: false)
-                                      : landLordProfileController
-                                          .verifyLandLord(
-                                              isVerifyOrUpdate: true);
-                                },
-                                fontColor: Colors.white,
-                                fontSize: 4.sp,
-                                fontWeight: FontWeight.w500,
-                                buttonColor: ColorManager.kasmiriBlue,
-                                buttonTitle:
-                                    // loginPageController.userData.account?.verified ?? false
-                                    landLordProfileController
-                                                .account.value?.verified ??
-                                            false
-                                        ? "Save & Update"
-                                        : "Verify Profile",
-                                buttonRadius: 10.r,
-                                buttonHeight: 40.h,
-                                buttonWidth: 30.w,
-                              );
+                    // Check if editing field is not editable and avoid rendering the button if false
+                    if (!landLordProfileController.isTextEditingFieldEditable.value) {
+                      return SizedBox.shrink(); // Return an empty widget
+                    }
+
+                    return landLordProfileController.verifyIsLoading.value
+                        ? CircularProgressIndicator()
+                        : CustomButton(
+                      onTap: () {
+                        bool isVerified = landLordProfileController.account.value?.verified ?? false;
+                        landLordProfileController.verifyLandLord(
+                          isVerifyOrUpdate: !isVerified,
+                        );
                       },
-                    ),
-                  ),
+                      fontColor: Colors.white,
+                      fontSize: 4.sp,
+                      fontWeight: FontWeight.w500,
+                      buttonColor: ColorManager.kasmiriBlue,
+                      buttonTitle: landLordProfileController.account.value?.verified ?? false
+                          ? "Save & Update"
+                          : "Verify Profile",
+                      buttonRadius: 10.r,
+                      buttonHeight: 40.h,
+                      buttonWidth: 30.w,
+                    );
+                  },
+                ),
 
+              ),
                   SizedBox(
                     height: 10.h,
                   ),
                 ],
               ),
+
             ),
 
             //WebFooter Area
