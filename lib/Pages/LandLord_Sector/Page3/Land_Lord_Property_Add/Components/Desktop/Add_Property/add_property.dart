@@ -406,7 +406,7 @@ class AddProperty extends StatelessWidget {
             child: AbsorbPointer(
               child: CustomTextFormField(
                 labelText: "Property Documents",
-                controller: propertyAddingLandLordController.propertyDocumentUrl,
+                controller: propertyAddingLandLordController.documentUrl,
               ),
             ),
           ),
