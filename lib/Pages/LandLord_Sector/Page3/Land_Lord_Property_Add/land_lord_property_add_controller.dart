@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:property_rental_2/Pages/LandLord_Sector/controller/land_lord_profile_information_controller.dart';
@@ -22,6 +23,7 @@ class LandLordPropertyAddController extends GetxController {
   List<File> files = [];
 
   var propertyImageList = [].obs;
+  // var propertyImageList = <File>[].obs;
 
   Rx<DateTime?> selectedDate = Rx<DateTime?>(null);
 
@@ -32,4 +34,7 @@ class LandLordPropertyAddController extends GetxController {
     }
     printInfo(info: "length of the image list ${propertyImageList.length}");
   }
+
+
+
 }

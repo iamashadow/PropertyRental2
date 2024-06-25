@@ -28,21 +28,36 @@ class AddProperty extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 100.w, right: 100.w),
+      margin: EdgeInsets.only(left: 80.w, right: 80.w),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           //Property Images
           InkWell(
             onTap: () {
-              // propertyAddingLandLordController.webImagePicker();
+              propertyAddingLandLordController.uploadPropertyImage();
             },
             child: Container(
-              width: double.maxFinite,
+              width: 180.w,
               height: 100.h,
               color: Colors.blue.shade100,
-              child: Center(
-                child: Column(
+              child: Obx(() => Center(
+                child: propertyAddingLandLordController.propertyImageList.value.isNotEmpty ?
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: List.generate(
+                      propertyAddingLandLordController.propertyImageList.length,
+                          (index){
+                        return Image.network(
+                          propertyAddingLandLordController.propertyImageList[index],
+                          fit: BoxFit.fill,
+                          height: 100.h,
+                          width: 18.w,
+                        );
+                      }
+                  ),
+                ):
+                Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -55,7 +70,7 @@ class AddProperty extends StatelessWidget {
                     // Image.file(propertyAddingLandLordController.files.first),
                   ],
                 ),
-              ),
+              ),),
             ),
           ),
           SizedBox(
