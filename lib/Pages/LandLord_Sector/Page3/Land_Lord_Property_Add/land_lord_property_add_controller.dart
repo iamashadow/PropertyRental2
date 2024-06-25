@@ -21,6 +21,7 @@ class LandLordPropertyAddController extends GetxController {
   var propertyBioController = TextEditingController();
   var propertyPropertyLocationController = TextEditingController();
   List<File> files = [];
+  var uploadingImage = false.obs;
 
   var propertyImageList = [].obs;
   // var propertyImageList = <File>[].obs;
@@ -28,13 +29,12 @@ class LandLordPropertyAddController extends GetxController {
   Rx<DateTime?> selectedDate = Rx<DateTime?>(null);
 
   Future<void> uploadPropertyImage() async {
+    uploadingImage.value = true;
     String? image = await landLordProfileInformationControllerClass.pickImage();
     if (image != null) {
       propertyImageList.add(image);
     }
     printInfo(info: "length of the image list ${propertyImageList.length}");
+    uploadingImage.value = false;
   }
-
-
-
 }

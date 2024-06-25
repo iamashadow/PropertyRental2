@@ -37,40 +37,70 @@ class AddProperty extends StatelessWidget {
             onTap: () {
               propertyAddingLandLordController.uploadPropertyImage();
             },
-            child: Container(
-              width: 180.w,
-              height: 100.h,
-              color: Colors.blue.shade100,
-              child: Obx(() => Center(
-                child: propertyAddingLandLordController.propertyImageList.value.isNotEmpty ?
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: List.generate(
-                      propertyAddingLandLordController.propertyImageList.length,
-                          (index){
-                        return Image.network(
-                          propertyAddingLandLordController.propertyImageList[index],
-                          fit: BoxFit.fill,
-                          height: 100.h,
-                          width: 18.w,
-                        );
-                      }
-                  ),
-                ):
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const Icon(Icons.image),
-                    CustomText(
-                      title: "Upload minimum 10 images",
-                      fontWeight: FontWeight.w500,
-                      fontSize: 3.sp,
+            child: Obx(
+              () => Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    width: 180.w,
+                    height: 100.h,
+                    color: Colors.blue.shade100,
+                    child: Center(
+                      child: propertyAddingLandLordController
+                              .propertyImageList.isNotEmpty
+                          ? Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: List.generate(
+                                  propertyAddingLandLordController
+                                      .propertyImageList.length, (index) {
+                                return Stack(
+                                  children: [
+                                    Image.network(
+                                      propertyAddingLandLordController
+                                          .propertyImageList[index],
+                                      fit: BoxFit.fill,
+                                      height: 100.h,
+                                      width: 18.w,
+                                    ),
+                                    Positioned(
+                                      top: 0,
+                                      right: 0,
+                                      child: IconButton(
+                                        icon: Icon(Icons.cancel,
+                                            color: Colors.red),
+                                        onPressed: () {
+                                          propertyAddingLandLordController
+                                              .propertyImageList
+                                              .removeAt(index);
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              }),
+                            )
+                          : Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                const Icon(Icons.image),
+                                CustomText(
+                                  title: "Upload minimum 10 images",
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 3.sp,
+                                ),
+                                // Image.file(propertyAddingLandLordController.files.first),
+                              ],
+                            ),
                     ),
-                    // Image.file(propertyAddingLandLordController.files.first),
-                  ],
-                ),
-              ),),
+                  ),
+                  SizedBox(
+                    width: 5.w,
+                  ),
+                  if (propertyAddingLandLordController.uploadingImage.value)
+                    const CircularProgressIndicator()
+                ],
+              ),
             ),
           ),
           SizedBox(
