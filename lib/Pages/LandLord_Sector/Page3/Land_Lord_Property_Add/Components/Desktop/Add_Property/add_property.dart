@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:property_rental_2/Pages/LandLord_Sector/Page3/Land_Lord_Property_Add/land_lord_property_add_controller.dart';
+import 'package:property_rental_2/Pages/LandLord_Sector/controller/land_lord_profile_information_controller.dart';
 import 'package:property_rental_2/Universal_Widgets/custom_button.dart';
 import 'package:property_rental_2/Universal_Widgets/custom_text.dart';
 import 'package:property_rental_2/Universal_Widgets/custom_text_form_field.dart';
@@ -14,16 +15,18 @@ class AddProperty extends StatelessWidget {
   AddProperty({super.key});
 
   final radioController = Get.put(UniversalControllerClass());
+  final LandLordProfileInformationControllerClass
+      landLordProfileInformationControllerClass =
+      Get.find<LandLordProfileInformationControllerClass>();
 
-  final propertyAddingLandLordController =
-      Get.put(LandLordPropertyAddController());
+  final LandLordPropertyAddController propertyAddingLandLordController =
+      Get.find<LandLordPropertyAddController>();
 
   final propertyPic =
       "https://plus.unsplash.com/premium_photo-1661963209358-0f4d5f509d10?q=80&w=2014&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
 
   @override
   Widget build(BuildContext context) {
-
     return Container(
       margin: EdgeInsets.only(left: 100.w, right: 100.w),
       child: Column(
@@ -108,10 +111,10 @@ class AddProperty extends StatelessWidget {
           //   height: 10.h,
           // ),
 
-
           //Date of Birth
           CustomText(
-            title: "Property Uploading Date ${DateTime.now().toLocal().toString().split(' ')[0]}",
+            title:
+                "Property Uploading Date ${DateTime.now().toLocal().toString().split(' ')[0]}",
           ),
           SizedBox(
             height: 10.h,
@@ -167,7 +170,6 @@ class AddProperty extends StatelessWidget {
           // SizedBox(
           //   height: 10.h,
           // ),
-
 
           ///
 
@@ -293,7 +295,6 @@ class AddProperty extends StatelessWidget {
             height: 10.h,
           ),
 
-
           //Property Area
           CustomText(
             title: "Total Property Area",
@@ -344,7 +345,8 @@ class AddProperty extends StatelessWidget {
 
           CustomTextFormField(
             labelText: "Property location google map link",
-            controller: propertyAddingLandLordController.propertyPropertyLocationController,
+            controller: propertyAddingLandLordController
+                .propertyPropertyLocationController,
           ),
           SizedBox(
             height: 10.h,

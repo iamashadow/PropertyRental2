@@ -45,44 +45,6 @@ class LandLordProfileInformationControllerClass extends GetxController {
 
   LoginPageControllerClass loginPageControllerClass = Get.find();
 
-  // @override
-  // void onInit() {
-  //   super.onInit();
-  //   landLordNameController.text =
-  //       loginPageControllerClass.userData.account?.name ?? "";
-
-  //   ProfileImage =
-  //       loginPageControllerClass.userData.account?.profileImage ?? "";
-
-  //   NidFrontImageUrl =
-  //       loginPageControllerClass.userData.account?.nidImage?.split(",").first ??
-  //           "";
-
-  //   NidBackImageUrl =
-  //       loginPageControllerClass.userData.account?.nidImage?.split(",").last ??
-  //           "";
-
-  //   landLordBioController.text =
-  //       loginPageControllerClass.userData.account?.bio ?? "";
-  //   landLordMobileNumberController.text =
-  //       loginPageControllerClass.userData.account?.mobileNumber ?? "";
-  //   landLordWhatsAppNumberController.text =
-  //       loginPageControllerClass.userData.account?.whatsAppNumber ?? "";
-  //   landLordOfficeNumberController.text =
-  //       loginPageControllerClass.userData.account?.officeNumber ?? "";
-  //   landLordEmailController.text =
-  //       loginPageControllerClass.userData.account?.email ?? "";
-  //   landLordNationalityController.text =
-  //       loginPageControllerClass.userData.account?.nationality ?? "";
-  //   selectedDate.text = loginPageControllerClass.userData.account?.dateOfBirth
-  //           .toString()
-  //           .split("T")
-  //           .first ??
-  //       "";
-
-  //   loadSavedDate();
-  // }
-
   Future<void> loadSavedDate() async {
     String? savedDate = await secureStorage.read(key: 'selectedDate');
     if (savedDate != null) {
@@ -128,6 +90,7 @@ class LandLordProfileInformationControllerClass extends GetxController {
     } catch (e) {
       imageIsUploadingtoServer.value = false;
       print(e.toString());
+      return null;
     }
   }
 
@@ -165,6 +128,7 @@ class LandLordProfileInformationControllerClass extends GetxController {
       return null;
     } catch (e) {
       print(e.toString());
+      return null;
     }
   }
 
