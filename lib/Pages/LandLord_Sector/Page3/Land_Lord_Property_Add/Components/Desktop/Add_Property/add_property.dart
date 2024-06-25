@@ -367,6 +367,24 @@ class AddProperty extends StatelessWidget {
             height: 10.h,
           ),
 
+
+          //Property Documents
+          InkWell(
+            onTap: (){
+              propertyAddingLandLordController.uploadFile();
+            },
+            child: AbsorbPointer(
+              child: CustomTextFormField(
+                labelText: "Property Documents",
+                controller: propertyAddingLandLordController.propertyDocumentUrl,
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 10.h,
+          ),
+
+
           //Button
           Center(
             child: CustomButton(
