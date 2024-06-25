@@ -41,6 +41,13 @@ class LandLordProfileInformationControllerClass extends GetxController {
   String? ProfileImage;
   RxBool imageIsUploadingtoServer = false.obs;
 
+  RxBool  isEditButtonPressed = true.obs;
+  RxBool  isTextEditingFieldEditable = true.obs;
+  toggleEditMode() {
+    isTextEditingFieldEditable.value = !isTextEditingFieldEditable.value;
+    isEditButtonPressed.value = !isEditButtonPressed.value;
+  }
+
   var verifyIsLoading = false.obs;
 
   LoginPageControllerClass loginPageControllerClass = Get.find();
@@ -155,7 +162,7 @@ class LandLordProfileInformationControllerClass extends GetxController {
             "officeNumber": landLordOfficeNumberController.text,
             "dateOfBirth": selectedDate.text,
             "nationality": landLordNationalityController.text,
-            "nidImage": '$NidFrontImageUrl,$NidFrontImageUrl',
+            "nidImage": '$NidFrontImageUrl,$NidBackImageUrl',
           }));
       var data = jsonDecode(response.body);
       print("Data : $data");

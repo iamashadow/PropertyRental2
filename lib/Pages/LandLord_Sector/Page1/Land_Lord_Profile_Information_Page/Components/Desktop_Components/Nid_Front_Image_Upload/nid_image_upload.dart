@@ -17,10 +17,10 @@ class NidFrontImageUpload extends StatelessWidget {
       builder: (controller) => Column(
         children: [
           InkWell(
-            onTap: () async {
+            onTap: controller.isTextEditingFieldEditable.value ? () async {
               controller.NidFrontImageUrl = await controller.pickImage();
               controller.update();
-            },
+            } : null,
             child: Container(
               // width: 150.w,
               height: 200.h,

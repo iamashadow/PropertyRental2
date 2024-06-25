@@ -53,24 +53,25 @@ class _ProeprtyRequestsAndApprovedPropertiesState extends State<ProeprtyRequests
 
           //TabBarView
 
-          IndexedStack(
-            index: propertyController.propertyController.value,
-            children: [
-              PropertyApproveRequests(),
-              ApproveProperties(),
-
-            ],
-          ),
-
-          // TabBarView(
-          //   controller: tabController,
+          // IndexedStack(
+          //   index: propertyController.propertyController.value,
           //   children: [
-          //
           //     PropertyApproveRequests(),
           //     ApproveProperties(),
           //
           //   ],
-          // )
+          // ),
+
+          Expanded(
+            child: TabBarView(
+              controller: tabController,
+              children: [
+                PropertyApproveRequests(),
+                ApproveProperties(),
+
+              ],
+            ),
+          )
         ]
     );
   }
