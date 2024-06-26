@@ -1,11 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:property_rental_2/Pages/Admin_Sector/admin_controller_class.dart';
 
 import '../../../../../../../Universal_Widgets/custom_text_form_field.dart';
 import '../../../../../../LandLord_Sector/Page1/Land_Lord_Profile_Information_Page/Components/Desktop_Components/Profile_Image_File_Picker/profile_image_file_picker.dart';
 
-class AdminProfileInfoDesktop extends StatelessWidget {
+class AdminProfileInfoDesktop extends StatefulWidget {
   const AdminProfileInfoDesktop({super.key});
+
+  @override
+  State<AdminProfileInfoDesktop> createState() =>
+      _AdminProfileInfoDesktopState();
+}
+
+class _AdminProfileInfoDesktopState extends State<AdminProfileInfoDesktop> {
+  final AdminControllerClass controller = Get.put(AdminControllerClass());
+
+  @override
+  void initState() {
+    controller.getAdminProfile();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +44,7 @@ class AdminProfileInfoDesktop extends StatelessWidget {
 
           //Name
           CustomTextFormField(
+            controller: controller.adminNameController,
             labelText: "Enter Your Name",
           ),
           SizedBox(
@@ -36,6 +53,7 @@ class AdminProfileInfoDesktop extends StatelessWidget {
 
           //Mobile Number
           CustomTextFormField(
+            controller: controller.adminMobileController,
             labelText: "Enter Your Mobile Number",
           ),
           SizedBox(
@@ -44,6 +62,7 @@ class AdminProfileInfoDesktop extends StatelessWidget {
 
           //Email
           CustomTextFormField(
+            controller: controller.adminEmailController,
             labelText: "Your Email",
           ),
           SizedBox(

@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'package:http/http.dart' as http;
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,7 +9,6 @@ import 'package:get/get.dart';
 import 'package:property_rental_2/Pages/LandLord_Sector/controller/land_lord_profile_information_controller.dart';
 
 class LandLordPropertyAddController extends GetxController {
-
   // final FirebaseAuth _auth = FirebaseAuth.instance;
 
   final LandLordProfileInformationControllerClass
@@ -25,9 +24,13 @@ class LandLordPropertyAddController extends GetxController {
   var propertyBioController = TextEditingController();
   var propertyPropertyLocationController = TextEditingController();
   var documentUrl = TextEditingController();
+  TextEditingController propertyVideoUrl = TextEditingController();
+  var latitute = ''.obs;
+  var longitute = ''.obs;
 
   List<File> files = [];
   var uploadingImage = false.obs;
+  var isLoading = false.obs;
 
   var propertyImageList = [].obs;
   // var propertyImageList = <File>[].obs;
@@ -44,11 +47,9 @@ class LandLordPropertyAddController extends GetxController {
     uploadingImage.value = false;
   }
 
-
-  Future<void> uploadFile() async {
+  Future<String?> uploadFile() async {
     try {
-      // Ensure the user is authenticated
-
+      isLoading.value = true;
       FilePickerResult? result = await FilePicker.platform.pickFiles(
         type: FileType.any,
       );
@@ -67,27 +68,31 @@ class LandLordPropertyAddController extends GetxController {
         }
 
         if (fileBytes != null && fileName != null) {
-          // Upload file to Firebase Storage
-          final Reference storageReference = FirebaseStorage.instance.ref().child('uploads/$fileName');
+          final Reference storageReference =
+              FirebaseStorage.instance.ref().child('uploads/$fileName');
           final UploadTask uploadTask = storageReference.putData(fileBytes);
 
           final TaskSnapshot taskSnapshot = await uploadTask;
           final String downloadURL = await taskSnapshot.ref.getDownloadURL();
 
-          // Use the download URL
           print('File uploaded successfully: $downloadURL');
+
           Get.snackbar('Success', 'File uploaded successfully: $downloadURL');
+          isLoading.value = false;
+          return downloadURL;
         }
+        isLoading.value = false;
+        return null;
       } else {
-        // User canceled the picker
         Get.snackbar('Error', 'No file selected');
+        isLoading.value = false;
+        return null;
       }
     } catch (e) {
-      // Handle errors
       Get.snackbar('Error', 'An error occurred while uploading the file: $e');
-      printInfo(info: "'Error', 'An error occurred while uploading the file: $e'");
+      print('Error: $e');
+      isLoading.value = false;
+      return null;
     }
   }
-
-
 }

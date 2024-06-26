@@ -41,8 +41,8 @@ class LandLordProfileInformationControllerClass extends GetxController {
   String? ProfileImage;
   RxBool imageIsUploadingtoServer = false.obs;
 
-  RxBool  isEditButtonPressed = true.obs;
-  RxBool  isTextEditingFieldEditable = true.obs;
+  RxBool isEditButtonPressed = true.obs;
+  RxBool isTextEditingFieldEditable = true.obs;
   toggleEditMode() {
     isTextEditingFieldEditable.value = !isTextEditingFieldEditable.value;
     isEditButtonPressed.value = !isEditButtonPressed.value;
@@ -174,7 +174,7 @@ class LandLordProfileInformationControllerClass extends GetxController {
         customToast(msg: data['message'], isError: true);
       }
       verifyIsLoading.value = false;
-      // getLandLordProfile();
+      getLandLordProfile();
       printInfo(info: "Accaunt Data : $account");
       update();
     } catch (e) {
