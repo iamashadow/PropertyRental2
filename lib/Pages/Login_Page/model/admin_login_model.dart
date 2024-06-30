@@ -42,10 +42,12 @@ class AdminLoginRpModel {
 class AdminData {
   final String? token;
   final AdminAccount? account;
+  final String? role;
 
   AdminData({
     this.token,
     this.account,
+    this.role,
   });
 
   factory AdminData.fromJson(Map<String, dynamic> json) => AdminData(
@@ -53,11 +55,13 @@ class AdminData {
         account: json["account"] == null
             ? null
             : AdminAccount.fromJson(json["account"]),
+        role: json["role"],
       );
 
   Map<String, dynamic> toJson() => {
         "token": token,
         "account": account?.toJson(),
+        "role": role,
       };
 }
 

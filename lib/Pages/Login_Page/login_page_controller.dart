@@ -19,10 +19,9 @@ class LoginPageControllerClass extends GetxController {
 
   // LandLordProfileInformationControllerClass
   //     landLordProfileInformationControllerClass = Get.find();
-  var whichRole = ''.obs;
 
   var isLoading = false.obs;
-  UserData userData = UserData();
+  Rxn<UserData> userData = Rxn<UserData>();
   Rxn<AdminData> adminData = Rxn<AdminData>();
 
   String generateRandomNumber() {
@@ -60,15 +59,9 @@ class LoginPageControllerClass extends GetxController {
     try {
       isLoading.value = true;
       final response = await http.post(
-        Uri.parse(whichRole.value == 'Admin'
-            ? loginOrRegistration
-                ? '$baseurl/admin/account/login'
-                : '$baseurl/admin/account/create'
-            : whichRole.value == 'LandLord'
-                ? loginOrRegistration
-                    ? '$baseurl/landlord/account/login'
-                    : '$baseurl/landlord/account/create'
-                : ""),
+        Uri.parse(loginOrRegistration
+            ? '$baseurl/landlord/account/login'
+            : '$baseurl/landlord/account/create'),
         headers: <String, String>{
           'Content-Type': 'application/json',
         },
@@ -81,17 +74,18 @@ class LoginPageControllerClass extends GetxController {
       // Declare variables outside of the conditionals
       LoginResponse? loginResponse;
       AdminLoginRpModel? adminLoginRpModel;
+      var data = jsonDecode(response.body);
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        if (whichRole.value == "LandLord") {
-          loginResponse = loginResponseFromJson(response.body);
-        } else if (whichRole.value == "Admin") {
+        if (data["data"]["role"] == "admin") {
           adminLoginRpModel = adminLoginRpModelFromJson(response.body);
+        } else {
+          loginResponse = loginResponseFromJson(response.body);
         }
 
         // Handle token storage and navigation based on role
-        if (whichRole.value == 'Admin' && adminLoginRpModel != null) {
-          adminData.value = adminLoginRpModel.data;
+        if (data["data"]["role"] == "admin") {
+          adminData.value = adminLoginRpModel!.data;
           await SecureData.writeSecureData(
               key: 'token', value: adminLoginRpModel.data!.token);
           tokenValue = adminLoginRpModel.data!.token;
@@ -99,8 +93,8 @@ class LoginPageControllerClass extends GetxController {
               ? Get.to(() => const HomePage())
               : Get.to(() => const AdminProfilePage());
           customToast(msg: adminLoginRpModel.message!);
-        } else if (whichRole.value == 'LandLord' && loginResponse != null) {
-          userData = loginResponse.data!;
+        } else if (data["data"]["role"] == "landlord") {
+          userData.value = loginResponse!.data;
           await SecureData.writeSecureData(
               key: 'token', value: loginResponse.data!.token);
           tokenValue = loginResponse.data!.token;

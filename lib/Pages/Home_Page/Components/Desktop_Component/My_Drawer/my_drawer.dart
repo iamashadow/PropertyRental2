@@ -292,70 +292,6 @@ class MyDrawer extends StatelessWidget {
                       textAlign: TextAlign.start,
                     ),
                   ),
-                  Divider(),
-                  loginController.userData.token == null ||
-                          loginController.userData.token!.isEmpty
-                      ? Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            CustomButton(
-                              onTap: () {
-                                loginController.whichRole.value = "LandLord";
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => LoginPage()),
-                                );
-                              },
-                              fontWeight: FontWeight.w500,
-                              fontSize: 3.sp,
-                              fontColor: ColorManager.whiteColor,
-                              buttonRadius: 10.r,
-                              buttonTitle: "Login",
-                              buttonWidth: 20.w,
-                              buttonHeight: 30.h,
-                              buttonColor: ColorManager.kasmiriBlue,
-                            ),
-                            SizedBox(
-                              width: 10.w,
-                            ),
-                            CustomButton(
-                              onTap: () {
-                                loginController.whichRole.value = "LandLord";
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => SignUpPage()),
-                                );
-                              },
-                              fontWeight: FontWeight.w500,
-                              fontSize: 3.sp,
-                              fontColor: ColorManager.whiteColor,
-                              buttonRadius: 10.r,
-                              buttonTitle: "Registration",
-                              buttonWidth: 20.w,
-                              buttonHeight: 30.h,
-                              buttonColor: ColorManager.blackColor,
-                            ),
-                          ],
-                        )
-                      : CustomButton(
-                          onTap: () {
-                            loginController.whichRole.value = "";
-                            tokenValue = null;
-                            SecureData.deleteAllSecureData();
-                            loginController.userData = UserData();
-                            loginController.update();
-                          },
-                          fontWeight: FontWeight.w500,
-                          fontSize: 3.sp,
-                          fontColor: ColorManager.whiteColor,
-                          buttonRadius: 10.r,
-                          buttonTitle: "LogOut",
-                          buttonWidth: 20.w,
-                          buttonHeight: 30.h,
-                          buttonColor: ColorManager.kasmiriBlue,
-                        ),
                 ],
               ),
             ),
@@ -405,73 +341,72 @@ class MyDrawer extends StatelessWidget {
                       textAlign: TextAlign.start,
                     ),
                   ),
-                  Divider(),
-                  loginController.userData.token == null ||
-                          loginController.userData.token!.isEmpty
-                      ? Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            CustomButton(
-                              onTap: () {
-                                loginController.whichRole.value = "Admin";
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => LoginPage()),
-                                );
-                              },
-                              fontWeight: FontWeight.w500,
-                              fontSize: 3.sp,
-                              fontColor: ColorManager.whiteColor,
-                              buttonRadius: 10.r,
-                              buttonTitle: "Login",
-                              buttonWidth: 20.w,
-                              buttonHeight: 30.h,
-                              buttonColor: ColorManager.kasmiriBlue,
-                            ),
-                            SizedBox(
-                              width: 10.w,
-                            ),
-                            CustomButton(
-                              onTap: () {
-                                loginController.whichRole.value = "Admin";
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => SignUpPage()),
-                                );
-                              },
-                              fontWeight: FontWeight.w500,
-                              fontSize: 3.sp,
-                              fontColor: ColorManager.whiteColor,
-                              buttonRadius: 10.r,
-                              buttonTitle: "Registration",
-                              buttonWidth: 20.w,
-                              buttonHeight: 30.h,
-                              buttonColor: ColorManager.blackColor,
-                            ),
-                          ],
-                        )
-                      : CustomButton(
-                          onTap: () {
-                            loginController.whichRole.value = "";
-                            tokenValue = null;
-                            SecureData.deleteAllSecureData();
-                            loginController.userData = UserData();
-                            loginController.update();
-                          },
-                          fontWeight: FontWeight.w500,
-                          fontSize: 3.sp,
-                          fontColor: ColorManager.whiteColor,
-                          buttonRadius: 10.r,
-                          buttonTitle: "LogOut",
-                          buttonWidth: 20.w,
-                          buttonHeight: 30.h,
-                          buttonColor: ColorManager.kasmiriBlue,
-                        ),
                 ],
               ),
             ),
+            SizedBox(
+              height: 20.h,
+            ),
+            loginController.userData.value?.token == null ||
+                    loginController.userData.value!.token!.isEmpty
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CustomButton(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LoginPage()),
+                          );
+                        },
+                        fontWeight: FontWeight.w500,
+                        fontSize: 3.sp,
+                        fontColor: ColorManager.whiteColor,
+                        buttonRadius: 10.r,
+                        buttonTitle: "Login",
+                        buttonWidth: 20.w,
+                        buttonHeight: 30.h,
+                        buttonColor: ColorManager.kasmiriBlue,
+                      ),
+                      SizedBox(
+                        width: 10.w,
+                      ),
+                      CustomButton(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SignUpPage()),
+                          );
+                        },
+                        fontWeight: FontWeight.w500,
+                        fontSize: 3.sp,
+                        fontColor: ColorManager.whiteColor,
+                        buttonRadius: 10.r,
+                        buttonTitle: "Registration",
+                        buttonWidth: 20.w,
+                        buttonHeight: 30.h,
+                        buttonColor: ColorManager.blackColor,
+                      ),
+                    ],
+                  )
+                : CustomButton(
+                    onTap: () {
+                      tokenValue = null;
+                      SecureData.deleteAllSecureData();
+                      loginController.userData.value = UserData();
+                      loginController.update();
+                    },
+                    fontWeight: FontWeight.w500,
+                    fontSize: 3.sp,
+                    fontColor: ColorManager.whiteColor,
+                    buttonRadius: 10.r,
+                    buttonTitle: "LogOut",
+                    buttonWidth: 20.w,
+                    buttonHeight: 30.h,
+                    buttonColor: ColorManager.kasmiriBlue,
+                  ),
             SizedBox(
               height: 20.h,
             ),

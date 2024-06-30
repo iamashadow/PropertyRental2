@@ -201,7 +201,7 @@ class LandLordProfileInformationControllerClass extends GetxController {
         print("imtiaz");
         account.value = Account.fromJson(data['data']);
 
-        loginPageControllerClass.userData =
+        loginPageControllerClass.userData.value =
             UserData(token: tokenValue, account: account.value!);
         update();
         printInfo(info: "daaaaaaaaaaaaaaaaaaaaaaaaaaData : ${data}");

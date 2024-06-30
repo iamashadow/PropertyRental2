@@ -40,21 +40,25 @@ class LoginResponse {
 class UserData {
   final String? token;
   final Account? account;
+  final String? role;
 
   UserData({
     this.token,
     this.account,
+    this.role,
   });
 
   factory UserData.fromJson(Map<String, dynamic> json) => UserData(
         token: json["token"],
         account:
             json["account"] == null ? null : Account.fromJson(json["account"]),
+        role: json["role"],
       );
 
   Map<String, dynamic> toJson() => {
         "token": token,
         "account": account?.toJson(),
+        "role": role,
       };
 }
 
