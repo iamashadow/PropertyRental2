@@ -2,54 +2,31 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:property_rental_2/Universal_Widgets/custom_text.dart';
 import 'package:property_rental_2/Utils/All_List/all_list.dart';
 import 'package:property_rental_2/Utils/Color_Manager/colo_manager.dart';
+import 'package:property_rental_2/controller/our_propertise_controller.dart';
 
 import '../../../../../../Our_Properties_Details_Page_Desktop/UI/Desktop/property_details_page_desktop.dart';
 
 class PropertiesForRent extends StatelessWidget {
-  const PropertiesForRent({super.key});
+  PropertiesForRent({super.key});
+  final OurPropertiseController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
         shrinkWrap: true,
-        itemCount: AllList.OurPropertiesList.length,
-        itemBuilder: (context, index){
+        itemCount: controller.allOpenProperties.value!.length,
+        itemBuilder: (context, index) {
           return InkWell(
-            onTap: (){
-              Navigator.push(context,
+            onTap: () {
+              Navigator.push(
+                context,
                 MaterialPageRoute(
                   builder: (context) => OurPropertiesDetailsPage(
-
-                    //Property Name
-                    propertyName: AllList.OurPropertiesList[index]["propertyName"]!,
-                    propertyNameFontSize: 25,
-                    propertyNameFontWeight: FontWeight.bold,
-
-                    //Property Posting Date
-                    propertyAddingDate: AllList.OurPropertiesList[index]["posetingDate"]!,
-                    propertyAddingDateColor: Colors.blueGrey,
-                    propertyAddingDateFontSize: 15,
-                    propertyAddingDateFontWeight: FontWeight.w700,
-
-                    //Property Status
-                    propertyStatusText: AllList.OurPropertiesList[index]["propertyType"]!,
-                    propertyStatusTextColor: Colors.blueGrey,
-                    propertyStatusTextSize: 20,
-
-                    //Property Price
-                    propertyPriceText: AllList.OurPropertiesList[index]["propertyPrice"]!,
-                    propertyPriceTextColor: const Color(0xFF4b5ea3),
-                    propertyPriceTextSize: 25,
-                    propertyPriceTextFontWeight: FontWeight.w800,
-
-                    //Property Feature
-                    propertyBedrooms: AllList.OurPropertiesList[index]["bedRooms"]!,
-                    propertyBathrooms: AllList.OurPropertiesList[index]["bathRooms"]!,
-                    propertyArea: AllList.OurPropertiesList[index]["propertyArea"]!,
-
+                    propertyInfo: controller.allOpenProperties.value![index],
                   ),
                 ),
               );
@@ -67,13 +44,17 @@ class PropertiesForRent extends StatelessWidget {
                       height: 150.h,
                       decoration: BoxDecoration(
                           image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(AllList.OurPropertiesList[index]["propertyImage"]!),
-                          )
-                      ),
+                        fit: BoxFit.cover,
+                        image: NetworkImage(
+                          controller.allOpenProperties.value![index]
+                                  .propertyImages?.first ??
+                              "https://ecowaterqa.vtexassets.com/arquivos/ids/157145/stillnoimageavailable.jpg?v=637179063344070000",
+                        ),
+                      )),
                     ),
-                    SizedBox(width: 10.w,),
-
+                    SizedBox(
+                      width: 10.w,
+                    ),
                     Padding(
                       padding: EdgeInsets.only(top: 10.h, bottom: 10.h),
                       child: Column(
@@ -85,11 +66,12 @@ class PropertiesForRent extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             fontSize: 5.sp,
                             fontColor: ColorManager.blackColor,
-                            title: AllList.OurPropertiesList[index]["propertyName"],
-
+                            title: controller
+                                .allOpenProperties.value![index].propertyName,
                           ),
-                          SizedBox(height: 50.h,),
-
+                          SizedBox(
+                            height: 50.h,
+                          ),
                           Row(
                             children: [
                               //BedRooms
@@ -101,23 +83,32 @@ class PropertiesForRent extends StatelessWidget {
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,
                                   ),
-                                  SizedBox(height: 1.sh*0.015,),
+                                  SizedBox(
+                                    height: 1.sh * 0.015,
+                                  ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       const Icon(FontAwesomeIcons.bed),
-                                      SizedBox(width: 1.sw*0.010,),
+                                      SizedBox(
+                                        width: 1.sw * 0.010,
+                                      ),
                                       //BedRooms
                                       CustomText(
-                                        title: AllList.OurPropertiesList[index]["bedRooms"],
+                                        title: controller.allOpenProperties
+                                            .value![index].bedrooms
+                                            .toString(),
                                         fontSize: 20,
                                       ),
                                     ],
                                   ),
                                 ],
                               ),
-                              SizedBox(width: 1.sw*0.010,),
+                              SizedBox(
+                                width: 1.sw * 0.010,
+                              ),
 
                               //BatRooms
                               Column(
@@ -128,24 +119,32 @@ class PropertiesForRent extends StatelessWidget {
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,
                                   ),
-                                  SizedBox(height: 1.sh*0.015,),
+                                  SizedBox(
+                                    height: 1.sh * 0.015,
+                                  ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       const Icon(FontAwesomeIcons.bath),
-                                      SizedBox(width: 1.sw*0.010,),
+                                      SizedBox(
+                                        width: 1.sw * 0.010,
+                                      ),
                                       //BedRooms
                                       CustomText(
-                                        title: AllList.OurPropertiesList[index]["bathRooms"],
+                                        title: controller.allOpenProperties
+                                            .value![index].bathrooms
+                                            .toString(),
                                         fontSize: 20,
                                       ),
                                     ],
                                   ),
                                 ],
                               ),
-                              SizedBox(width: 1.sw*0.010,),
-
+                              SizedBox(
+                                width: 1.sw * 0.010,
+                              ),
 
                               //Area
                               Column(
@@ -156,72 +155,92 @@ class PropertiesForRent extends StatelessWidget {
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,
                                   ),
-                                  SizedBox(height: 1.sh*0.015,),
+                                  SizedBox(
+                                    height: 1.sh * 0.015,
+                                  ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       const Icon(FontAwesomeIcons.chartArea),
-                                      SizedBox(width: 1.sw*0.010,),
+                                      SizedBox(
+                                        width: 1.sw * 0.010,
+                                      ),
                                       //BedRooms
                                       CustomText(
-                                        title: AllList.OurPropertiesList[index]["propertyArea"],
+                                        title: controller.allOpenProperties
+                                            .value![index].area
+                                            .toString(),
                                         fontSize: 20,
                                       ),
                                     ],
                                   ),
                                 ],
                               ),
-                              SizedBox(width: 1.sw*0.010,),
-
+                              SizedBox(
+                                width: 1.sw * 0.010,
+                              ),
                             ],
                           ),
                         ],
                       ),
                     ),
-                    SizedBox(width: 10.w,),
-
+                    SizedBox(
+                      width: 10.w,
+                    ),
                     Container(
                         margin: EdgeInsets.only(top: 10.h, bottom: 10.h),
-                        child: VerticalDivider(color: ColorManager.kasmiriBlue, thickness: 2,)
+                        child: VerticalDivider(
+                          color: ColorManager.kasmiriBlue,
+                          thickness: 2,
+                        )),
+                    SizedBox(
+                      width: 10.w,
                     ),
-                    SizedBox(width: 10.w,),
-
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-
                         CustomText(
                           textAlign: TextAlign.start,
                           fontWeight: FontWeight.bold,
                           fontSize: 5.sp,
-                          fontColor: AllList.OurPropertiesList[index]["propertyType"] == "Sold" ? Colors.red :
-                          AllList.OurPropertiesList[index]["propertyType"] == "Available" ? Colors.green :
-                          AllList.OurPropertiesList[index]["propertyType"] == "Rented" ? Colors.deepPurple : null,
-                          title: AllList.OurPropertiesList[index]["propertyType"],
-
+                          fontColor: controller.allOpenProperties.value![index]
+                                      .propertyStatus ==
+                                  "Sold"
+                              ? Colors.red
+                              : controller.allOpenProperties.value![index]
+                                          .propertyStatus ==
+                                      "Available"
+                                  ? Colors.green
+                                  : controller.allOpenProperties.value![index]
+                                              .propertyStatus ==
+                                          "Rented"
+                                      ? Colors.deepPurple
+                                      : null,
+                          title: controller
+                              .allOpenProperties.value![index].propertyStatus,
                         ),
-                        SizedBox(width: 10.w,),
-
+                        SizedBox(
+                          width: 10.w,
+                        ),
                         CustomText(
                           textAlign: TextAlign.start,
                           fontWeight: FontWeight.bold,
                           fontSize: 5.sp,
                           fontColor: ColorManager.kasmiriBlue,
-                          title: AllList.OurPropertiesList[index]["propertyPrice"],
-
+                          title: controller
+                              .allOpenProperties.value![index].propertyPrice
+                              .toString(),
                         ),
-
                       ],
                     ),
-
                   ],
                 ),
               ),
             ),
           );
-        }
-    );
+        });
   }
 }

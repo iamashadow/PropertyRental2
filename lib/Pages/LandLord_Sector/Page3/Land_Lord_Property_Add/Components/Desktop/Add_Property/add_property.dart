@@ -236,6 +236,8 @@ class AddProperty extends StatelessWidget {
                 ),
                 onChanged: (value) {
                   radioController.propertyStatusRadioGroupValue.value = value!;
+                  propertyAddingLandLordController.propertyStatus.value =
+                      "Rented";
                 }),
           ),
           SizedBox(
@@ -253,6 +255,8 @@ class AddProperty extends StatelessWidget {
                 ),
                 onChanged: (value) {
                   radioController.propertyStatusRadioGroupValue.value = value!;
+                  propertyAddingLandLordController.propertyStatus.value =
+                      "Available";
                 }),
           ),
           SizedBox(
@@ -277,6 +281,7 @@ class AddProperty extends StatelessWidget {
                 ),
                 onChanged: (value) {
                   radioController.propertyTypeRadioGroupValue.value = value!;
+                  propertyAddingLandLordController.propertyType.value = "Flat";
                 }),
           ),
           SizedBox(
@@ -289,11 +294,12 @@ class AddProperty extends StatelessWidget {
                 value: 2,
                 groupValue: radioController.propertyTypeRadioGroupValue.value,
                 title: CustomText(
-                  title: "Home",
+                  title: "House",
                   fontWeight: FontWeight.w500,
                 ),
                 onChanged: (value) {
                   radioController.propertyTypeRadioGroupValue.value = value!;
+                  propertyAddingLandLordController.propertyType.value = "House";
                 }),
           ),
           SizedBox(
@@ -445,43 +451,7 @@ class AddProperty extends StatelessWidget {
                       buttonTitle: "Upload Property",
                       buttonRadius: 10.r,
                       onTap: () {
-                        var newProperty = PropertyApproveRequestToAdminModel(
-                          propertyImage: propertyPic,
-                          propertyName: propertyAddingLandLordController
-                              .propertyNameController.text,
-                          propertyPrice: propertyAddingLandLordController
-                              .propertyPriceController.text,
-                          posetingDate: propertyAddingLandLordController
-                              .propertyUploadDateController.text,
-                          bedRooms: propertyAddingLandLordController
-                              .propertyBedRoomsController.text,
-                          bathRooms: propertyAddingLandLordController
-                              .propertyBathRoomsController.text,
-                          propertyArea: propertyAddingLandLordController
-                              .propertyAreaController.text,
-                          propertyType: radioController
-                              .propertyTypeRadioGroupValue.value
-                              .toString(),
-                          propertyStatus: radioController
-                              .propertyStatusRadioGroupValue.value
-                              .toString(),
-                          prpertyBio: propertyAddingLandLordController
-                              .propertyBioController.text,
-                        );
-
-                        AllList.propertyApproveRequestListToAdmin
-                            .add(newProperty);
-
-                        print(newProperty.propertyImage);
-                        print(newProperty.propertyName);
-                        print(newProperty.propertyPrice);
-                        print(newProperty.posetingDate);
-                        print(newProperty.bedRooms);
-                        print(newProperty.bathRooms);
-                        print(newProperty.propertyArea);
-                        print(newProperty.propertyType);
-                        print(
-                            "INdedx : ${AllList.propertyApproveRequestListToAdmin.length}");
+                        propertyAddingLandLordController.addProperty();
                       },
                     ),
             ),

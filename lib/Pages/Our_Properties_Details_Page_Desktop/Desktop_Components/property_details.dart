@@ -5,27 +5,27 @@ import '../../../Utils/All_List/all_list.dart';
 import '../../../Universal_Widgets/custom_text.dart';
 
 class PropertyDetails extends StatelessWidget {
-  const PropertyDetails({super.key});
+  final String? bio;
+  const PropertyDetails({super.key, this.bio});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(1.sh*0.010),
+      padding: EdgeInsets.all(1.sh * 0.010),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-
           //Text : Property Details
           CustomText(
             title: "Details",
             fontColor: const Color(0xFF4B5EB8),
             fontWeight: FontWeight.bold,
           ),
-          SizedBox(height : 1.sh*0.010),
+          SizedBox(height: 1.sh * 0.010),
 
           //Text : Property Full Details
           CustomText(
-            title: AllList.propertyDetails,
+            title: bio,
           )
         ],
       ),

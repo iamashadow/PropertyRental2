@@ -7,6 +7,7 @@ import 'package:get/get_instance/get_instance.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:property_rental_2/Pages/LandLord_Sector/controller/land_lord_profile_information_controller.dart';
 import 'package:property_rental_2/Pages/Login_Page/login_page_controller.dart';
+import 'package:property_rental_2/controller/our_propertise_controller.dart';
 import 'package:property_rental_2/firebase_options.dart';
 import 'Pages/Home_Page/home_page.dart';
 
@@ -36,6 +37,7 @@ class PropertyRental extends StatelessWidget {
           },
         ),
         initialBinding: BindingsBuilder(() {
+          Get.put(OurPropertiseController());
           Get.put(LoginPageControllerClass());
           Get.put(LandLordProfileInformationControllerClass());
         }),

@@ -77,6 +77,10 @@ class PropertyResponseMOdel {
             ? []
             : List<dynamic>.from(data!.map((x) => x.toJson())),
       };
+
+  List<PropertyInfo> verifyedProperty() {
+    return data!.where((element) => element.isVerified == true).toList();
+  }
 }
 
 class PropertyInfo {
@@ -93,13 +97,14 @@ class PropertyInfo {
   final int? area;
   final String? propertyBio;
   final String? propertyVideo;
-  final String? owner;
+  final dynamic? owner;
   final List<String>? propertyImages;
   final String? propertyDocuments;
   final bool? isVerified;
   final DateTime? createdAt;
   final DateTime? updatedAt;
   final int? v;
+  final String? locationUrl;
 
   PropertyInfo({
     this.propertyLocation,
@@ -122,6 +127,7 @@ class PropertyInfo {
     this.createdAt,
     this.updatedAt,
     this.v,
+    this.locationUrl,
   });
 
   factory PropertyInfo.fromJson(Map<String, dynamic> json) => PropertyInfo(
@@ -144,7 +150,11 @@ class PropertyInfo {
         area: json["area"],
         propertyBio: json["propertyBio"],
         propertyVideo: json["propertyVideo"],
-        owner: json["owner"],
+        owner: json['owner'] == null
+            ? null
+            : (json['owner'] is String
+                ? json['owner']
+                : Owner.fromJson(json['owner'])),
         propertyImages: json["propertyImages"] == null
             ? []
             : List<String>.from(json["propertyImages"]!.map((x) => x)),
@@ -157,6 +167,7 @@ class PropertyInfo {
             ? null
             : DateTime.parse(json["updatedAt"]),
         v: json["__v"],
+        locationUrl: json["locationUrl"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -173,7 +184,7 @@ class PropertyInfo {
         "area": area,
         "propertyBio": propertyBio,
         "propertyVideo": propertyVideo,
-        "owner": owner,
+        "owner": owner?.toJson(),
         "propertyImages": propertyImages == null
             ? []
             : List<dynamic>.from(propertyImages!.map((x) => x)),
@@ -182,6 +193,47 @@ class PropertyInfo {
         "createdAt": createdAt?.toIso8601String(),
         "updatedAt": updatedAt?.toIso8601String(),
         "__v": v,
+        "locationUrl": locationUrl,
+      };
+}
+
+class Owner {
+  final String? id;
+  final String? email;
+  final String? mobileNumber;
+  final String? name;
+  final String? officeNumber;
+  final String? profileImage;
+  final String? whatsAppNumber;
+
+  Owner({
+    this.id,
+    this.email,
+    this.mobileNumber,
+    this.name,
+    this.officeNumber,
+    this.profileImage,
+    this.whatsAppNumber,
+  });
+
+  factory Owner.fromJson(Map<String, dynamic> json) => Owner(
+        id: json["_id"],
+        email: json["email"],
+        mobileNumber: json["mobileNumber"],
+        name: json["name"],
+        officeNumber: json["officeNumber"],
+        profileImage: json["profileImage"],
+        whatsAppNumber: json["whatsAppNumber"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "_id": id,
+        "email": email,
+        "mobileNumber": mobileNumber,
+        "name": name,
+        "officeNumber": officeNumber,
+        "profileImage": profileImage,
+        "whatsAppNumber": whatsAppNumber,
       };
 }
 

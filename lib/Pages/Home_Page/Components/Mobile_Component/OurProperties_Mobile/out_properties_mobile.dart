@@ -33,13 +33,12 @@ class OurProperties extends StatelessWidget {
           fontWeight: FontWeight.bold,
           letterSpacing: 1,
         ),
-        SizedBox(height: 1.sh*0.1,),
+        SizedBox(
+          height: 1.sh * 0.1,
+        ),
 
-        MyListView(),
-
-
+        // MyListView(),
       ],
     );
   }
 }
-

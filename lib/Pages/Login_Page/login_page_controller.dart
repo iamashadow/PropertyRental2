@@ -23,6 +23,7 @@ class LoginPageControllerClass extends GetxController {
   var isLoading = false.obs;
   Rxn<UserData> userData = Rxn<UserData>();
   Rxn<AdminData> adminData = Rxn<AdminData>();
+  var whichRole = "landlord".obs;
 
   String generateRandomNumber() {
     final Random random = Random();
@@ -59,9 +60,13 @@ class LoginPageControllerClass extends GetxController {
     try {
       isLoading.value = true;
       final response = await http.post(
-        Uri.parse(loginOrRegistration
-            ? '$baseurl/landlord/account/login'
-            : '$baseurl/landlord/account/create'),
+        Uri.parse(whichRole.value == "landlord"
+            ? loginOrRegistration
+                ? '$baseurl/landlord/account/login'
+                : '$baseurl/landlord/account/create'
+            : loginOrRegistration
+                ? '$baseurl/admin/account/login'
+                : '$baseurl/admin/account/create'),
         headers: <String, String>{
           'Content-Type': 'application/json',
         },
@@ -90,7 +95,9 @@ class LoginPageControllerClass extends GetxController {
               key: 'token', value: adminLoginRpModel.data!.token);
           tokenValue = adminLoginRpModel.data!.token;
           loginOrRegistration
-              ? Get.to(() => const HomePage())
+              ? Get.to(
+                  () => const HomePage(),
+                )
               : Get.to(() => const AdminProfilePage());
           customToast(msg: adminLoginRpModel.message!);
         } else if (data["data"]["role"] == "landlord") {

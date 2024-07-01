@@ -32,7 +32,70 @@ class LoginPageDesktopView extends StatelessWidget {
             SizedBox(
               height: 1.sh * 0.1,
             ),
+            Obx(
+              () => Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.w),
+                child: Row(
+                  children: [
+                    //user or admin
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () {
+                          loginPageController.whichRole.value = "landloard";
+                        },
+                        child: Container(
+                          height: 1.sh * 0.1,
+                          color:
+                              loginPageController.whichRole.value == "landloard"
+                                  ? Colors.blue
+                                  : Colors.white,
+                          child: Center(
+                            child: CustomText(
+                              title: "LandLord",
+                              fontColor: loginPageController.whichRole.value ==
+                                      "landloard"
+                                  ? Colors.white
+                                  : Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 10.w,
+                    ),
 
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () {
+                          loginPageController.whichRole.value = "admin";
+                        },
+                        child: Container(
+                          height: 1.sh * 0.1,
+                          color: loginPageController.whichRole.value == "admin"
+                              ? Colors.blue
+                              : Colors.white,
+                          child: Center(
+                            child: CustomText(
+                              title: "User",
+                              fontColor:
+                                  loginPageController.whichRole.value == "admin"
+                                      ? Colors.white
+                                      : Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 1.sh * 0.1,
+            ),
             Container(
               margin: EdgeInsets.only(left: 100.w, right: 100.w),
               padding: EdgeInsets.all(10.sp),
@@ -86,7 +149,7 @@ class LoginPageDesktopView extends StatelessWidget {
                               child: ElevatedButton(
                                 style: ButtonStyle(
                                   backgroundColor:
-                                  MaterialStateProperty.all<Color>(
+                                      MaterialStateProperty.all<Color>(
                                           Colors.blue),
                                   shape: MaterialStateProperty.all<
                                       RoundedRectangleBorder>(

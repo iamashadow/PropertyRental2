@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -6,20 +7,21 @@ import 'package:property_rental_2/Utils/All_List/all_list.dart';
 import 'package:property_rental_2/Universal_Widgets/custom_button.dart';
 import 'package:property_rental_2/Universal_Widgets/custom_text_form_field.dart';
 import 'package:property_rental_2/Utils/Color_Manager/colo_manager.dart';
+import 'package:property_rental_2/Utils/Model/property_approve_request_to_admin_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../Universal_Widgets/custom_text.dart';
 import '../../../Universal_Widgets/our_amazing_service_button_retangle.dart';
 
 class AgentContactForm extends StatefulWidget {
-  const AgentContactForm({super.key});
+  final Owner? owner;
+  const AgentContactForm({super.key, this.owner});
 
   @override
   State<AgentContactForm> createState() => _AgentContactFormState();
 }
 
 class _AgentContactFormState extends State<AgentContactForm> {
-
   DateTime? selectedDate;
 
   @override
@@ -28,45 +30,52 @@ class _AgentContactFormState extends State<AgentContactForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-
           //Agent Image
           Container(
-            width: 1.sw*0.1,
-            height: 1.sh*0.170,
-            decoration: BoxDecoration(
-              // color: Colors.red,
-                borderRadius: BorderRadius.circular(10),
-                image: const DecorationImage(
-                    fit: BoxFit.cover,
-                    image: NetworkImage("https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8MHwwfHx8MA%3D%3D"),
-                )
+            width: 1.sw * 0.1,
+            height: 1.sh * 0.170,
+            child: CachedNetworkImage(
+              imageUrl: widget.owner?.profileImage ??
+                  "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8MHwwfHx8MA%3D%3D",
+              errorWidget: (context, url, error) => Image.network(
+                "https://ecowaterqa.vtexassets.com/arquivos/ids/157145/stillnoimageavailable.jpg?v=637179063344070000",
+                fit: BoxFit.cover,
+              ),
             ),
           ),
-          SizedBox(height: 1.sh*0.01,),
+          SizedBox(
+            height: 1.sh * 0.01,
+          ),
 
           //Agent Name
           CustomText(
-            title: "Name : ${AllList.OurAgents[0]["name"]}",
+            title: "Name : ${widget.owner?.name}",
             fontWeight: FontWeight.bold,
             fontColor: Colors.black,
           ),
-          SizedBox(height: 1.sh*0.01,),
+          SizedBox(
+            height: 1.sh * 0.01,
+          ),
 
           //Agent Mobile Number
           CustomText(
-            title: "Mobile Number : ${AllList.OurAgents[0]["mobileNumber"]}",
+            title: "Mobile Number : ${widget.owner?.mobileNumber}",
             fontWeight: FontWeight.bold,
             fontColor: Colors.black,
           ),
-          SizedBox(height: 1.sh*0.01,),
+          SizedBox(
+            height: 1.sh * 0.01,
+          ),
 
           //Agent Email
           CustomText(
-            title: "Email : ${AllList.OurAgents[0]["email"]}",
+            title: "Email : ${widget.owner?.email}",
             fontWeight: FontWeight.bold,
             fontColor: Colors.black,
           ),
-          SizedBox(height: 1.sh*0.01,),
+          SizedBox(
+            height: 1.sh * 0.01,
+          ),
 
           /*
           User Input area
@@ -112,7 +121,6 @@ class _AgentContactFormState extends State<AgentContactForm> {
           // ),
           // SizedBox(height: 1.sh*0.01,),
 
-
           //Submit Button
           // OurAmazingServiceButtonRetangle(
           //   height: 1.sh*0.050,
@@ -134,8 +142,9 @@ class _AgentContactFormState extends State<AgentContactForm> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               InkWell(
-                onTap: (){
-                  launchUrl(Uri.parse("https://wa.me/+8801828583383"));
+                onTap: () {
+                  launchUrl(Uri.parse(
+                      "https://wa.me/${widget.owner?.whatsAppNumber}"));
                 },
                 child: Card(
                   surfaceTintColor: ColorManager.whiteColor,
@@ -148,7 +157,9 @@ class _AgentContactFormState extends State<AgentContactForm> {
                           FontAwesomeIcons.whatsapp,
                           color: Colors.greenAccent,
                         ),
-                        SizedBox(width: 1.w,),
+                        SizedBox(
+                          width: 1.w,
+                        ),
                         CustomText(
                           fontColor: Colors.black,
                           fontSize: 3.sp,
@@ -161,13 +172,12 @@ class _AgentContactFormState extends State<AgentContactForm> {
                   ),
                 ),
               ),
-
               InkWell(
-                onTap: (){
+                onTap: () {
                   launchUrl(Uri(
                     scheme: "mailto",
-                    path: "rezajr2k18@gmail.com",
-                    query: "Send a Mail to Imtiaz Chowdhury",
+                    path: widget.owner?.email!,
+                    query: "Send a Mail to ${widget.owner!.name}",
                   ));
                 },
                 child: Card(
@@ -181,7 +191,9 @@ class _AgentContactFormState extends State<AgentContactForm> {
                           Icons.email_outlined,
                           color: Colors.red,
                         ),
-                        SizedBox(width: 1.w,),
+                        SizedBox(
+                          width: 1.w,
+                        ),
                         CustomText(
                           fontColor: Colors.black,
                           fontSize: 3.sp,
@@ -196,13 +208,16 @@ class _AgentContactFormState extends State<AgentContactForm> {
               ),
             ],
           ),
-          SizedBox(height: 10.h,),
+          SizedBox(
+            height: 10.h,
+          ),
 
           InkWell(
-            onTap: (){
+            onTap: () {
               launchUrl(Uri(
                 scheme: "tel",
-                path: "tel:+8801828583383", // Replace with the phone number of the contact
+                path:
+                    "tel:${widget.owner?.mobileNumber}", // Replace with the phone number of the contact
               ));
             },
             child: Card(
@@ -217,7 +232,9 @@ class _AgentContactFormState extends State<AgentContactForm> {
                       FontAwesomeIcons.phoneVolume,
                       color: Colors.green,
                     ),
-                    SizedBox(width: 1.w,),
+                    SizedBox(
+                      width: 1.w,
+                    ),
                     CustomText(
                       fontColor: Colors.white,
                       fontSize: 3.sp,
@@ -261,21 +278,25 @@ class _AgentContactFormState extends State<AgentContactForm> {
                             }
                           },
                           child: Container(
-                            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 20),
                             decoration: BoxDecoration(
                               color: Colors.blue,
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: CustomText(
                               title: selectedDate != null
-                                  ? "Selected Date: ${selectedDate!.toLocal()}".split(' ')[0]
+                                  ? "Selected Date: ${selectedDate!.toLocal()}"
+                                      .split(' ')[0]
                                   : "Select Date",
                               fontColor: Colors.white,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
-                        const SizedBox(height: 20,),
+                        const SizedBox(
+                          height: 20,
+                        ),
                         SizedBox(
                           height: 200, // Set fixed height for content
                           width: double.maxFinite,
@@ -294,21 +315,22 @@ class _AgentContactFormState extends State<AgentContactForm> {
                                       color: Colors.blue,
                                       borderRadius: BorderRadius.circular(10),
                                     ),
-                                    alignment: Alignment.center, // Center the text
+                                    alignment:
+                                        Alignment.center, // Center the text
                                     child: CustomText(
                                       title: AllList.timeSlotList[index],
                                       fontColor: Colors.white,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  const SizedBox(width: 10,),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
                                 ],
                               );
                             },
                           ),
                         ),
-
-
                       ],
                     ),
                     actions: [
@@ -341,7 +363,8 @@ class _AgentContactFormState extends State<AgentContactForm> {
               color: Colors.blue,
               elevation: 2,
               child: Padding(
-                padding: const EdgeInsets.all(8.0), // Use EdgeInsets instead of sp
+                padding:
+                    const EdgeInsets.all(8.0), // Use EdgeInsets instead of sp
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -360,10 +383,6 @@ class _AgentContactFormState extends State<AgentContactForm> {
               ),
             ),
           ),
-
-
-
-
         ],
       ),
     );

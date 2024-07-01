@@ -2,15 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:property_rental_2/Utils/Color_Manager/colo_manager.dart';
+import 'package:property_rental_2/controller/our_propertise_controller.dart';
 import '../../../../../Universal_Widgets/ListView.dart';
 import '../../../../../Universal_Widgets/custom_text.dart';
 import '../../../../../Universal_Widgets/our_amazing_service_button_retangle.dart';
 import '../../../../Properties_All_Page/Page2/For_Rent_Page/for_rent_page.dart';
 
 class OurProperties extends StatelessWidget {
-  const OurProperties({super.key});
-
+  OurProperties({super.key});
+  final OurPropertiseController controller = Get.find();
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -35,10 +37,22 @@ class OurProperties extends StatelessWidget {
           fontWeight: FontWeight.bold,
           letterSpacing: 1,
         ),
-        SizedBox(height: 1.sh*0.1,),
-        MyListView(),
-        SizedBox(height: 1.sh*0.055,),
-
+        SizedBox(
+          height: 1.sh * 0.1,
+        ),
+        Obx(
+          () => controller.isLoading.value == true
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : MyListView(
+                  controller: controller,
+                  properList: controller.allOpenProperties.value ?? [],
+                ),
+        ),
+        SizedBox(
+          height: 1.sh * 0.055,
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -57,17 +71,16 @@ class OurProperties extends StatelessWidget {
                 fontWeight: FontWeight.bold,
                 letterSpacing: 1,
               ),
-              onPressed: (){
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ForRentPage()),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ForRentPage()),
                 );
               },
             ),
           ],
         ),
-
       ],
     );
   }
 }
-
