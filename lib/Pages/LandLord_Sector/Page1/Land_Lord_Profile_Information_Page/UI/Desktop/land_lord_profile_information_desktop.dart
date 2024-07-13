@@ -39,18 +39,7 @@ class _LandLordProfileInformationDesktopState
     super.initState();
   }
 
-  // void restoreData() {
-  //   if (loginPageController.userData.account != null) {
-  //     landLordProfileController.landLordNameController.text = loginPageController.userData.account?.name ?? '';
-  //     landLordProfileController.landLordEmailController.text = loginPageController.userData.account?.email ?? '';
-  //     landLordProfileController.landLordMobileNumberController.text = loginPageController.userData.account?.mobileNumber ?? '';
-  //     landLordProfileController.landLordWhatsAppNumberController.text = loginPageController.userData.account?.whatsAppNumber ?? '';
-  //     landLordProfileController.landLordOfficeNumberController.text = loginPageController.userData.account?.officeNumber ?? '';
-  //     landLordProfileController.landLordNationalityController.text = loginPageController.userData.account?.nationality ?? '';
-  //     landLordProfileController.landLordBioController.text = loginPageController.userData.account?.bio ?? '';
-  //     landLordProfileController.ProfileImage = loginPageController.userData.account?.profileImage?? '';
-  //   }
-  // }
+
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +73,7 @@ class _LandLordProfileInformationDesktopState
             SizedBox(
               height: 1.sh * 0.8,
               width: 1.sw,
-              child: const HeadBannerSection(),
+              child: HeadBannerSection(),
             ),
             SizedBox(
               height: 1.sh * 0.1,

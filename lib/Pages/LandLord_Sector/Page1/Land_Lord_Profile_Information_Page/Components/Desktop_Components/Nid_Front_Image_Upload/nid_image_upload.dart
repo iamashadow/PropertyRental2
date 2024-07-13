@@ -65,18 +65,6 @@ class NidFrontImageUpload extends StatelessWidget {
           SizedBox(
             height: 10.h,
           ),
-          // if (controller.imageFile != null)
-          //   CustomButton(
-          //     buttonWidth: 50.w,
-          //     buttonHeight: 30.h,
-          //     buttonRadius: 10.r,
-          //     buttonTitle: "Upload NID Picture",
-          //     buttonColor: ColorManager.kasmiriBlue,
-          //     fontWeight: FontWeight.w500,
-          //     fontSize: 4.sp,
-          //     onTap: () {},
-          //     fontColor: Colors.white,
-          //   ),
         ],
       ),
     );

@@ -47,7 +47,10 @@ class OurProperties extends StatelessWidget {
                 )
               : MyListView(
                   controller: controller,
-                  properList: controller.allOpenProperties.value ?? [],
+                  properList:controller.searchController.text != null && controller.searchController.text.isNotEmpty?
+                      controller.searchProperties.value??[]
+                      :
+                  controller.allOpenProperties.value ?? [],
                 ),
         ),
         SizedBox(

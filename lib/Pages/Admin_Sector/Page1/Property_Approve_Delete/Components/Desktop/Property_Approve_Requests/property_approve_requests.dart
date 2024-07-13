@@ -255,7 +255,9 @@ class PropertyApproveRequests extends StatelessWidget {
                         fontWeight: FontWeight.w700,
                         fontColor: ColorManager.blackColor,
                         fontSize: 3.sp,
-                        onTap: () {},
+                        onTap: () {
+                          controller.propertyDecline(propertyInfo[index].id!);
+                        },
                         buttonColor: ColorManager.redColor.withOpacity(0.5),
                         buttonTitle: "Decline",
                         buttonRadius: 10,

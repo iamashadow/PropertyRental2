@@ -4,11 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:property_rental_2/Pages/Login_Page/model/admin_login_model.dart';
-import 'package:property_rental_2/Pages/Login_Page/model/login_rp.dart';
 import 'package:property_rental_2/Universal_Widgets/custom_toast.dart';
 
 import '../../Utils/constant.dart';
+import '../Login_Page/model/admin_login_model.dart';
 
 class AdminControllerClass extends GetxController {
   TextEditingController adminNameController = TextEditingController();

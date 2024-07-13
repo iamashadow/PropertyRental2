@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:property_rental_2/Pages/Admin_Sector/Page2/Admin_Profile/admin_profile_page.dart';
 import 'package:property_rental_2/Pages/Home_Page/home_page.dart';
-import 'package:property_rental_2/Pages/LandLord_Sector/controller/land_lord_profile_information_controller.dart';
 import 'package:property_rental_2/Pages/Login_Page/model/admin_login_model.dart';
 import 'package:property_rental_2/Pages/Login_Page/model/login_rp.dart';
 import 'package:property_rental_2/Universal_Widgets/custom_toast.dart';
@@ -13,15 +12,20 @@ import 'package:property_rental_2/Utils/secure_storage.dart';
 import '../LandLord_Sector/Page1/Land_Lord_Profile_Information_Page/land_lord_profile_information_page.dart';
 import 'package:http/http.dart' as http;
 
+import '../User_Section/Profile_Section/user_profile.dart';
+import 'model/user_profile_details_model.dart';
+
 class LoginPageControllerClass extends GetxController {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
 
   // LandLordProfileInformationControllerClass
   //     landLordProfileInformationControllerClass = Get.find();
 
   var isLoading = false.obs;
   Rxn<UserData> userData = Rxn<UserData>();
+  Rxn<MainUserData> mainUserData = Rxn<MainUserData>();
   Rxn<AdminData> adminData = Rxn<AdminData>();
   var whichRole = "landlord".obs;
 
@@ -64,26 +68,43 @@ class LoginPageControllerClass extends GetxController {
             ? loginOrRegistration
                 ? '$baseurl/landlord/account/login'
                 : '$baseurl/landlord/account/create'
-            : loginOrRegistration
-                ? '$baseurl/admin/account/login'
-                : '$baseurl/admin/account/create'),
+            : whichRole.value == "user"
+                ? loginOrRegistration
+                    ? '$baseurl/user/account/login'
+                    : '$baseurl/user/account/create'
+                : loginOrRegistration
+                    ? '$baseurl/admin/account/login'
+                    : '$baseurl/admin/account/create'),
         headers: <String, String>{
           'Content-Type': 'application/json',
         },
-        body: jsonEncode({
-          'email': emailController.text,
-          'password': passwordController.text,
-        }),
+        body: whichRole.value == "user" && !loginOrRegistration
+            ? jsonEncode({
+                'email': emailController.text,
+                'password': passwordController.text,
+                'name': nameController.text,
+              })
+            : jsonEncode({
+                'email': emailController.text,
+                'password': passwordController.text,
+              }),
       );
 
       // Declare variables outside of the conditionals
       LoginResponse? loginResponse;
       AdminLoginRpModel? adminLoginRpModel;
+
+      UserProfileDetails? userProfileDetails;
+
       var data = jsonDecode(response.body);
+
+      print("This is data : ${data}");
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         if (data["data"]["role"] == "admin") {
           adminLoginRpModel = adminLoginRpModelFromJson(response.body);
+        } else if (data["data"]["role"] == "user") {
+          userProfileDetails = userProfileDetailsFromJson(response.body);
         } else {
           loginResponse = loginResponseFromJson(response.body);
         }
@@ -100,6 +121,15 @@ class LoginPageControllerClass extends GetxController {
                 )
               : Get.to(() => const AdminProfilePage());
           customToast(msg: adminLoginRpModel.message!);
+        } else if (data["data"]["role"] == "user") {
+          mainUserData.value = userProfileDetails!.data;
+          await SecureData.writeSecureData(
+              key: 'token', value: userProfileDetails.data!.token);
+          tokenValue = userProfileDetails.data!.token;
+          loginOrRegistration
+              ? Get.to(() => const HomePage())
+              : Get.to(() => UserProfile());
+          customToast(msg: userProfileDetails.message!);
         } else if (data["data"]["role"] == "landlord") {
           userData.value = loginResponse!.data;
           await SecureData.writeSecureData(

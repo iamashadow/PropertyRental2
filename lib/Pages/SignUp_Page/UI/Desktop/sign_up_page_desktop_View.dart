@@ -35,6 +35,71 @@ class SignUpPageDesktopView extends StatelessWidget {
               height: 1.sh * 0.1,
             ),
 
+            Obx(
+                  () => Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.w),
+                child: Row(
+                  children: [
+                    //user or admin
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () {
+                          login.whichRole.value = "landlord";
+                        },
+                        child: Container(
+                          height: 1.sh * 0.1,
+                          color:
+                          login.whichRole.value == "landlord"
+                              ? Colors.blue
+                              : Colors.white,
+                          child: Center(
+                            child: CustomText(
+                              title: "LandLord",
+                              fontColor: login.whichRole.value ==
+                                  "landlord"
+                                  ? Colors.white
+                                  : Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 10.w,
+                    ),
+
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () {
+                          login.whichRole.value = "user";
+                        },
+                        child: Container(
+                          height: 1.sh * 0.1,
+                          color: login.whichRole.value == "user"
+                              ? Colors.blue
+                              : Colors.white,
+                          child: Center(
+                            child: CustomText(
+                              title: "User",
+                              fontColor:
+                              login.whichRole.value == "user"
+                                  ? Colors.white
+                                  : Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 1.sh * 0.1,
+            ),
+
             Container(
               margin: EdgeInsets.only(left: 100.w, right: 100.w),
               padding: EdgeInsets.all(10.sp),
@@ -53,6 +118,27 @@ class SignUpPageDesktopView extends StatelessWidget {
                 key: signUpPageController.formKey,
                 child: Column(
                   children: [
+
+                    Obx( () => login.whichRole.value == "user" ?
+
+                        Column(
+                          children: [
+                            CustomTextFormField(
+                              autovalidateMode: AutovalidateMode.onUserInteraction,
+                              labelText: "Enter Name",
+                              textAlign: TextAlign.start,
+                              // validator: signUpPageController.validateEmail,
+                              controller: login.nameController,
+                            ),
+                            SizedBox(
+                              height: 10.h,
+                            ),
+                          ],
+                        ) : SizedBox.shrink(),
+
+                      ),
+
+
                     CustomTextFormField(
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       labelText: "Enter Email",

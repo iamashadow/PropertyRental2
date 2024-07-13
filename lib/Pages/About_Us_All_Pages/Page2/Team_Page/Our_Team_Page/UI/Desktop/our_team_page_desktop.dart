@@ -22,7 +22,7 @@ class OurTeamPageDesktop extends StatelessWidget {
             Container(
               height: 1.sh*0.8,
               width: 1.sw,
-              child: const HeadBannerSection(),
+              child:  HeadBannerSection(),
             ),
             SizedBox(height: 1.sh*0.1,),
 

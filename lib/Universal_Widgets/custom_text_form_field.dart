@@ -9,7 +9,7 @@ class CustomTextFormField extends StatelessWidget {
   final String? Function(String?)? validator;
   final AutovalidateMode autovalidateMode;
   bool? isEnabled;
-
+  Function(String)? onfieldSubmit;
   CustomTextFormField({super.key,
 
     this.labelText,
@@ -19,6 +19,7 @@ class CustomTextFormField extends StatelessWidget {
     this.validator,
     this.autovalidateMode = AutovalidateMode.disabled,
     this.isEnabled,
+    this.onfieldSubmit,
 
   });
 
@@ -50,6 +51,7 @@ class CustomTextFormField extends StatelessWidget {
               )
           )
       ),
+      onChanged: onfieldSubmit,
     );
   }
 }

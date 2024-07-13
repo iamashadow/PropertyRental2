@@ -27,7 +27,7 @@ class LoginPageDesktopView extends StatelessWidget {
             Container(
               height: 1.sh * 0.8,
               width: 1.sw,
-              child: const HeadBannerSection(),
+              child:  HeadBannerSection(),
             ),
             SizedBox(
               height: 1.sh * 0.1,
@@ -41,19 +41,47 @@ class LoginPageDesktopView extends StatelessWidget {
                     Expanded(
                       child: GestureDetector(
                         onTap: () {
-                          loginPageController.whichRole.value = "landloard";
+                          loginPageController.whichRole.value = "landlord";
                         },
                         child: Container(
                           height: 1.sh * 0.1,
                           color:
-                              loginPageController.whichRole.value == "landloard"
+                              loginPageController.whichRole.value == "landlord"
                                   ? Colors.blue
                                   : Colors.white,
                           child: Center(
                             child: CustomText(
                               title: "LandLord",
                               fontColor: loginPageController.whichRole.value ==
-                                      "landloard"
+                                      "landlord"
+                                  ? Colors.white
+                                  : Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 10.w,
+                    ),
+
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () {
+                          loginPageController.whichRole.value = "user";
+                        },
+                        child: Container(
+                          height: 1.sh * 0.1,
+                          color:
+                          loginPageController.whichRole.value == "user"
+                              ? Colors.blue
+                              : Colors.white,
+                          child: Center(
+                            child: CustomText(
+                              title: "User",
+                              fontColor: loginPageController.whichRole.value ==
+                                  "user"
                                   ? Colors.white
                                   : Colors.black,
                               fontWeight: FontWeight.bold,
@@ -78,7 +106,7 @@ class LoginPageDesktopView extends StatelessWidget {
                               : Colors.white,
                           child: Center(
                             child: CustomText(
-                              title: "User",
+                              title: "Admin",
                               fontColor:
                                   loginPageController.whichRole.value == "admin"
                                       ? Colors.white

@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import '../../../../../Universal_Widgets/custom_text.dart';
 import '../../../../../Universal_Widgets/custom_text_form_field.dart';
+import '../../../../../controller/our_propertise_controller.dart';
 import '../My_Drawer/my_drawer.dart';
 import '../Nav_Bar/nav_bar.dart';
 
 class HeadBannerSection extends StatelessWidget {
-  const HeadBannerSection({super.key});
+   HeadBannerSection({super.key});
+
+  final OurPropertiseController controller = Get.find<OurPropertiseController>();
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +78,11 @@ class HeadBannerSection extends StatelessWidget {
                   height: 1.sh*0.050,
                   width: 1.sw*0.4,
                   child: CustomTextFormField(
+                    controller: controller.searchController,
                     labelText: "Search Property Here",
+                    onfieldSubmit: (value){
+controller.getSearchPropertise(value);
+                    },
                   ),
                 ),
               ),

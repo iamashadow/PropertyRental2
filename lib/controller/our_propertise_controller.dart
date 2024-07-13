@@ -7,7 +7,9 @@ import 'package:property_rental_2/Utils/constant.dart';
 
 class OurPropertiseController extends GetxController {
   var isLoading = false.obs;
+  final TextEditingController searchController = TextEditingController();
   Rxn<List<PropertyInfo>> allOpenProperties = Rxn<List<PropertyInfo>>();
+  Rxn<List<PropertyInfo>> searchProperties = Rxn<List<PropertyInfo>>();
   Rxn<List<PropertyInfo>> landLordProperties = Rxn<List<PropertyInfo>>();
   Rxn<List<PropertyInfo>> adminPropertise = Rxn<List<PropertyInfo>>();
   Rxn<PropertyResponseMOdel> propertyResponseMOdel =
@@ -33,6 +35,33 @@ class OurPropertiseController extends GetxController {
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         allOpenProperties.value = propertyResponseMOdel.data;
+      } else {
+        printInfo(info: propertyResponseMOdel.message.toString());
+      }
+      printInfo(
+          info: "All Open Properties: ${allOpenProperties.value!.length}");
+      isLoading.value = false;
+    } catch (e) {
+      isLoading.value = false;
+      printInfo(info: e.toString());
+    }
+  }
+
+  Future<void> getSearchPropertise(String? param) async {
+    try {
+      isLoading.value = true;
+      final response = await http.get(
+          Uri.parse(
+              'https://property-rental-backend-ashen.vercel.app/api/v1/open/properties/?propertyName=$param'),
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer $tokenValue',
+          });
+      PropertyResponseMOdel propertyResponseMOdel =
+      propertyResponseMOdelFromJson(response.body);
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        searchProperties.value = propertyResponseMOdel.data;
       } else {
         printInfo(info: propertyResponseMOdel.message.toString());
       }
@@ -123,6 +152,37 @@ class OurPropertiseController extends GetxController {
         );
       } else {
         printInfo(info: "Property Approval Failed");
+      }
+      isLoading.value = false;
+    } catch (e) {
+      printInfo(info: e.toString());
+      isLoading.value = false;
+    }
+  }
+
+  Future<void> propertyDecline(String propertyId) async {
+    try {
+      isLoading.value = true;
+      final response = await http.delete(
+          Uri.parse(
+              'https://property-rental-backend-ashen.vercel.app/api/v1/admin/properties/$propertyId'),
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer $tokenValue',
+          });
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        printInfo(info: "Property Approved");
+        getAdminPropertise();
+        Get.snackbar(
+          "Property Decline",
+          "Property Decline Successfull!",
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+          duration: Duration(seconds: 5),
+        );
+      } else {
+        printInfo(info: "Property Decline Failed");
       }
       isLoading.value = false;
     } catch (e) {

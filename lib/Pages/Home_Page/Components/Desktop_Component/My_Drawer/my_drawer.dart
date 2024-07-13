@@ -10,7 +10,9 @@ import 'package:property_rental_2/Pages/Home_Page/home_page.dart';
 import 'package:property_rental_2/Pages/LandLord_Sector/Schedules/schedules.dart';
 import 'package:property_rental_2/Pages/Login_Page/login_page.dart';
 import 'package:property_rental_2/Pages/Login_Page/login_page_controller.dart';
+import 'package:property_rental_2/Pages/Login_Page/model/admin_login_model.dart';
 import 'package:property_rental_2/Pages/Login_Page/model/login_rp.dart';
+import 'package:property_rental_2/Pages/Login_Page/model/user_profile_details_model.dart';
 import 'package:property_rental_2/Universal_Widgets/custom_button.dart';
 import 'package:property_rental_2/Universal_Widgets/custom_text.dart';
 import 'package:property_rental_2/Utils/All_Images/all_images.dart';
@@ -27,6 +29,7 @@ import '../../../../LandLord_Sector/Page2/Land_Lord_Properties/land_lord_propert
 import '../../../../LandLord_Sector/Page3/Land_Lord_Property_Add/land_lord_property_add.dart';
 import '../../../../Properties_All_Page/Page2/For_Rent_Page/for_rent_page.dart';
 import '../../../../SignUp_Page/sign_up_page.dart';
+import '../../../../User_Section/Profile_Section/user_profile.dart';
 
 class MyDrawer extends StatelessWidget {
   MyDrawer({super.key});
@@ -220,135 +223,166 @@ class MyDrawer extends StatelessWidget {
               height: 20.h,
             ),
 
-            //Land Lord Profile Information Page
-            Card(
-              surfaceTintColor: ColorManager.whiteColor,
-              child: ExpansionTile(
-                leading: const Icon(FontAwesomeIcons.person),
-                title: CustomText(
-                  title: "Land Lord Profile & Properties",
-                  textAlign: TextAlign.start,
-                  fontColor: ColorManager.blackColor,
-                  fontSize: 3.sp,
-                  fontWeight: FontWeight.w500,
+            //User Profile
+            if (loginController.whichRole.value == "user")
+              Card(
+                surfaceTintColor: ColorManager.whiteColor,
+                child: ListTile(
+                  contentPadding: EdgeInsets.all(1.sp),
+                  leading: Icon(FontAwesomeIcons.phone),
+                  title: CustomText(
+                    title: "User Profile",
+                    textAlign: TextAlign.start,
+                    fontColor: ColorManager.blackColor,
+                    fontSize: 3.sp,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => UserProfile()),
+                    );
+                  },
                 ),
-                children: [
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                LandLordProfileInformationPage()),
-                      );
-                    },
-                    child: CustomText(
-                      title: "Profile Information",
-                      fontWeight: FontWeight.w500,
-                      textAlign: TextAlign.start,
-                    ),
-                  ),
-                  const Divider(),
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => LandLordProperties()),
-                      );
-                    },
-                    child: CustomText(
-                      title: "Property Information",
-                      fontWeight: FontWeight.w500,
-                      textAlign: TextAlign.start,
-                    ),
-                  ),
-                  const Divider(),
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => LandLordPropertyAdd()),
-                      );
-                    },
-                    child: CustomText(
-                      title: "Add Property",
-                      fontWeight: FontWeight.w500,
-                      textAlign: TextAlign.start,
-                    ),
-                  ),
-                  const Divider(),
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Schedules()),
-                      );
-                    },
-                    child: CustomText(
-                      title: "Schedules",
-                      fontWeight: FontWeight.w500,
-                      textAlign: TextAlign.start,
-                    ),
-                  ),
-                ],
               ),
+            SizedBox(
+              height: 20.h,
             ),
+
+            //Land Lord Profile Information Page
+            if (loginController.whichRole.value == "landlord")
+              Card(
+                surfaceTintColor: ColorManager.whiteColor,
+                child: ExpansionTile(
+                  leading: const Icon(FontAwesomeIcons.person),
+                  title: CustomText(
+                    title: "Land Lord Profile & Properties",
+                    textAlign: TextAlign.start,
+                    fontColor: ColorManager.blackColor,
+                    fontSize: 3.sp,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  LandLordProfileInformationPage()),
+                        );
+                      },
+                      child: CustomText(
+                        title: "Profile Information",
+                        fontWeight: FontWeight.w500,
+                        textAlign: TextAlign.start,
+                      ),
+                    ),
+                    const Divider(),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LandLordProperties()),
+                        );
+                      },
+                      child: CustomText(
+                        title: "Property Information",
+                        fontWeight: FontWeight.w500,
+                        textAlign: TextAlign.start,
+                      ),
+                    ),
+                    const Divider(),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LandLordPropertyAdd()),
+                        );
+                      },
+                      child: CustomText(
+                        title: "Add Property",
+                        fontWeight: FontWeight.w500,
+                        textAlign: TextAlign.start,
+                      ),
+                    ),
+                    const Divider(),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Schedules()),
+                        );
+                      },
+                      child: CustomText(
+                        title: "Schedules",
+                        fontWeight: FontWeight.w500,
+                        textAlign: TextAlign.start,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             SizedBox(
               height: 20.h,
             ),
 
             //Admin Profile Information & Property Approve or Delete Page
-            Card(
-              surfaceTintColor: ColorManager.whiteColor,
-              child: ExpansionTile(
-                leading: Icon(FontAwesomeIcons.person),
-                title: CustomText(
-                  title: "Admin Sector",
-                  textAlign: TextAlign.start,
-                  fontColor: ColorManager.blackColor,
-                  fontSize: 3.sp,
-                  fontWeight: FontWeight.w500,
+            if (loginController.whichRole.value == "admin")
+              Card(
+                surfaceTintColor: ColorManager.whiteColor,
+                child: ExpansionTile(
+                  leading: Icon(FontAwesomeIcons.person),
+                  title: CustomText(
+                    title: "Admin Sector",
+                    textAlign: TextAlign.start,
+                    fontColor: ColorManager.blackColor,
+                    fontSize: 3.sp,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => PropertyApproveDelete()),
+                        );
+                      },
+                      child: CustomText(
+                        title: "Manage Properties",
+                        fontWeight: FontWeight.w500,
+                        textAlign: TextAlign.start,
+                      ),
+                    ),
+                    Divider(),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AdminProfilePage()),
+                        );
+                      },
+                      child: CustomText(
+                        title: "Admin Profile",
+                        fontWeight: FontWeight.w500,
+                        textAlign: TextAlign.start,
+                      ),
+                    ),
+                  ],
                 ),
-                children: [
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => PropertyApproveDelete()),
-                      );
-                    },
-                    child: CustomText(
-                      title: "Manage Properties",
-                      fontWeight: FontWeight.w500,
-                      textAlign: TextAlign.start,
-                    ),
-                  ),
-                  Divider(),
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => AdminProfilePage()),
-                      );
-                    },
-                    child: CustomText(
-                      title: "Admin Profile",
-                      fontWeight: FontWeight.w500,
-                      textAlign: TextAlign.start,
-                    ),
-                  ),
-                ],
               ),
-            ),
             SizedBox(
               height: 20.h,
             ),
-            loginController.userData.value?.token == null ||
-                    loginController.userData.value!.token!.isEmpty
+            (loginController.userData.value?.token == null ||
+                        loginController.userData.value!.token!.isEmpty) &&
+                    (loginController.adminData.value?.token == null ||
+                        loginController.adminData.value!.token!.isEmpty) && (loginController.mainUserData.value?.token == null ||
+                loginController.mainUserData.value!.token!.isEmpty)
                 ? Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -393,9 +427,12 @@ class MyDrawer extends StatelessWidget {
                   )
                 : CustomButton(
                     onTap: () {
+                      loginController.whichRole.value = "";
                       tokenValue = null;
                       SecureData.deleteAllSecureData();
                       loginController.userData.value = UserData();
+                      loginController.adminData.value = AdminData();
+                      loginController.mainUserData.value = MainUserData();
                       loginController.update();
                     },
                     fontWeight: FontWeight.w500,
